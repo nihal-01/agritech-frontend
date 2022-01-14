@@ -1,0 +1,122 @@
+.loginPage__wrapper {
+  max-width: 1650px;
+  margin: 0 auto;
+  padding: 0px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loginPage {
+    width: 100%;
+    max-width: 500px;
+
+    &__title {
+      font-family: var(--title-font-family);
+      font-size: 25px;
+      color: var(--text-dark-color);
+      margin-bottom: 1em;
+    }
+
+    &__form {
+      label {
+        color: var(--text-light-color);
+      }
+
+      input[type="email"],
+      input[type="password"],
+      input[type="text"] {
+        width: 100%;
+        padding: 13px;
+        border-radius: 5px;
+        border: 1px solid #dbdbdb;
+
+        &:focus {
+          outline: 1px solid #333;
+        }
+      }
+
+      &__password {
+        position: relative;
+
+        button {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 15px;
+          font-size: 20px;
+          cursor: pointer;
+          color: var(--text-dark-color);
+          background-color: transparent;
+        }
+      }
+
+      &__btn {
+        width: 100%;
+        background-color: var(--secondary-color);
+        color: var(--text-dark-color);
+        padding: 13px;
+        border-radius: 5px;
+        margin-top: 1.2em;
+        font-weight: 500;
+
+        &:hover {
+          background: var(--primary-color);
+          color: #fff;
+        }
+      }
+
+      #email,
+      #password {
+        margin-bottom: 0.8em;
+      }
+
+      &__saveBox__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+
+        .loginPage__form__saveBox {
+          display: flex;
+          align-items: center;
+
+          input[type="checkbox"] {
+            margin-right: 10px;
+            height: 15px;
+            width: 15px;
+          }
+        }
+
+        a {
+          text-decoration: none;
+          color: var(--text-light-color);
+          font-size: 16px;
+          transition: 0.5s;
+
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
+    }
+
+    &__error {
+      color: #f72e2e;
+      margin-top: 0.8em;
+    }
+
+    &__signup__btn {
+      text-decoration: none;
+      display: flex;
+      justify-content: flex-end;
+      color: var(--primary-color);
+      transition: 0.5s;
+      margin-top: 0.8em;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

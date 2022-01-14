@@ -1,0 +1,110 @@
+.signupPage__wrapper {
+  max-width: 1650px;
+  margin: 0 auto;
+  padding: 0px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .signupPage {
+    width: 100%;
+    max-width: 500px;
+
+    &__title {
+      font-family: var(--title-font-family);
+      font-size: 25px;
+      color: var(--text-dark-color);
+      margin-bottom: 1em;
+    }
+
+    &__form {
+      &__name {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        margin-bottom: 0.8em;
+      }
+
+      label {
+        color: var(--text-light-color);
+      }
+
+      input {
+        width: 100%;
+        padding: 13px;
+        border-radius: 5px;
+        border: 1px solid #dbdbdb;
+
+        &:focus {
+          outline: 1px solid #333;
+        }
+      }
+
+      &__password {
+        position: relative;
+
+        button {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 15px;
+          font-size: 20px;
+          cursor: pointer;
+          color: var(--text-dark-color);
+          background-color: transparent;
+        }
+      }
+
+      &__btn {
+        width: 100%;
+        background-color: var(--secondary-color);
+        color: var(--text-dark-color);
+        padding: 13px;
+        border-radius: 5px;
+        margin-top: 1.2em;
+        font-weight: 500;
+
+        &:hover {
+          background: var(--primary-color);
+          color: #fff;
+        }
+      }
+
+      &__error {
+        color: #f72e2e;
+        margin-bottom: 0.7em;
+      }
+
+      &__policy {
+        color: var(--text-light-color);
+      }
+
+      #email {
+        margin-bottom: 0.8em;
+      }
+
+      #password,
+      #cPassword {
+        margin-bottom: 0.8em;
+      }
+    }
+
+    &__error {
+      color: #f72e2e;
+      margin-top: 0.8em;
+    }
+
+    &__login__btn {
+      text-decoration: none;
+      display: flex;
+      justify-content: flex-end;
+      color: var(--primary-color);
+      transition: 0.5s;
+      margin-top: 0.8em;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

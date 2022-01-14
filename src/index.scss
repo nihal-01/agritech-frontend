@@ -1,0 +1,42 @@
+@import "styles/main.scss";
+
+:root {
+  --primary-color: #347758;
+  --primary-hover-color: #2e6b4f;
+  --secondary-color: #f4c340;
+  --secondary-hover-color: #f2b922;
+  --text-light-color: #656565;
+  --text-dark-color: #3d3d3d;
+  --font-family: "Poppins", sans-serif;
+  --title-font-family: "Signika", sans-serif;
+  --logo-font-family: "Lobster", cursive;
+  // --background-color: #f9fafb;
+  --background-color: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+.admin {
+  width: 100%;
+
+  .admin-main {
+    margin-left: 18rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .admin {
+    .admin-main {
+      margin-left: 0;
+    }
+  }
+}

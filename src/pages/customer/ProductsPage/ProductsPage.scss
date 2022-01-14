@@ -1,0 +1,27 @@
+.products__page {
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2em;
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0px 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .products__page {
+    &__wrapper {
+      display: block;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+    .products__page {
+      &__wrapper {
+        padding: 0px 15px;
+      }
+    }
+  }

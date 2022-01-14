@@ -1,0 +1,121 @@
+.sort {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__left {
+    display: flex;
+    align-items: center;
+
+    &__filter {
+      background-color: transparent;
+      color: var(--text-dark-color);
+      margin-right: 1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 15px;
+      display: none;
+
+      &:hover {
+        color: var(--primary-hover-color);
+      }
+
+      svg {
+        margin-right: 7px;
+        font-size: 16px;
+      }
+    }
+
+    p {
+      color: #333;
+      font-size: 17px;
+      font-weight: 500;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+      background-color: transparent;
+      margin-right: 1em;
+      color: var(--text-dark-color);
+      font-weight: 600;
+      font-size: 21px;
+
+      &:hover {
+        color: var(--primary-hover-color);
+      }
+    }
+
+    select {
+      outline: none;
+      border: none;
+      background-color: transparent;
+      border: 1px solid #111;
+      color: #111;
+      padding: 10px 20px;
+      border-radius: 5px;
+      max-width: 100%;
+      appearance: none;
+      width: 200px;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNiAxNic+PHBhdGggZmlsbD0nbm9uZScgc3Ryb2tlPScjMzQzYTQwJyBzdHJva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnIHN0cm9rZS13aWR0aD0nMicgZD0nTTIgNWw2IDYgNi02Jy8+PC9zdmc+);
+      background-position: calc(100% - 15px) center;
+      background-repeat: no-repeat;
+      background-size: 16px 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .sort {
+    &__left {
+      &__filter {
+        display: block;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sort {
+    &__left {
+      p {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .sort {
+    &__left {
+      &__filter {
+        font-size: 14px;
+      }
+    }
+    &__right {
+      &__icon {
+        display: none;
+      }
+
+      select {
+        width: 170px;
+        padding: 10px 15px;
+      }
+    }
+  }
+}
+
+.sort__wrapper {
+  hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin-top: 1em;
+  }
+}

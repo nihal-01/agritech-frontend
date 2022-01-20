@@ -1,0 +1,23 @@
+.btnLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__loader {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        animation: spin 1s linear infinite;
+        border-top: 2px solid #000000;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

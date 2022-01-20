@@ -147,11 +147,11 @@
       display: flex;
       align-items: center;
 
-      .header__signin__wrapper {
+      .header__signin__wrapper, .header__user__wrapper {
         position: relative;
-        margin-right: 20px;
+        margin-right: 25px;
 
-        .header__signin {
+        .header__signin, .header__user {
           display: flex;
           align-items: center;
           cursor: pointer;
@@ -160,6 +160,11 @@
 
           &:hover .header__signin__content,
           &:hover .header__signin__content strong {
+            color: #2e6b4f;
+          }
+
+          &:hover .header__user__content,
+          &:hover .header__user__content strong {
             color: #2e6b4f;
           }
 

@@ -59,7 +59,7 @@
         width: 100%;
         background-color: var(--secondary-color);
         color: var(--text-dark-color);
-        padding: 13px;
+        height: 46px;
         border-radius: 5px;
         margin-top: 1.2em;
         font-weight: 500;
@@ -67,6 +67,11 @@
         &:hover {
           background: var(--primary-color);
           color: #fff;
+        }
+
+        &:disabled {
+          cursor: default;
+          background-color: var(--secondary-color);
         }
       }
 

@@ -26,9 +26,11 @@ body {
 }
 
 .admin {
+    position: relative;
     width: 100%;
     background-color: #121317;
     min-height: 100vh;
+    overflow-x: hidden;
 
     .admin-main {
         margin-left: 18rem;

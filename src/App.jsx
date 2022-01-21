@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Header, Footer } from './components/customer';
 import {
     Admin404Page,
+    AdminCategoriesPage,
     AdminHomePage,
     AdminPrivateRoute,
     AdminProductsPage,
@@ -15,7 +16,7 @@ import {
     HomePage,
     LoginPage,
     NotFoundPage,
-    PrivateRoute,
+    // PrivateRoute,
     ProductsPage,
     ResetPasswordPage,
     SignupPage,
@@ -120,6 +121,10 @@ const Admin = () => {
                     <Route
                         path='/products'
                         element={<AdminProductsPage />}
+                    ></Route>
+                    <Route
+                        path='/categories'
+                        element={<AdminCategoriesPage />}
                     ></Route>
                     <Route path='*' element={<Admin404Page />} />
                 </Routes>

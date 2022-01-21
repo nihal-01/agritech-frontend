@@ -1,5 +1,6 @@
 import AdminSidebar from './AdminSidebar/AdminSidebar';
 import AdminNavbar from './AdminNavbar/AdminNavbar';
-import AdminAddProductSidebar from './AdminAddProductSidebar/AdminAddProductSidebar';
+import AdminProductSidebar from './AdminProductSidebar/AdminProductSidebar';
+import AdminCategorySidebar from './AdminCategorySidebar/AdminCategorySidebar';
 
-export { AdminSidebar, AdminNavbar, AdminAddProductSidebar };
+export { AdminSidebar, AdminNavbar, AdminProductSidebar, AdminCategorySidebar };

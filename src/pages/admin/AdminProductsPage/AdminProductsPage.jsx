@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import './AdminProductsPage.scss';
-import { AdminAddProductSidebar } from '../../../components/admin';
+import { AdminProductSidebar } from '../../../components/admin';
 
 function AdminProductsPage() {
-    const [addProductSidebar, setAddProductsSidebar] = useState(false);
+    const [isProductSidebarOpen, setIsProductSidebarOpen] = useState(false);
 
     return (
         <div className='admin--products'>
@@ -28,14 +28,18 @@ function AdminProductsPage() {
                     </select>
                 </div>
                 <div className='admin--products--options__add'>
-                    <button>
+                    <button
+                        onClick={() => {
+                            setIsProductSidebarOpen(true);
+                        }}
+                    >
                         <span>+</span> Add Product
                     </button>
                 </div>
             </div>
-            <AdminAddProductSidebar
-                addProductSidebar={addProductSidebar}
-                setAddProductsSidebar={setAddProductsSidebar}
+            <AdminProductSidebar
+                isProductSidebarOpen={isProductSidebarOpen}
+                setIsProductSidebarOpen={setIsProductSidebarOpen}
             />
         </div>
     );

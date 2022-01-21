@@ -24,8 +24,8 @@ const links = [
     icon: <BsShop />,
   },
   {
-    name: "Category",
-    to: "/category",
+    name: "Categories",
+    to: "/categories",
     icon: <BsListUl />,
   },
   {

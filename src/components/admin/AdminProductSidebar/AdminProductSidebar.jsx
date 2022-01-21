@@ -1,23 +1,65 @@
 import React, { useState } from 'react';
 import { FiUploadCloud } from 'react-icons/fi';
+import {
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+    getStorage,
+} from 'firebase/storage';
 
-import './AdminAddProductSidebar.scss';
+import './AdminProductSidebar.scss';
+import '../../../firebase/config';
+import { useForm } from '../../../hooks';
+import axios from '../../../axios';
 
-function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
-    const [thumbnail, setThumbnail] = useState('');
-    const [thumbnailError, setThumbnailError] = useState('');
+const categories = [
+    { _id: '012a', name: 'vegitables' },
+    { _id: '012b', name: 'fruits' },
+    { _id: '012c', name: 'others' },
+];
+
+function AdminProductSidebar({
+    isProductSidebarOpen,
+    setIsProductSidebarOpen,
+}) {
+    const [thumbnailImg, setThumbnailImg] = useState('');
+    const [thumbnail, setThumbnail] = useState({
+        error: '',
+        url: '',
+        progress: 0,
+    });
     const [images, setImages] = useState([]);
+    const [product, handleChange] = useForm({
+        name: '',
+        shortDescription: '',
+        stock: 0,
+        unit: '',
+        description: '',
+        price: 0,
+        category: '',
+    });
+    const [productState, setProductState] = useState({
+        loading: false,
+        err: '',
+    });
+
+    const storage = getStorage();
 
     const handleThumbnail = (e) => {
         if (e.target.files[0]) {
-            setThumbnailError('');
-            setThumbnail('');
+            setThumbnail((prev) => {
+                return { ...prev, error: '', url: '', progress: 0 };
+            });
 
-            if (!e.target.files[0].name.match(/\.(jpg|jpeg|png|webp)/gm)) {
-                setThumbnailError('Please upload jpeg, jpg, png or webp file');
+            if (!e.target.files[0].name.match(/\.(jpg|jpeg|png)/gm)) {
+                setThumbnail({
+                    ...thumbnail,
+                    error: 'Please upload jpeg, jpg, or png file',
+                });
                 return;
             }
-            setThumbnail(e.target.files[0]);
+            setThumbnailImg(e.target.files[0]);
+            handleUpload(e.target.files[0]);
         }
     };
 
@@ -31,12 +73,91 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
         }
     };
 
-    console.log(images);
+    const handleUpload = (image) => {
+        const storageRef = ref(storage, `images/${image.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+
+        uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                if (!isNaN(progress)) {
+                    setThumbnail((prev) => {
+                        return {
+                            ...prev,
+                            progress: Number(progress).toFixed(0),
+                        };
+                    });
+                }
+            },
+            (error) => {
+                setThumbnail({
+                    ...thumbnail,
+                    error: 'something went wrong, try again.',
+                });
+            },
+            () => {
+                getDownloadURL(ref(storage, `images/${image.name}`)).then(
+                    (downloadURL) => {
+                        setThumbnail((prev) => {
+                            return {
+                                ...prev,
+                                url: downloadURL,
+                            };
+                        });
+                    }
+                );
+            }
+        );
+    };
+
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault();
+
+            if (!thumbnail.url) {
+                setProductState((prev) => {
+                    return {
+                        ...prev,
+                        err: 'please wait thumbnail is uploading to server!.',
+                    };
+                });
+                return;
+            }
+
+            const response = await axios.post('/products', {
+                ...product,
+                price: Number(product.price),
+                stock: Number(product.stock),
+                thumbnail: thumbnail.url,
+            });
+            console.log(response.data);
+        } catch (err) {
+            console.log(err.response);
+        }
+    };
 
     return (
         <div className='admin--addProductSidebar'>
-            <div className='admin--addProductSidebar__ovarlay'></div>
-            <form className='admin--addProductSidebar__main'>
+            <div
+                className={
+                    isProductSidebarOpen
+                        ? 'admin--addProductSidebar__ovarlay admin--addProductSidebar__ovarlay__active'
+                        : 'admin--addProductSidebar__ovarlay'
+                }
+                onClick={() => {
+                    setIsProductSidebarOpen(false);
+                }}
+            ></div>
+            <form
+                className={
+                    isProductSidebarOpen
+                        ? 'admin--addProductSidebar__main admin--addProductSidebar__main__active'
+                        : 'admin--addProductSidebar__main'
+                }
+                onSubmit={handleSubmit}
+            >
                 <div className='admin--addProductSidebar__main__header'>
                     <div className='admin--addProductSidebar__main__header__content'>
                         <h4>Add Product</h4>
@@ -44,7 +165,13 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
                             Add your product and necessary information from here
                         </p>
                     </div>
-                    <button className='admin--addProductSidebar__main__header__closebtn'>
+                    <button
+                        type='button'
+                        className='admin--addProductSidebar__main__header__closebtn'
+                        onClick={() => {
+                            setIsProductSidebarOpen(false);
+                        }}
+                    >
                         x
                     </button>
                 </div>
@@ -69,22 +196,21 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
                                     accepted)
                                 </p>
                             </div>
-                            {thumbnailError && (
+                            {thumbnail.error && (
                                 <p className='admin--addProductSidebar__main__error'>
-                                    {thumbnailError}
+                                    {thumbnail.error}
                                 </p>
                             )}
-                            {thumbnail && (
+                            {thumbnailImg && (
                                 <>
                                     <div className='admin--addProductSidebar__main__form__file__wrapper__img'>
                                         <img
-                                            src={URL.createObjectURL(thumbnail)}
+                                            src={URL.createObjectURL(
+                                                thumbnailImg
+                                            )}
                                             alt=''
                                         />
-                                    </div>
-                                    <div className='admin--addProductSidebar__main__form__file__wrapper__progress'>
-                                        <div></div>
-                                        <span>10% completed</span>
+                                        <span>{thumbnail.progress}%</span>
                                     </div>
                                 </>
                             )}
@@ -96,6 +222,7 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
                             type='text'
                             name='name'
                             placeholder='Product Name'
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -105,6 +232,7 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
                             type='text'
                             name='shortDescription'
                             placeholder='Description'
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -114,15 +242,22 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
                             type='number'
                             name='stock'
                             placeholder='stock'
+                            onChange={handleChange}
                             required
                         />
                     </div>
                     <div className='admin--addProductSidebar__main__form__select'>
-                        <label htmlFor=''>Stock</label>
-                        <select name='unit' id='' required>
-                            <option value=''>Kilo Gram (kg)</option>
-                            <option value=''>Gram (g)</option>
-                            <option value=''>Litre (L)</option>
+                        <label htmlFor=''>Unit</label>
+                        <select
+                            name='unit'
+                            id=''
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value='kg'>Kilo Gram</option>
+                            <option value='g'>Gram</option>
+                            <option value='l'>Litre</option>
+                            <option value='pack'>pack</option>
                         </select>
                     </div>
                     <div className='admin--addProductSidebar__main__form__textarea'>
@@ -133,28 +268,41 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
                             cols='30'
                             rows='10'
                             placeholder='Description'
+                            minLength='30'
+                            onChange={handleChange}
                             required
                         ></textarea>
                     </div>
                     <div className='admin--addProductSidebar__main__form__input'>
                         <label htmlFor=''>Price</label>
                         <input
+                            name='price'
                             type='number'
-                            name='stock'
                             placeholder='Price'
+                            onChange={handleChange}
                             required
                         />
                     </div>
                     <div className='admin--addProductSidebar__main__form__select'>
                         <label htmlFor=''>Category</label>
-                        <select name='category' id=''>
-                            <option value=''>Fish</option>
-                            <option value=''>Vegitables</option>
-                            <option value=''>Fruits</option>
+                        <select
+                            name='category'
+                            id=''
+                            onChange={handleChange}
+                            required
+                        >
+                            {categories.map((category) => {
+                                const { _id, name } = category;
+                                return (
+                                    <option key={_id} value={_id}>
+                                        {name}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </div>
 
-                    {/* imagesPath */}
+                    {/* other images */}
                     <div className='admin--addProductSidebar__main__form__imagePaths'>
                         <label htmlFor=''>Images</label>
                         <div className='admin--addProductSidebar__main__form__imagePaths__right'>
@@ -201,12 +349,24 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
                             )}
                         </div>
                     </div>
+                    <p className='admin--addProductSidebar__main__err'>
+                        * Something went wrong...
+                    </p>
                 </div>
                 <div className='admin--addProductSidebar__main__btns'>
-                    <button className='admin--addProductSidebar__main__btns__cancel'>
+                    <button
+                        type='button'
+                        className='admin--addProductSidebar__main__btns__cancel'
+                        onClick={() => {
+                            setIsProductSidebarOpen(false);
+                        }}
+                    >
                         Cancel
                     </button>
-                    <button className='admin--addProductSidebar__main__btns__add'>
+                    <button
+                        type='submit'
+                        className='admin--addProductSidebar__main__btns__add'
+                    >
                         Add Product
                     </button>
                 </div>
@@ -215,4 +375,4 @@ function AdminAddProductSidebar({ addProductSidebar, setAddProductsSidebar }) {
     );
 }
 
-export default AdminAddProductSidebar;
+export default AdminProductSidebar;

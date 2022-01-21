@@ -1,4 +1,4 @@
-.admin--products {
+.admin--categories {
     padding: 0em 2em;
 
     &__title {
@@ -8,7 +8,7 @@
         font-weight: 600;
     }
 
-    .admin--products--options {
+    &__options {
         display: flex;
         align-items: center;
         gap: 2em;
@@ -36,36 +36,7 @@
             }
         }
 
-        &__category,
-        &__price {
-            width: 350px;
-            height: 3.6em;
-
-            select {
-                width: 100%;
-                height: 100%;
-                background-color: #24262d;
-                border: none;
-                outline: none;
-                border: 1px solid #4c4f52;
-                border-radius: 0.5rem;
-                padding: 1em;
-                color: #d5d6d7;
-                font-size: 16px;
-                appearance: none;
-                background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0aec0'%3E%3Cpath d='M15.3 9.3a1 1 0 011.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4l3.3 3.29 3.3-3.3z'/%3E%3C/svg%3E");
-                background-position: calc(100% - 1em) center;
-                background-repeat: no-repeat;
-                background-size: 16px 12px;
-                background-size: 25px;
-            }
-        }
-
-        &__price {
-            width: 300px;
-        }
-
-        &__add {
+        &__button {
             width: 260px;
             height: 3.6em;
 

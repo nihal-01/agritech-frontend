@@ -58,4 +58,21 @@
             }
         }
     }
+
+    &__notfound {
+        text-align: center;
+        margin-top: 3em;
+
+        img {
+            width: 450px;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+        p {
+            color: #9e9e9e;
+            margin-top: 1em;
+            font-size: 22px;
+        }
+    }
 }

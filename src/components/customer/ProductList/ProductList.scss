@@ -1,75 +1,152 @@
 .productNotFound {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2em;
-
-  &__img__wrapper {
     position: relative;
-    width: 500px;
-    height: 407px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
 
-    img {
-      width: 100%;
-      height: 100%;
-    }
-
-    .productNotFound__img__loader__wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-
-      .loader {
+    &__img__wrapper {
         position: relative;
-        background-color: #e2e2e2;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
+        width: 500px;
+        height: 407px;
 
-        &::after {
-          display: block;
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          transform: translateX(-100%);
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.2),
-            rgba(255, 255, 255, 0.3),
-            rgba(255, 255, 255, 0.1),
-            transparent
-          );
-          animation: loading 1.2s infinite;
+        img {
+            width: 100%;
+            height: 100%;
         }
 
-        @keyframes loading {
-          100% {
-            transform: translateX(100%);
-          }
+        .productNotFound__img__loader__wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            .loader {
+                position: relative;
+                background-color: #e2e2e2;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+
+                &::after {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    transform: translateX(-100%);
+                    background: linear-gradient(
+                        90deg,
+                        transparent,
+                        rgba(255, 255, 255, 0.2),
+                        rgba(255, 255, 255, 0.3),
+                        rgba(255, 255, 255, 0.1),
+                        transparent
+                    );
+                    animation: loading 1.2s infinite;
+                }
+
+                @keyframes loading {
+                    100% {
+                        transform: translateX(100%);
+                    }
+                }
+            }
         }
-      }
     }
-  }
 
-  h3 {
-    font-family: var(--title-font-family);
-    color: var(--text-dark-color);
-    margin-top: 1em;
-    font-size: 20px;
-  }
+    h3 {
+        font-family: var(--title-font-family);
+        color: var(--text-dark-color);
+        margin-top: 1em;
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 640px) {
-  .productNotFound {
-    &__img__wrapper {
-      width: 260px;
-      height: 215px;
+    .productNotFound {
+        &__img__wrapper {
+            width: 260px;
+            height: 215px;
+        }
     }
-  }
+}
+
+// grid view loading
+
+.gridViewLoading {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2em;
+    margin-top: 2.5em;
+
+    &__item {
+        text-align: center;
+        margin-bottom: 30px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+
+        &__img {
+            background-color: #f2f2f2;
+            width: 100%;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                transform: translateX(-100%);
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0.3),
+                    rgba(255, 255, 255, 0.1),
+                    transparent
+                );
+                animation: loading 1.2s infinite;
+            }
+        }
+
+        &__name,
+        &__price {
+            background-color: #f2f2f2;
+            width: 80%;
+            height: 20px;
+
+            position: relative;
+            overflow: hidden;
+
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                transform: translateX(-100%);
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0.3),
+                    rgba(255, 255, 255, 0.1),
+                    transparent
+                );
+                animation: loading 1.2s infinite;
+            }
+        }
+
+        &__price {
+            width: 60%;
+        }
+    }
 }

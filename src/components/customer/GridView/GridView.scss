@@ -1,11 +1,11 @@
 .gridView {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 2em;
   margin-top: 2.5em;
 
   &__item {
     text-align: center;
-    padding: 0px 15px;
     margin-bottom: 30px;
 
     &:hover &__image__wrapper .gridView__item__buttons {

@@ -11,12 +11,8 @@ import './AdminProductSidebar.scss';
 import '../../../firebase/config';
 import { useForm } from '../../../hooks';
 import axios from '../../../axios';
-
-const categories = [
-    { _id: '012a', name: 'vegitables' },
-    { _id: '012b', name: 'fruits' },
-    { _id: '012c', name: 'others' },
-];
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function AdminProductSidebar({
     isProductSidebarOpen,
@@ -29,7 +25,7 @@ function AdminProductSidebar({
         progress: 0,
     });
     const [images, setImages] = useState([]);
-    const [product, handleChange] = useForm({
+    const [product, handleChange, setValue] = useForm({
         name: '',
         shortDescription: '',
         stock: 0,
@@ -44,11 +40,13 @@ function AdminProductSidebar({
     });
 
     const storage = getStorage();
+    const categories = useSelector((state) => state.categories.categories);
+    const dispatch = useDispatch();
 
     const handleThumbnail = (e) => {
         if (e.target.files[0]) {
             setThumbnail((prev) => {
-                return { ...prev, error: '', url: '', progress: 0 };
+                return { ...prev, error: '' };
             });
 
             if (!e.target.files[0].name.match(/\.(jpg|jpeg|png)/gm)) {
@@ -92,9 +90,11 @@ function AdminProductSidebar({
                 }
             },
             (error) => {
-                setThumbnail({
-                    ...thumbnail,
-                    error: 'something went wrong, try again.',
+                setThumbnail((prev) => {
+                    return {
+                        ...prev,
+                        error: 'something went wrong, try again.',
+                    };
                 });
             },
             () => {
@@ -115,12 +115,16 @@ function AdminProductSidebar({
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
+            setProductState((prev) => {
+                return { ...prev, err: '', loading: true };
+            });
 
             if (!thumbnail.url) {
                 setProductState((prev) => {
                     return {
                         ...prev,
-                        err: 'please wait thumbnail is uploading to server!.',
+                        err: 'please wait until file is uploaded.',
+                        loading: false,
                     };
                 });
                 return;
@@ -132,9 +136,23 @@ function AdminProductSidebar({
                 stock: Number(product.stock),
                 thumbnail: thumbnail.url,
             });
-            console.log(response.data);
+
+            setProductState((prev) => {
+                return {
+                    ...prev,
+                    loading: false,
+                };
+            });
         } catch (err) {
-            console.log(err.response);
+            setProductState((prev) => {
+                return {
+                    ...prev,
+                    error:
+                        err.response?.data?.error ||
+                        'Something went wrong, Try again.',
+                    loading: false,
+                };
+            });
         }
     };
 
@@ -221,6 +239,7 @@ function AdminProductSidebar({
                         <input
                             type='text'
                             name='name'
+                            value={product.name || ''}
                             placeholder='Product Name'
                             onChange={handleChange}
                             required
@@ -349,9 +368,11 @@ function AdminProductSidebar({
                             )}
                         </div>
                     </div>
-                    <p className='admin--addProductSidebar__main__err'>
-                        * Something went wrong...
-                    </p>
+                    {productState.err && (
+                        <p className='admin--addProductSidebar__main__err'>
+                            {productState.err}
+                        </p>
+                    )}
                 </div>
                 <div className='admin--addProductSidebar__main__btns'>
                     <button

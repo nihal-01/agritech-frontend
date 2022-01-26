@@ -18,7 +18,7 @@
     }
 
     &__main {
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         background-color: #1a1c23;
@@ -348,11 +348,11 @@
         }
 
         &__error {
-            color: #f05252;
+            color: #f98080;
         }
 
         &__err {
-            color: #f05252;
+            color: #f98080;
             margin-top: 1.5em;
             font-size: 16px;
         }

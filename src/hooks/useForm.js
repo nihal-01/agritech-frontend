@@ -8,6 +8,11 @@ const useForm = ({ initialValue }) => {
         (event) => {
             setValue({ ...value, [event.target.name]: event.target.value });
         },
+        (key, value) => {
+            setValue((prev) => {
+                return { ...prev, [key]: value };
+            });
+        },
     ];
 };
 

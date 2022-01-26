@@ -1,38 +1,55 @@
-import React from "react";
-import { HiOutlineFilter, HiOutlineViewGrid } from "react-icons/hi";
+import React from 'react';
+import { HiOutlineFilter, HiOutlineViewGrid } from 'react-icons/hi';
 // HiViewGrid
-import { BsListUl } from "react-icons/bs";
+import { BsListUl } from 'react-icons/bs';
 
-import "./Sort.scss";
+import './Sort.scss';
+import { useDispatch } from 'react-redux';
+import { updateSort } from '../../../redux/slices/productsSlice';
+import { useSelector } from 'react-redux';
 
 function Sort() {
-  return (
-    <div className="sort__wrapper">
-      <div className="sort">
-        <div className="sort__left">
-          <button className="sort__left__filter">
-            <HiOutlineFilter /> Filter
-          </button>
-          <p>Showing all 10 results</p>
+    const dispatch = useDispatch();
+    const { loading, totalProducts } = useSelector((state) => state.products);
+
+    return (
+        <div className='sort__wrapper'>
+            <div className='sort'>
+                <div className='sort__left'>
+                    <button className='sort__left__filter'>
+                        <HiOutlineFilter /> Filter
+                    </button>
+                    {loading ? (
+                        <div className='sort__left__loading'></div>
+                    ) : (
+                        <p>Showing all {totalProducts} results</p>
+                    )}
+                </div>
+                <div className='sort__right'>
+                    <button className='sort__right__icon'>
+                        <HiOutlineViewGrid />
+                    </button>
+                    <button className='sort__right__icon'>
+                        <BsListUl />
+                    </button>
+                    <select
+                        name='sort'
+                        id=''
+                        onChange={(e) => {
+                            dispatch(updateSort(e.target.value));
+                        }}
+                    >
+                        <option value='default'>Sort by default</option>
+                        <option value='name:asc'>Name: A - Z</option>
+                        <option value='name:desc'>Name: Z - A</option>
+                        <option value='price:asc'>price: low to high</option>
+                        <option value='price:desc'>price: high to low</option>
+                    </select>
+                </div>
+            </div>
+            <hr />
         </div>
-        <div className="sort__right">
-          <button className="sort__right__icon">
-            <HiOutlineViewGrid />
-          </button>
-          <button className="sort__right__icon">
-            <BsListUl />
-          </button>
-          <select name="" id="">
-            <option value="">Sort by default</option>
-            <option value="">Sort by popularity</option>
-            <option value="">Sort by name</option>
-            <option value="">Sort by price</option>
-          </select>
-        </div>
-      </div>
-      <hr />
-    </div>
-  );
+    );
 }
 
 export default Sort;

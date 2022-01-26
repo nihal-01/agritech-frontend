@@ -26,24 +26,29 @@ import { AdminSidebar, AdminNavbar } from './components/admin';
 import axios from './axios';
 import { saveUser } from './redux/slices/userSlice';
 import { useSelector } from 'react-redux';
+import { fetchCategories } from './redux/slices/categoriesSlice';
 
 function App() {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchUser = useCallback(async () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const response = await axios.get('/users');
-            dispatch(saveUser(response.data));
-            console.log(response.data);
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const response = await axios.get('/users');
+                dispatch(saveUser(response.data));
+            }
+            setIsLoading(false);
+        } catch (err) {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     }, [dispatch]);
 
     useEffect(() => {
         fetchUser();
-    }, [fetchUser]);
+        dispatch(fetchCategories());
+    }, [fetchUser, dispatch]);
 
     return isLoading ? (
         <h1>Loading...</h1>

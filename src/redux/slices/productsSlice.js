@@ -49,6 +49,9 @@ export const productsSlice = createSlice({
         },
     },
     extraReducers: {
+        [fetchProducts.pending]: (state, action) => {
+            state.loading = true;
+        },
         [fetchProducts.fulfilled]: (state, action) => {
             state.products = action.payload.products;
             state.skip = action.payload.skip;

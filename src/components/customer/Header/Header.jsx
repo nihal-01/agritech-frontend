@@ -14,9 +14,9 @@ function Header() {
     const [searchKeyword, setSearchKeyword] = useState('');
     const [userDropDown, setUserDropDown] = useState(false);
 
-    console.log(searchKeyword);
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const user = useSelector((state) => state.user.user);
+    const { cartCount } = useSelector((state) => state.cart);
 
     return (
         <header className='header__wrapper'>
@@ -92,7 +92,9 @@ function Header() {
                                 </div>
                             </Link>
                             {userDropDown && (
-                                <UserDropDown setUserDropDown={setUserDropDown} />
+                                <UserDropDown
+                                    setUserDropDown={setUserDropDown}
+                                />
                             )}
                         </div>
                     )}
@@ -109,7 +111,7 @@ function Header() {
                             }}
                         >
                             <BiCart />
-                            <span>0</span>
+                            <span>{cartCount}</span>
                         </div>
                         <SidebarCart
                             isSidebarOpen={isSidebarOpen}

@@ -435,10 +435,61 @@
     &__reviews {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3em;
+        gap: 5em;
         margin-top: 1.5em;
 
+        &__notFound {
+            text-align: center;
+
+            h3 {
+                font-size: 50px;
+            }
+
+            p {
+                color: var(--text-dark-color);
+                font-weight: 500;
+                font-size: 18px;
+                margin-top: 5px;
+            }
+        }
+
         &__content {
+            .singleProductReview__reviewList {
+                display: flex;
+                gap: 2em;
+                margin-bottom: 2.5em;
+
+                &__img {
+                    min-width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                &__content {
+                    h5 {
+                        text-transform: capitalize;
+                        color: var(--text-dark-color);
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+
+                    &__date {
+                        color: #999999;
+                        font-size: 15px;
+                    }
+
+                    &__feedback {
+                        color: #555555;
+                        margin-top: 7px;
+                    }
+                }
+            }
         }
 
         &__form {
@@ -495,6 +546,11 @@
                 padding: 0px 15px;
             }
 
+            &__error {
+                color: #e2401c;
+                margin-top: 1em;
+            }
+
             &__submit {
                 margin-top: 2em;
                 height: 50px;
@@ -544,6 +600,63 @@
                     color: #fff;
                     text-decoration: none;
                     border-radius: 5px;
+                }
+            }
+        }
+
+        &__loading {
+            display: flex;
+            gap: 2em;
+            margin-bottom: 2.5em;
+
+            &__img {
+                min-width: 50px;
+                height: 50px;
+                background-color: #f4f4f4;
+                border-radius: 50%;
+                position: relative;
+                overflow: hidden;
+                @include loading();
+            }
+
+            &__content {
+                width: 100%;
+
+                :nth-child(1) {
+                    width: 100px;
+                    height: 15px;
+                    background-color: #f4f4f4;
+                    position: relative;
+                    overflow: hidden;
+                    @include loading();
+                }
+
+                :nth-child(2) {
+                    width: 200px;
+                    height: 18px;
+                    background-color: #f4f4f4;
+                    margin-top: 10px;
+                    position: relative;
+                    overflow: hidden;
+                    @include loading();
+                }
+                :nth-child(3) {
+                    width: 150px;
+                    height: 13px;
+                    background-color: #f4f4f4;
+                    margin-top: 10px;
+                    position: relative;
+                    overflow: hidden;
+                    @include loading();
+                }
+                :nth-child(4) {
+                    width: 70%;
+                    height: 15px;
+                    background-color: #f4f4f4;
+                    margin-top: 15px;
+                    position: relative;
+                    overflow: hidden;
+                    @include loading();
                 }
             }
         }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import axios from '../../../axios';
 import { deleteCartItem } from '../../../redux/slices/cartSlice';
 import { BtnLoading } from '..';

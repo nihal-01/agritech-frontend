@@ -217,8 +217,6 @@ function SingleProductPage() {
                         <BlankSpace />
                         <SingleProductReview
                             description={product.description}
-                            reviews={product.reviews}
-                            id={product._id}
                         />
                         <BlankSpace />
                         <GridView products={items} count={5} />

@@ -26,7 +26,7 @@ function LoginPage() {
             setFormError({ error: false, msg: '' });
 
             const response = await axios.post('/users/login', user);
-            dispacth(saveUser(response.data.user));
+            dispacth(saveUser(response.data));
         } catch (err) {
             console.log(err.response);
             setFormError({

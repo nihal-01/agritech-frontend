@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './SidebarCart.scss';
 import { SidebarCartContent, SidebarCartHeader, SidebarCartLoading } from '.';
-import { useDispatch } from 'react-redux';
 import { getCartItems } from '../../../redux/slices/cartSlice';
-import { useSelector } from 'react-redux';
 
 function SidebarCart({ isSidebarOpen, setIsSidebarOpen }) {
     const dispatch = useDispatch();
-    const { cartItems, cartLoading } = useSelector((state) => state.cart);
+    const { cartItems, cartLoading, isFetch } = useSelector(
+        (state) => state.cart
+    );
 
     useEffect(() => {
         dispatch(getCartItems());
-    }, [dispatch]);
+    }, [dispatch, isFetch]);
 
     return (
         <div className='sidebarCart__wrapper'>

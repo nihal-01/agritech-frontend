@@ -8,6 +8,8 @@ import ResetPasswordPage from './ResetPasswordPage/ResetPasswordPage';
 import ContactPage from './ContactPage/ContactPage';
 import AboutPage from './AboutPage/AboutPage';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import CartPage from './CartPage/CartPage';
+import WishlistPage from './WishlistPage/WishlistPage';
 
 export {
     HomePage,
@@ -20,4 +22,6 @@ export {
     ContactPage,
     AboutPage,
     PrivateRoute,
+    CartPage,
+    WishlistPage,
 };

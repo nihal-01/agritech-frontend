@@ -36,7 +36,7 @@ function SignupPage() {
 
             const response = await axios.post('/users/', user);
 
-            dispatch(saveUser(response.data.user));
+            dispatch(saveUser(response.data));
         } catch (err) {
             setFormError({
                 error: true,

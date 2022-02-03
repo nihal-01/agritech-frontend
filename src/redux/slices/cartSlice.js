@@ -1,18 +1,26 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../axios';
+import { logout, saveUser } from './userSlice';
 
 const initialState = {
     cartItems: [],
     cartTotal: 0,
     cartCount: 0,
     cartLoading: true,
+    isFetch: false,
 };
 
-const getCartItems = createAsyncThunk('/cart/getCartItems', async () => {
-    console.log('get cart request');
-    const response = await axios.get('/cart');
-    return response.data;
-});
+const getCartItems = createAsyncThunk(
+    '/cart/getCartItems',
+    async (args, { getState }) => {
+        console.log('get cart request');
+        const { token } = getState().user;
+        const response = await axios.get('/cart', {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return response.data;
+    }
+);
 
 export const cartSlice = createSlice({
     name: 'cart',
@@ -54,6 +62,17 @@ export const cartSlice = createSlice({
             }
             state.cartCount = total;
             state.cartLoading = false;
+        },
+        [getCartItems.rejected]: (state, action) => {
+            state.cartLoading = false;
+        },
+        [logout]: (state, action) => {
+            state.cartItems = [];
+            state.cartTotal = 0;
+            state.cartCount = 0;
+        },
+        [saveUser]: (state, action) => {
+            state.isFetch = !state.isFetch;
         },
     },
 });

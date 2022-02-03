@@ -12,15 +12,17 @@ import {
 } from './pages/admin';
 import {
     AboutPage,
+    CartPage,
     ContactPage,
     HomePage,
     LoginPage,
     NotFoundPage,
-    // PrivateRoute,
+    PrivateRoute,
     ProductsPage,
     ResetPasswordPage,
     SignupPage,
     SingleProductPage,
+    WishlistPage,
 } from './pages/customer';
 import { AdminSidebar, AdminNavbar } from './components/admin';
 import axios from './axios';
@@ -105,6 +107,15 @@ const Customer = () => {
                         path='/my-account/lost-password'
                         element={<ResetPasswordPage />}
                     />
+                    <Route
+                        path='/cart'
+                        element={
+                            <PrivateRoute redirectTo={'/login'}>
+                                <CartPage />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route path='/wishlist' element={<WishlistPage />} />
                     <Route path='/about' element={<AboutPage />} />
                     <Route path='/contact' element={<ContactPage />} />
                     <Route path='/*' element={<NotFoundPage />} />

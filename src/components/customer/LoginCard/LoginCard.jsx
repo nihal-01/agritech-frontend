@@ -26,7 +26,8 @@ function LoginCard({ setIsLoginOpen }) {
             setFormError({ error: false, msg: '' });
 
             const response = await axios.post('/users/login', user);
-            dispatch(saveUser(response.data.user));
+            dispatch(saveUser(response.data));
+
             setIsLoginOpen(false);
         } catch (err) {
             setFormError({

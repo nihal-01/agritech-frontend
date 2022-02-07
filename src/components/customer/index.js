@@ -15,6 +15,7 @@ import SidebarCart from './SidebarCart/SidebarCart';
 import Pagination from './Pagination/Pagination';
 import BtnLoading from './BtnLoading/BtnLoading';
 import UserDropDown from './UserDropDown/UserDropDown';
+import Loader from './Loader/Loader';
 
 export {
     Navbar,
@@ -33,5 +34,6 @@ export {
     SidebarCart,
     Pagination,
     BtnLoading,
-    UserDropDown
+    UserDropDown,
+    Loader,
 };

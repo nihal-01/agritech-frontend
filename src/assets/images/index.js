@@ -8,6 +8,7 @@ import paymentCardsImg from './paymentCards.png';
 import notFoundImg from './404.webp';
 import noImage from './noImage.png';
 import adminNotFoundImg from './admin-notFound.svg';
+import emptyCartImg from './emptyCart.png';
 
 export {
     leavesImg,
@@ -20,4 +21,5 @@ export {
     notFoundImg,
     noImage,
     adminNotFoundImg,
+    emptyCartImg,
 };

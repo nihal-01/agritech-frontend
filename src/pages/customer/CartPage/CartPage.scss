@@ -2,11 +2,15 @@
     max-width: 1650px;
     margin: 0 auto;
     padding: 0px 30px;
-    display: flex;
-    gap: 5em;
+
+    &__content {
+        display: flex;
+        gap: 5em;
+    }
 
     &__table {
         min-width: 67%;
+        position: relative;
 
         thead {
             tr {
@@ -23,6 +27,8 @@
 
         tbody {
             tr {
+                position: relative;
+
                 td {
                     border-top: 1px solid #f2f2f2;
                     padding: 18px 18px 18px 0px;
@@ -64,10 +70,76 @@
         &__closeBtn {
             background-color: transparent;
             font-size: 16px;
+            color: var(--text-dark-color);
+
+            &:disabled {
+                color: var(--text-dark-color);
+                cursor: not-allowed;
+            }
 
             &:hover {
                 color: red;
             }
+        }
+
+        &__quantity {
+            border: 1px solid #f4f4f4;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 130px;
+
+            span {
+                background-color: #f4f4f4;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--text-dark-color);
+            }
+
+            button {
+                width: 100%;
+                height: 100%;
+                background-color: transparent;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 15px;
+
+                &:disabled {
+                    cursor: not-allowed;
+                    color: var(--text-dark-color);
+                }
+
+                &:hover {
+                    background-color: var(--secondary-color);
+                }
+            }
+        }
+
+        &__loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &__wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            opacity: 0.5;
         }
     }
 
@@ -129,6 +201,60 @@
                 &:hover {
                     background-color: var(--primary-color);
                     color: #fff;
+                }
+            }
+        }
+    }
+
+    &__noItem {
+        text-align: center;
+
+        img {
+            width: 360px;
+            max-width: 100%;
+        }
+
+        p {
+            color: var(--text-dark-color);
+            margin-top: 0.2em;
+        }
+
+        button {
+            color: var(--text-dark-color);
+            background-color: var(--secondary-color);
+            margin-top: 1.5em;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+
+            &:hover {
+                background-color: var(--primary-color);
+                color: #fff;
+            }
+        }
+    }
+
+    &__loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5em 0;
+
+        &__loader {
+            width: 45px;
+            height: 45px;
+            border: 3px solid #f2f2f2;
+            border-radius: 50%;
+            border-top: 3px solid var(--primary-color);
+            animation: loader 0.9s linear infinite;
+            transition: 0.5s;
+
+            @keyframes loader {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
                 }
             }
         }

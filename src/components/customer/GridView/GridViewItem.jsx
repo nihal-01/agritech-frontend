@@ -4,8 +4,8 @@ import {
     AiOutlineShoppingCart,
     AiOutlineHeart,
     AiOutlineEye,
+    AiFillHeart,
 } from 'react-icons/ai';
-// AiFillHeart
 import { HiOutlineChevronDoubleRight } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 
@@ -13,10 +13,28 @@ import { Stars } from '..';
 import axios from '../../../axios';
 import { addItemToCart } from '../../../redux/slices/cartSlice';
 import BtnLoading from '../BtnLoading/BtnLoading';
+import {
+    addToWishlist,
+    deleteWishlist,
+} from '../../../redux/slices/wishlistSlice';
+
+const isLoved = (id) => {
+    if (localStorage.getItem('wishlist')) {
+        const items = JSON.parse(localStorage.getItem('wishlist'));
+        for (let i = 0; i < items.length; i++) {
+            if (items[i]._id === id) {
+                return true;
+            }
+            return false;
+        }
+    }
+    return false;
+};
 
 const GridViewItem = ({ _id, name, stars, thumbnail, price, stock }) => {
     const [addToCartLoading, setAddToCartLoading] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
+    const [loved, setLoved] = useState(isLoved(_id));
 
     const dispatch = useDispatch();
 
@@ -24,7 +42,7 @@ const GridViewItem = ({ _id, name, stars, thumbnail, price, stock }) => {
         try {
             setAddToCartLoading(true);
             await axios.post('/cart', { productId: product._id });
-            dispatch(addItemToCart(product));
+            dispatch(addItemToCart({ product, quantity: 1 }));
             setAddToCartLoading(false);
         } catch (err) {
             console.log(err.response.data);
@@ -53,8 +71,27 @@ const GridViewItem = ({ _id, name, stars, thumbnail, price, stock }) => {
                     />
                 </Link>
                 <div className='gridView__item__buttons'>
-                    <button>
-                        <AiOutlineHeart />
+                    <button
+                        onClick={() => {
+                            if (loved) {
+                                dispatch(deleteWishlist(_id));
+                                setLoved(false);
+                            } else {
+                                dispatch(
+                                    addToWishlist({
+                                        _id,
+                                        thumbnail,
+                                        name,
+                                        price,
+                                        stock,
+                                        createdAt: new Date().toISOString(),
+                                    })
+                                );
+                                setLoved(true);
+                            }
+                        }}
+                    >
+                        {loved ? <AiFillHeart /> : <AiOutlineHeart />}
                     </button>
                     <button
                         onClick={() => {

@@ -28,28 +28,57 @@ export const cartSlice = createSlice({
     reducers: {
         addItemToCart: (state, action) => {
             for (let i = 0; i < state.cartItems.length; i++) {
-                if (state.cartItems[i].productId === action.payload._id) {
-                    state.cartItems[i].quantity++;
+                if (
+                    state.cartItems[i].productId === action.payload.product._id
+                ) {
+                    state.cartItems[i].quantity += action.payload.quantity;
+                    state.cartCount += action.payload.quantity;
+                    state.cartTotal += action.payload.product.price;
+                    return;
+                }
+            }
+            state.cartItems.push({
+                productId: action.payload.product._id,
+                quantity: action.payload.quantity,
+                product: action.payload.product,
+            });
+            state.cartCount += action.payload.quantity;
+            state.cartTotal += action.payload.product.price;
+        },
+        deleteCartItem: (state, action) => {
+            state.cartCount -= action.payload.quantity;
+            state.cartTotal -=
+                parseInt(action.payload.quantity) *
+                action.payload.product.price;
+            state.cartItems = state.cartItems.filter((item) => {
+                return item.productId !== action.payload.productId;
+            });
+        },
+        incrementCartItem: (state, action) => {
+            for (let i = 0; i < state.cartItems.length; i++) {
+                if (state.cartItems[i].productId === action.payload.productId) {
+                    state.cartItems[i].quantity += 1;
                     state.cartCount += 1;
                     state.cartTotal += action.payload.price;
                     return;
                 }
             }
-            state.cartItems.push({
-                productId: action.payload._id,
-                quantity: 1,
-                product: action.payload,
-            });
-            state.cartCount += 1;
-            state.cartTotal += action.payload.price;
         },
-        deleteCartItem: (state, action) => {
-            state.cartCount -= action.payload.quantity;
-            state.cartTotal -=
-                action.payload.quantity * action.payload.product.price;
-            state.cartItems = state.cartItems.filter((item) => {
-                return item.productId !== action.payload.productId;
-            });
+        decrementCartItem: (state, action) => {
+            for (let i = 0; i < state.cartItems.length; i++) {
+                if (state.cartItems[i].productId === action.payload.productId) {
+                    state.cartItems[i].quantity -= 1;
+                    state.cartCount -= 1;
+                    state.cartTotal -= action.payload.price;
+                    return;
+                }
+            }
+        },
+
+        clearCartItems: (state) => {
+            state.cartItems = [];
+            state.cartTotal = 0;
+            state.cartCount = 0;
         },
     },
     extraReducers: {
@@ -77,7 +106,13 @@ export const cartSlice = createSlice({
     },
 });
 
-export const { addItemToCart, deleteCartItem } = cartSlice.actions;
+export const {
+    addItemToCart,
+    deleteCartItem,
+    decrementCartItem,
+    incrementCartItem,
+    clearCartItems,
+} = cartSlice.actions;
 
 export { getCartItems };
 

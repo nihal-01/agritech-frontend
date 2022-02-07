@@ -5,6 +5,7 @@ import {
     categoriesReducer,
     productsReducer,
     userReducer,
+    wishlistReducer,
 } from './slices';
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
         categories: categoriesReducer,
         products: productsReducer,
         cart: cartReducer,
+        wishlist: wishlistReducer,
     },
     devTools: true,
 });

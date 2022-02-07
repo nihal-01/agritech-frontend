@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import axios from '../../../axios';
 import { deleteCartItem } from '../../../redux/slices/cartSlice';
-import { BtnLoading } from '..';
+import { Loader } from '..';
 
 const SidebarCartSingle = ({ item, setIsSidebarOpen }) => {
     const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ const SidebarCartSingle = ({ item, setIsSidebarOpen }) => {
         <li className='sidebarCart__products__item'>
             {loading && (
                 <div className='sidebarCart__products__item__loading'>
-                    <BtnLoading />
+                    <Loader />
                 </div>
             )}
             <Link

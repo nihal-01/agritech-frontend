@@ -3,23 +3,26 @@ import { Link } from 'react-router-dom';
 import { BlankSpace, PageHero } from '../../../components/customer';
 import './WishlistPage.scss';
 import { monthNames } from '../../../utils/constants';
-
-const wishlist = [];
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteWishlist } from '../../../redux/slices/wishlistSlice';
 
 const WishlistPage = () => {
-    console.log('WishlistPage');
+    const { wishlistItems } = useSelector((state) => state.wishlist);
+    const dispatch = useDispatch();
 
     return (
         <div className='wishlistPage--wrapper'>
             <PageHero title='Wishlist' />
             <BlankSpace />
             <div className='wishlistPage'>
-                {wishlist.length < 1 ? (
-                    <p className='wishlistPage__noWishlist'>There are no products on the wishlist!</p>
+                {wishlistItems.length < 1 ? (
+                    <p className='wishlistPage__noWishlist'>
+                        There is no products on the wishlist!
+                    </p>
                 ) : (
                     <table className='wishlistPage__table'>
                         <tbody>
-                            {wishlist.map((item) => {
+                            {wishlistItems.map((item) => {
                                 const {
                                     _id,
                                     name,
@@ -33,7 +36,13 @@ const WishlistPage = () => {
                                 return (
                                     <tr key={_id}>
                                         <td className='wishlistPage__table__close'>
-                                            <button>
+                                            <button
+                                                onClick={() => {
+                                                    dispatch(
+                                                        deleteWishlist(_id)
+                                                    );
+                                                }}
+                                            >
                                                 <AiOutlineClose />
                                             </button>
                                         </td>

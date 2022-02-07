@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BiPhoneCall, BiSearch, BiUser, BiHeart, BiCart } from 'react-icons/bi';
 import { CgMenuLeft } from 'react-icons/cg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './Header.scss';
 import { leavesImg } from '../../../assets/images';
@@ -17,6 +17,13 @@ function Header() {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const user = useSelector((state) => state.user.user);
     const { cartCount } = useSelector((state) => state.cart);
+    const { wishlistItems } = useSelector((state) => state.wishlist);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+    }, [wishlistItems, dispatch]);
 
     return (
         <header className='header__wrapper'>
@@ -100,7 +107,7 @@ function Header() {
                     )}
                     <Link to='/wishlist' className='header__wishlist__icon'>
                         <BiHeart />
-                        <span>2</span>
+                        <span>{wishlistItems.length}</span>
                     </Link>
                     <div className='header__cart__wrapper'>
                         <div

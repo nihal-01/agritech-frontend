@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import './SingleProductPage.scss';
 import {
     BlankSpace,
+    BtnLoading,
     GridView,
     PageHero,
     Stars,
@@ -17,6 +18,8 @@ import {
     SingleProductThumbnail,
 } from '.';
 import { NotFoundPage } from '..';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../../redux/slices/cartSlice';
 
 const items = products.slice(0, 5);
 
@@ -26,9 +29,11 @@ function SingleProductPage() {
     const [images, setImages] = useState([]);
     const [itemCount, setItemCount] = useState(1);
     const [error, setError] = useState(false);
+    const [cartBtnLoading, setCartBtnLoading] = useState(false);
 
     const imgs = useRef(null);
     const { id } = useParams();
+    const dispatch = useDispatch();
 
     const handleClick = (index) => {
         imgs.current.style.transform = `translateX(-${index * 100}%)`;
@@ -64,6 +69,22 @@ function SingleProductPage() {
             setProductLoading(false);
         }
     }, [id]);
+
+    const addToCart = async () => {
+        try {
+            setCartBtnLoading(true);
+
+            await axios.post('/cart', {
+                productId: product._id,
+                quantity: itemCount,
+            });
+
+            dispatch(addItemToCart({ product, quantity: itemCount }));
+            setCartBtnLoading(false);
+        } catch (err) {
+            console.log(err.response.data);
+        }
+    };
 
     useEffect(() => {
         fetchSingleProduct();
@@ -192,10 +213,20 @@ function SingleProductPage() {
                                                     </button>
                                                 </div>
 
-                                                <span className='addToCart__btn'>
+                                                <button
+                                                    className='addToCart__btn'
+                                                    onClick={() => {
+                                                        addToCart();
+                                                    }}
+                                                    disabled={cartBtnLoading}
+                                                >
                                                     <HiOutlineShoppingBag />
-                                                    Add to cart
-                                                </span>
+                                                    {cartBtnLoading ? (
+                                                        <BtnLoading />
+                                                    ) : (
+                                                        'Add to cart'
+                                                    )}
+                                                </button>
                                             </>
                                         ) : (
                                             <button className='addToCart__outOfStockBtn'>

@@ -16,6 +16,7 @@ import Pagination from './Pagination/Pagination';
 import BtnLoading from './BtnLoading/BtnLoading';
 import UserDropDown from './UserDropDown/UserDropDown';
 import Loader from './Loader/Loader';
+import BlogGrid from './BlogGrid/BlogGrid';
 
 export {
     Navbar,
@@ -36,4 +37,5 @@ export {
     BtnLoading,
     UserDropDown,
     Loader,
+    BlogGrid,
 };

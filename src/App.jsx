@@ -1,34 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { Header, Footer } from './components/customer';
-import {
-    Admin404Page,
-    AdminCategoriesPage,
-    AdminHomePage,
-    AdminPrivateRoute,
-    AdminProductsPage,
-} from './pages/admin';
-import {
-    AboutPage,
-    CartPage,
-    ContactPage,
-    HomePage,
-    LoginPage,
-    NotFoundPage,
-    PrivateRoute,
-    ProductsPage,
-    ResetPasswordPage,
-    SignupPage,
-    SingleProductPage,
-    WishlistPage,
-} from './pages/customer';
-import { AdminSidebar, AdminNavbar } from './components/admin';
+import { AdminPrivateRoute } from './pages/admin';
 import axios from './axios';
 import { saveUser } from './redux/slices/userSlice';
-import { useSelector } from 'react-redux';
 import { fetchCategories } from './redux/slices/categoriesSlice';
+import { AdminRoutes, CustomerRoutes } from './routes';
 
 function App() {
     const dispatch = useDispatch();
@@ -61,92 +39,13 @@ function App() {
                 path='/admin/*'
                 element={
                     <AdminPrivateRoute>
-                        <Admin />
+                        <AdminRoutes />
                     </AdminPrivateRoute>
                 }
             />
-            <Route path='/*' element={<Customer />} />
+            <Route path='/*' element={<CustomerRoutes />} />
         </Routes>
     );
 }
-
-const Customer = () => {
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    return (
-        <>
-            <Header />
-            <main>
-                <Routes>
-                    <Route path='/' element={<HomePage />} />
-                    <Route
-                        path='/signup'
-                        element={
-                            isLoggedIn ? (
-                                <Navigate replace to='/' />
-                            ) : (
-                                <SignupPage />
-                            )
-                        }
-                    />
-                    <Route
-                        path='/login'
-                        element={
-                            isLoggedIn ? (
-                                <Navigate replace to='/' />
-                            ) : (
-                                <LoginPage />
-                            )
-                        }
-                    />
-                    <Route path='/products' element={<ProductsPage />} />
-                    <Route
-                        path='/products/:id'
-                        element={<SingleProductPage />}
-                    />
-                    <Route
-                        path='/my-account/lost-password'
-                        element={<ResetPasswordPage />}
-                    />
-                    <Route
-                        path='/cart'
-                        element={
-                            <PrivateRoute redirectTo={'/login'}>
-                                <CartPage />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route path='/wishlist' element={<WishlistPage />} />
-                    <Route path='/about' element={<AboutPage />} />
-                    <Route path='/contact' element={<ContactPage />} />
-                    <Route path='/*' element={<NotFoundPage />} />
-                </Routes>
-            </main>
-            <Footer />
-        </>
-    );
-};
-
-const Admin = () => {
-    return (
-        <div className='admin'>
-            <AdminSidebar />
-            <div className='admin-main'>
-                <AdminNavbar />
-                <Routes>
-                    <Route path='/' element={<AdminHomePage />} />
-                    <Route
-                        path='/products'
-                        element={<AdminProductsPage />}
-                    ></Route>
-                    <Route
-                        path='/categories'
-                        element={<AdminCategoriesPage />}
-                    ></Route>
-                    <Route path='*' element={<Admin404Page />} />
-                </Routes>
-            </div>
-        </div>
-    );
-};
 
 export default App;

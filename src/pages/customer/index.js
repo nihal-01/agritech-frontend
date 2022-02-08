@@ -10,6 +10,8 @@ import AboutPage from './AboutPage/AboutPage';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import CartPage from './CartPage/CartPage';
 import WishlistPage from './WishlistPage/WishlistPage';
+import BlogPage from './BlogPage/BlogPage';
+import SingleBlogPage from './SingleBlogPage/SingleBlogPage';
 
 export {
     HomePage,
@@ -24,4 +26,6 @@ export {
     PrivateRoute,
     CartPage,
     WishlistPage,
+    BlogPage,
+    SingleBlogPage,
 };

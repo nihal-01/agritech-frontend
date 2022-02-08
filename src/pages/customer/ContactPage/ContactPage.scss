@@ -1,0 +1,106 @@
+.contactPage {
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0px 30px;
+    display: flex;
+    gap: 5em;
+
+    &__img {
+        width: 75%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__main {
+        &__title {
+            font-family: var(--title-font-family);
+            color: var(--text-dark-color);
+            font-size: 30px;
+        }
+
+        &__desc {
+            color: var(--text-light-color);
+            margin-top: 1em;
+            font-size: 17px;
+            line-height: 30px;
+        }
+
+        &__info {
+            display: flex;
+            margin-top: 2em;
+            gap: 30px;
+
+            &__left {
+                width: 50%;
+            }
+
+            h3 {
+                font-weight: 600;
+                font-size: 18px;
+                color: var(--text-dark-color);
+            }
+
+            p {
+                color: var(--text-light-color);
+                margin-top: 0.8em;
+                line-height: 30px;
+
+                span {
+                    font-weight: 600;
+                    color: var(--text-dark-color);
+                }
+            }
+        }
+
+        hr {
+            margin: 3em 0;
+            border: none;
+            border-top: 1px solid #e1e1e1;
+        }
+
+        &__form {
+            h2 {
+                margin-bottom: 1em;
+            }
+            input {
+                width: 100%;
+                border: 1px solid #e1e1e1;
+                outline: none;
+                height: 50px;
+                border-radius: 4px;
+                margin-bottom: 1.5em;
+                padding: 0px 15px;
+                font-size: 16px;
+            }
+
+            textarea {
+                width: 100%;
+                border: 1px solid #e1e1e1;
+                outline: none;
+                resize: none;
+                padding: 15px;
+                font-size: 16px;
+                height: 180px;
+                border-radius: 4px;
+            }
+
+            button {
+                width: 150px;
+                height: 48px;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: 600;
+                margin-top: 1.5em;
+                background-color: var(--secondary-color);
+                color: var(--text-dark-color);
+
+                &:hover {
+                    background-color: var(--primary-color);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

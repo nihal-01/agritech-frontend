@@ -9,6 +9,7 @@ import notFoundImg from './404.webp';
 import noImage from './noImage.png';
 import adminNotFoundImg from './admin-notFound.svg';
 import emptyCartImg from './emptyCart.png';
+import contactImg from './contact.jpg';
 
 export {
     leavesImg,
@@ -22,4 +23,5 @@ export {
     noImage,
     adminNotFoundImg,
     emptyCartImg,
+    contactImg,
 };

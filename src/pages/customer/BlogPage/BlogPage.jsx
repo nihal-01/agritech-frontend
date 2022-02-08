@@ -1,4 +1,5 @@
-import { BlogGrid } from '../../../components/customer';
+import './BlogPage.scss';
+import { BlankSpace, BlogGrid, PageHero, Pagination } from '../../../components/customer';
 
 const posts = [
     {
@@ -75,7 +76,17 @@ const posts = [
 
 const BlogPage = () => {
     console.log('blog page..!');
-    return <BlogGrid posts={posts} />;
+    return (
+        <div className='blogPage-wrapper'>
+            <PageHero title='Blog' />
+            <BlankSpace />
+            <div className='blogPage'>
+                <BlogGrid posts={posts} />
+                <Pagination />
+            </div>
+            <BlankSpace />
+        </div>
+    );
 };
 
 export default BlogPage;

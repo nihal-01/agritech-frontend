@@ -18,6 +18,7 @@ import {
 import { Link } from 'react-router-dom';
 
 function AboutPage() {
+    console.log('about page');
     return (
         <div>
             <PageHero title='About' />

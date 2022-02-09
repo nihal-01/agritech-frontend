@@ -1,15 +1,22 @@
-import React from "react";
-import { BlankSpace, Hero } from "../../../components/customer";
+import React from 'react';
+import { BlankSpace, Hero } from '../../../components/customer';
 
 function HomePage() {
-  return (
-    <div className="homePage">
-      <Hero />
-      <div className="homePage__main">
-        <BlankSpace />
-      </div>
-    </div>
-  );
+    console.log('Home page');
+    return (
+        <div className='homePage-wrapper'>
+            <Hero />
+            <BlankSpace />
+            <div className='homePage'>
+                <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default HomePage;

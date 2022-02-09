@@ -40,7 +40,7 @@ function ContactPage() {
                                 info@example.com
                             </p>
                         </div>
-                        <div>
+                        <div className='contactPage__main__info__right'>
                             <h3>OUR BUSINESS HOURS</h3>
                             <p>
                                 Monday - Friday: <br />

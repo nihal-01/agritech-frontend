@@ -6,7 +6,7 @@
     gap: 5em;
 
     &__img {
-        width: 75%;
+        width: 100%;
 
         img {
             width: 100%;
@@ -99,6 +99,57 @@
                 &:hover {
                     background-color: var(--primary-color);
                     color: #fff;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .contactPage {
+        display: block;
+
+        &__img {
+            text-align: center;
+
+            img {
+                width: auto;
+                max-width: 100%;
+            }
+        }
+
+        &__main {
+            margin-top: 1em;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .contactPage {
+        &__main {
+            &__desc {
+                font-size: 16px;
+            }
+
+            &__info {
+                display: block;
+
+                h3 {
+                    font-size: 17px;
+                }
+
+                p {
+                    font-size: 15px;
+                }
+
+                &__left {
+                    width: 100%;
+                }
+
+                &__right {
+                    h3 {
+                        margin-top: 1.5em;
+                    }
                 }
             }
         }

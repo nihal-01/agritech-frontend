@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import "./BlankSpace.scss";
+import './BlankSpace.scss';
 
 function BlankSpace() {
-  return <div className="blank__space"></div>;
+    return <div className='blank__space'></div>;
 }
 
 export default BlankSpace;

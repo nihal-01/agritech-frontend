@@ -116,3 +116,70 @@
         }
     }
 }
+
+@media (max-width: 1280px) {
+    .aboutPage {
+        &__features {
+            &__list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
+                &__middle {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .aboutPage {
+        &__blog {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &__features {
+            text-align: center;
+
+            &__list {
+                display: block;
+
+                &__item {
+                    display: grid;
+
+                    img {
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutPage {
+        &__blog {
+            display: block;
+
+            &__item {
+                margin-bottom: 3em;
+
+                a {
+                    h3 {
+                        font-size: 20px;
+                        margin-top: 0.6em;
+                    }
+                }
+
+                p {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        &__features {
+            margin-top: 5em;
+        }
+    }
+}

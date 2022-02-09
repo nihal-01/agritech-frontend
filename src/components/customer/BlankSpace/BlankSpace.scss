@@ -1,15 +1,9 @@
 .blank__space {
-  margin-top: 4.5em;
+    margin-top: 4.5em;
 }
 
 @media (max-width: 1024px) {
-  .blank__space {
-    margin-top: 3em;
-  }
-}
-
-@media (max-width: 768px) {
-  .blank__space {
-    margin-top: 2em;
-  }
+    .blank__space {
+        margin-top: 3em;
+    }
 }

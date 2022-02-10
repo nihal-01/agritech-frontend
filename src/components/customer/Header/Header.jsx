@@ -20,6 +20,7 @@ function Header() {
     const { wishlistItems } = useSelector((state) => state.wishlist);
 
     const dispatch = useDispatch();
+    console.log(searchKeyword);
 
     useEffect(() => {
         localStorage.setItem('wishlist', JSON.stringify(wishlistItems));

@@ -6,13 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './Header.scss';
 import { leavesImg } from '../../../assets/images';
-import { LoginCard, Navbar, SidebarCart, UserDropDown } from '..';
+import {
+    LoginCard,
+    Navbar,
+    SidebarCart,
+    UserDropDown,
+    MobileSidebar,
+} from '..';
 
 function Header() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState('');
     const [userDropDown, setUserDropDown] = useState(false);
+    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const user = useSelector((state) => state.user.user);
@@ -29,7 +36,16 @@ function Header() {
     return (
         <header className='header__wrapper'>
             <div className='header'>
-                <div className='header__menu'>
+                <MobileSidebar
+                    isMobileSidebarOpen={isMobileSidebarOpen}
+                    setIsMobileSidebarOpen={setIsMobileSidebarOpen}
+                />
+                <div
+                    className='header__menu'
+                    onClick={() => {
+                        setIsMobileSidebarOpen(true);
+                    }}
+                >
                     <CgMenuLeft />
                 </div>
                 <div className='header__logo__wrapper'>

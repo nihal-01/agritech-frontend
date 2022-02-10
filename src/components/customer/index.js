@@ -17,6 +17,7 @@ import BtnLoading from './BtnLoading/BtnLoading';
 import UserDropDown from './UserDropDown/UserDropDown';
 import Loader from './Loader/Loader';
 import BlogGrid from './BlogGrid/BlogGrid';
+import MobileSidebar from './MobileSidebar/MobileSidebar';
 
 export {
     Navbar,
@@ -38,4 +39,5 @@ export {
     UserDropDown,
     Loader,
     BlogGrid,
+    MobileSidebar,
 };

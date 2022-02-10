@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { BsBellFill } from 'react-icons/bs';
-import { AiOutlineClose, AiOutlineCheck } from 'react-icons/ai';
+// import { AiOutlineClose, AiOutlineCheck } from 'react-icons/ai';
 
 import './AdminNavbar.scss';
 import { avatar } from '../../../assets/images';

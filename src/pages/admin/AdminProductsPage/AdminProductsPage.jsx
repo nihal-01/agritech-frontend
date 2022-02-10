@@ -21,8 +21,9 @@ function AdminProductsPage() {
 
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories.categories);
-    const { products, skip, limit, totalProducts, loading, filters, sort } =
-        useSelector((state) => state.products);
+    const { products, skip, limit, totalProducts, filters, sort } = useSelector(
+        (state) => state.products
+    );
 
     const handleDelete = async (_id) => {
         try {

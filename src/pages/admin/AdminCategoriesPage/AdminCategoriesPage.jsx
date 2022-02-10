@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { FiEdit } from 'react-icons/fi';
@@ -8,7 +8,6 @@ import './AdminCategoriesPage.scss';
 import { AdminCategorySidebar } from '../../../components/admin';
 import {
     deleteCategory,
-    fetchCategories,
     updateIsEdit,
 } from '../../../redux/slices/categoriesSlice';
 import { adminNotFoundImg, noImage } from '../../../assets/images';

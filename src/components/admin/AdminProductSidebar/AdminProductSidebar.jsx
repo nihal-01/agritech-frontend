@@ -10,9 +10,9 @@ import {
 import './AdminProductSidebar.scss';
 import '../../../firebase/config';
 import { useForm } from '../../../hooks';
-import axios from '../../../axios';
+// import axios from '../../../axios';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 function AdminProductSidebar({
     isProductSidebarOpen,
@@ -25,7 +25,7 @@ function AdminProductSidebar({
         progress: 0,
     });
     const [images, setImages] = useState([]);
-    const [product, handleChange, setValue] = useForm({
+    const [product, handleChange] = useForm({
         name: '',
         shortDescription: '',
         stock: 0,
@@ -41,7 +41,6 @@ function AdminProductSidebar({
 
     const storage = getStorage();
     const categories = useSelector((state) => state.categories.categories);
-    const dispatch = useDispatch();
 
     const handleThumbnail = (e) => {
         if (e.target.files[0]) {
@@ -130,12 +129,12 @@ function AdminProductSidebar({
                 return;
             }
 
-            const response = await axios.post('/products', {
-                ...product,
-                price: Number(product.price),
-                stock: Number(product.stock),
-                thumbnail: thumbnail.url,
-            });
+            // const response = await axios.post('/products', {
+            //     ...product,
+            //     price: Number(product.price),
+            //     stock: Number(product.stock),
+            //     thumbnail: thumbnail.url,
+            // });
 
             setProductState((prev) => {
                 return {

@@ -25,18 +25,19 @@ const isLoved = (id) => {
             if (items[i]._id === id) {
                 return true;
             }
-            return false;
         }
     }
     return false;
 };
 
-const GridViewItem = ({ _id, name, stars, thumbnail, price, stock }) => {
+const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
     const [addToCartLoading, setAddToCartLoading] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
     const [loved, setLoved] = useState(isLoved(_id));
 
     const dispatch = useDispatch();
+
+    console.log('object');
 
     const addToCart = async (product) => {
         try {
@@ -116,7 +117,7 @@ const GridViewItem = ({ _id, name, stars, thumbnail, price, stock }) => {
                 )}
             </div>
             <div className='gridView__item__stars'>
-                <Stars stars={stars} />
+                <Stars stars={avgStars} />
             </div>
             <h3 className='gridView__item__name'>
                 <Link to={`/products/${_id}`}>{name}</Link>

@@ -120,3 +120,24 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .loginPage__wrapper {
+        .loginPage {
+            &__form {
+                label {
+                    font-size: 15px;
+                }
+
+                &__saveBox__wrapper {
+                    display: block;
+                    text-align: right;
+
+                    .loginPage__form__saveBox {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

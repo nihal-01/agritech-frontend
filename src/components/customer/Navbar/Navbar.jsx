@@ -12,15 +12,15 @@ function Navbar() {
     return (
         <nav className='navbar'>
             <div className='navbar__wrapper'>
-                {/* <div className="navbar__categories">
-          <i>
-            <HiOutlineViewGrid />
-          </i>{" "}
-          All Categories{" "}
-          <span>
-            <FiChevronDown />
-          </span>
-        </div> */}
+                {/*<div className='navbar__categories'>
+                    <i>
+                        <HiOutlineViewGrid />
+                    </i>{' '}
+                    All Categories{' '}
+                    <span>
+                        <FiChevronDown />
+                    </span>
+                </div> */}
                 <ul className='menu'>
                     {navLinks.map((link, index) => {
                         return (

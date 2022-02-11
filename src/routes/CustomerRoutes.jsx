@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Header, Footer } from '../components/customer';
+import { Header, Footer, BottomNav } from '../components/customer';
 import {
     AboutPage,
     BlogPage,
@@ -73,6 +73,7 @@ const CustomerRoutes = () => {
                     <Route path='/*' element={<NotFoundPage />} />
                 </Routes>
             </main>
+            <BottomNav />
             <Footer />
         </>
     );

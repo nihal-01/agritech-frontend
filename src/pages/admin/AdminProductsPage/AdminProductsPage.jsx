@@ -12,6 +12,7 @@ import {
     updateCategory,
     updateSkip,
     updateSort,
+    updateIsEdit,
 } from '../../../redux/slices/productsSlice';
 import axios from '../../../axios';
 
@@ -92,6 +93,7 @@ function AdminProductsPage() {
                 <div className='admin--products--options__add'>
                     <button
                         onClick={() => {
+                            dispatch(updateIsEdit({ isEdit: false }));
                             setIsProductSidebarOpen(true);
                         }}
                     >
@@ -137,7 +139,18 @@ function AdminProductsPage() {
                                         </button>
                                     </td>
                                     <td>
-                                        <button className='table--editbtn'>
+                                        <button
+                                            className='table--editbtn'
+                                            onClick={() => {
+                                                dispatch(
+                                                    updateIsEdit({
+                                                        isEdit: true,
+                                                        editProductId: _id,
+                                                    })
+                                                );
+                                                setIsProductSidebarOpen(true);
+                                            }}
+                                        >
                                             <FiEdit />
                                         </button>
                                         <button

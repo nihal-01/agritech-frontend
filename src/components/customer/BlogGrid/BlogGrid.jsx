@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AiOutlineCalendar, AiOutlineComment } from 'react-icons/ai';
 
 import './BlogGrid.scss';
 import { monthNames } from '../../../utils/constants';
@@ -20,30 +21,37 @@ const BlogGrid = ({ posts }) => {
 
                 return (
                     <div key={_id} className='blogGrid__item'>
-                        <img src={thumbnail} alt='' />
-                        <div className='blogGrid__item__content'>
-                            <div className='blogGrid__item__content__meta'>
-                                <Link to={`/blog/category/${category}`}>
-                                    {category}
-                                </Link>
+                        <div className='blogGrid__item__img'>
+                            <Link to={`/blog/${_id}`}>
+                                <img src={thumbnail} alt='' />
+                            </Link>
+                            <Link
+                                to={`/blog/categories/${category}`}
+                                className='blogGrid__item__category'
+                            >
+                                {category}
+                            </Link>
+                        </div>
+                        <div className='blogGrid__item__meta'>
+                            <p>
+                                <AiOutlineCalendar />{' '}
                                 <span>
                                     {monthNames[myDate.getMonth()] +
                                         ' ' +
-                                        myDate.getDay() +
+                                        myDate.getDate() +
                                         ', ' +
                                         myDate.getFullYear()}
                                 </span>
-                            </div>
-                            <h2>
-                                <Link to={`/blog/${_id}`}>{title}</Link>
-                            </h2>
-                            <p>{description}</p>
-                            <Link to={`/blog/${_id}`}>
-                                <button className='blogGrid__item__content__btn'>
-                                    Read More
-                                </button>
-                            </Link>
+                            </p>
+                            <span>/</span>
+                            <p>
+                                <AiOutlineComment /> <span>6</span>
+                            </p>
                         </div>
+                        <h3 className='blogGrid__item__title'>
+                            <Link to={`/blog/${_id}`}>{title}</Link>
+                        </h3>
+                        <p className='blogGrid__item__desc'>{description}</p>
                     </div>
                 );
             })}

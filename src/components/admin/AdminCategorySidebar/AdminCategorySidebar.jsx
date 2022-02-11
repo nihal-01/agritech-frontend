@@ -184,6 +184,9 @@ function AdminCategorySidebar({
                 }
                 onClick={() => {
                     setIsCategorySidebarOpen(false);
+                    if (isEdit) {
+                        setCategoryName('');
+                    }
                 }}
             ></div>
             <form
@@ -207,6 +210,9 @@ function AdminCategorySidebar({
                         className='adminCategorySidebar__form__header__closebtn'
                         onClick={() => {
                             setIsCategorySidebarOpen(false);
+                            if (isEdit) {
+                                setCategoryName('');
+                            }
                         }}
                     >
                         x
@@ -287,6 +293,9 @@ function AdminCategorySidebar({
                         className='adminCategorySidebar__form__btns__cancel'
                         onClick={() => {
                             setIsCategorySidebarOpen(false);
+                            if (isEdit) {
+                                setCategoryName('');
+                            }
                         }}
                     >
                         Cancel

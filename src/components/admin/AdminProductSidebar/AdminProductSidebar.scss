@@ -66,6 +66,11 @@
             }
         }
 
+        &__loading {
+            text-align: center;
+            margin-top: 1em;
+        }
+
         &__form {
             flex: 1;
             overflow-y: auto;
@@ -248,64 +253,76 @@
 
                 &__right {
                     width: 63%;
+                    display: flex;
+                    gap: 1.2em;
 
-                    input {
-                        width: 100%;
-                        height: 52px;
-                        border-radius: 0.5rem;
-                        border: none;
-                        outline: none;
-                        border: 1px solid #4c4f52;
-                        background-color: #24262d;
-                        color: #d5d6d7;
-                        font-size: 15px;
-                        cursor: pointer;
-                        padding: 12px;
-                    }
-
-                    &__images {
-                        display: flex;
-                        align-items: center;
-                        gap: 1em;
-                        flex-wrap: wrap;
-                        margin-top: 1em;
-                    }
-
-                    &__image {
-                        width: 115px;
-                        height: 80px;
-                        border-radius: 0.5rem;
-                        padding: 10px;
-                        border: 1px solid #4c4f52;
+                    &__single-img {
                         position: relative;
+                        width: 100%;
+                        height: 95px;
+                        border: 1px solid #4c4f52;
+                        border-radius: 0.5em;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
 
-                        img {
+                        input {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
                             width: 100%;
                             height: 100%;
-                            object-fit: cover;
+                            opacity: 0;
+                            cursor: pointer;
+                            border-radius: 0.5rem;
                         }
 
-                        span {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            text-align: center;
+                        .admin--addProductSidebar__images__uploadIcon {
+                            color: #3da06f;
+                            font-size: 27px;
+                        }
+
+                        p {
+                            color: #fff;
                             font-size: 15px;
-                            color: white;
-                            font-weight: bold;
-                            box-shadow: -2px 0 8px rgb(0 0 0 / 15%);
-                            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
-                                -1px 1px 0 #000, 1px 1px 0 #000;
                         }
 
-                        button {
-                            position: absolute;
-                            border-radius: 50%;
-                            width: 20px;
-                            height: 20px;
-                            top: -5px;
-                            right: -5px;
+                        &__image {
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 0.5em;
+                            }
+
+                            button {
+                                position: absolute;
+                                border-radius: 50%;
+                                width: 20px;
+                                height: 20px;
+                                top: -5px;
+                                right: -5px;
+                                font-weight: 600;
+                            }
+
+                            span {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                text-align: center;
+                                font-size: 15px;
+                                color: white;
+                                font-weight: bold;
+                                box-shadow: -2px 0 8px rgb(0 0 0 / 15%);
+                                text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+                                    -1px 1px 0 #000, 1px 1px 0 #000;
+                            }
                         }
                     }
                 }

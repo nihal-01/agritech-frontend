@@ -13,6 +13,8 @@ const initialState = {
         category: 'all',
         price: 0,
     },
+    isEdit: false,
+    editProductId: '',
 };
 
 const fetchProducts = createAsyncThunk(
@@ -47,6 +49,10 @@ export const productsSlice = createSlice({
                 return product._id !== action.payload;
             });
         },
+        updateIsEdit: (state, action) => {
+            state.isEdit = action.payload.isEdit;
+            state.editProductId = action.payload?.editProductId;
+        },
     },
     extraReducers: {
         [fetchProducts.pending]: (state, action) => {
@@ -68,6 +74,7 @@ export const {
     updateCategory,
     updateSort,
     deleteProduct,
+    updateIsEdit,
 } = productsSlice.actions;
 
 export { fetchProducts };

@@ -1,5 +1,11 @@
 import './BlogPage.scss';
-import { BlankSpace, BlogGrid, PageHero, Pagination } from '../../../components/customer';
+import {
+    BlankSpace,
+    BlogGrid,
+    BlogSidebar,
+    PageHero,
+    Pagination,
+} from '../../../components/customer';
 
 const posts = [
     {
@@ -8,7 +14,7 @@ const posts = [
         description:
             'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
         thumbnail:
-            'https://demo2.wpopal.com/ecolive/wp-content/uploads/2021/10/blog-22-1024x683.jpg',
+            'https://demo2.pavothemes.com/freshio/wp-content/uploads/2019/12/blog-1-410x250.jpg',
         category: 'Countryside',
         createdAt: '2022-02-07T15:28:26.301Z',
     },
@@ -18,7 +24,7 @@ const posts = [
         description:
             'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
         thumbnail:
-            'https://demo2.wpopal.com/ecolive/wp-content/uploads/2021/10/blog-22-1024x683.jpg',
+            'https://pediasure.com.ph/Static/websites/pediasure-com-ph/img/WMG-results-boy.png',
         category: 'Countryside',
         createdAt: '2022-02-07T15:28:26.301Z',
     },
@@ -81,8 +87,11 @@ const BlogPage = () => {
             <PageHero title='Blog' />
             <BlankSpace />
             <div className='blogPage'>
-                <BlogGrid posts={posts} />
-                <Pagination />
+                <div className='blogPage__main'>
+                    <BlogGrid posts={posts} />
+                    <Pagination />
+                </div>
+                <BlogSidebar />
             </div>
             <BlankSpace />
         </div>

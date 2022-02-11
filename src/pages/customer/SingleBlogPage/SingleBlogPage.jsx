@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import './SingleBlogPage.scss';
-import { PageHero, BlankSpace } from '../../../components/customer';
+import {
+    PageHero,
+    BlankSpace,
+    BlogSidebar,
+} from '../../../components/customer';
 import { monthNames } from '../../../utils/constants';
 import { avatar } from '../../../assets/images';
 
@@ -40,123 +44,128 @@ const SingleBlogPage = () => {
     console.log('single blog..!');
 
     return (
-        <div className='singleBlogPage__wrapper'>
+        <div>
             <PageHero title={title} blog={true} />
             <BlankSpace />
-            <div className='singleBlogPage'>
-                <div className='singleBlogPage__meta'>
-                    <Link to={`/blog/category/${category}`}>{category}</Link>
-                    <span>
-                        {monthNames[myDate.getMonth()] +
-                            ' ' +
-                            myDate.getDay() +
-                            ', ' +
-                            myDate.getFullYear()}
-                    </span>
-                </div>
-                <h1>{title}</h1>
-                <img
-                    src={thumbnail}
-                    alt=''
-                    className='singleBlogPage__thumbnail'
-                />
-                <p
-                    dangerouslySetInnerHTML={{ __html: content }}
-                    className='singleBlogPage__para'
-                ></p>
-                <div className='singleBlogPage__nav'>
-                    <div className='singleBlogPage__nav__prev'>
-                        <span className='singleBlogPage__nav__reader-text'>
-                            Previous post
-                        </span>
-                        <Link to={`/blog/${previousPost._id}`}>
-                            <span className='singleBlogPage__nav__title'>
-                                {previousPost.title}
-                            </span>
+            <div className='singleBlogPage__wrapper'>
+                <div className='singleBlogPage'>
+                    <div className='singleBlogPage__meta'>
+                        <Link to={`/blog/category/${category}`}>
+                            {category}
                         </Link>
-                    </div>
-                    <div className='singleBlogPage__nav__next'>
-                        <span className='singleBlogPage__nav__reader-text'>
-                            Next post
+                        <span>
+                            {monthNames[myDate.getMonth()] +
+                                ' ' +
+                                myDate.getDay() +
+                                ', ' +
+                                myDate.getFullYear()}
                         </span>
-                        <Link to={`/blog/${nextPost._id}`}>
-                            <span className='singleBlogPage__nav__title'>
-                                {nextPost.title}
-                            </span>
-                        </Link>
                     </div>
-                </div>
+                    <h1>{title}</h1>
+                    <img
+                        src={thumbnail}
+                        alt=''
+                        className='singleBlogPage__thumbnail'
+                    />
+                    <p
+                        dangerouslySetInnerHTML={{ __html: content }}
+                        className='singleBlogPage__para'
+                    ></p>
+                    <div className='singleBlogPage__nav'>
+                        <div className='singleBlogPage__nav__prev'>
+                            <span className='singleBlogPage__nav__reader-text'>
+                                Previous post
+                            </span>
+                            <Link to={`/blog/${previousPost._id}`}>
+                                <span className='singleBlogPage__nav__title'>
+                                    {previousPost.title}
+                                </span>
+                            </Link>
+                        </div>
+                        <div className='singleBlogPage__nav__next'>
+                            <span className='singleBlogPage__nav__reader-text'>
+                                Next post
+                            </span>
+                            <Link to={`/blog/${nextPost._id}`}>
+                                <span className='singleBlogPage__nav__title'>
+                                    {nextPost.title}
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
 
-                {/* blog comments */}
-                <div className='singleBlogPage__comments__wrapper'>
-                    <h3>
-                        Comments <div>20</div>
-                    </h3>
-                    <div className='singleBlogPage__comments'>
-                        <div className='singleBlogPage__comment'>
-                            <div className='singleBlogPage__comment__img'>
-                                <img src={avatar} alt='' />
-                            </div>
-                            <div className='singleBlogPage__comment__content'>
-                                <h5>Nihal N</h5>
-                                <p className='singleBlogPage__comment__content__date'>
-                                    {/* {monthNames[reviewDate.getMonth()] +
+                    {/* blog comments */}
+                    <div className='singleBlogPage__comments__wrapper'>
+                        <h3>
+                            Comments <div>20</div>
+                        </h3>
+                        <div className='singleBlogPage__comments'>
+                            <div className='singleBlogPage__comment'>
+                                <div className='singleBlogPage__comment__img'>
+                                    <img src={avatar} alt='' />
+                                </div>
+                                <div className='singleBlogPage__comment__content'>
+                                    <h5>Nihal N</h5>
+                                    <p className='singleBlogPage__comment__content__date'>
+                                        {/* {monthNames[reviewDate.getMonth()] +
                                             ' ' +
                                             reviewDate.getDate() +
                                             ', ' +
                                             reviewDate.getFullYear()} */}
-                                    February 8, 2022
-                                </p>
-                                <p className='singleBlogPage__comment__content__review'>
-                                    This is a awesome post
-                                </p>
+                                        February 8, 2022
+                                    </p>
+                                    <p className='singleBlogPage__comment__content__review'>
+                                        This is a awesome post
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className='singleBlogPage__comment'>
-                            <div className='singleBlogPage__comment__img'>
-                                <img src={avatar} alt='' />
-                            </div>
-                            <div className='singleBlogPage__comment__content'>
-                                <h5>Nihal N</h5>
-                                <p className='singleBlogPage__comment__content__date'>
-                                    {/* {monthNames[reviewDate.getMonth()] +
+                            <div className='singleBlogPage__comment'>
+                                <div className='singleBlogPage__comment__img'>
+                                    <img src={avatar} alt='' />
+                                </div>
+                                <div className='singleBlogPage__comment__content'>
+                                    <h5>Nihal N</h5>
+                                    <p className='singleBlogPage__comment__content__date'>
+                                        {/* {monthNames[reviewDate.getMonth()] +
                                             ' ' +
                                             reviewDate.getDate() +
                                             ', ' +
                                             reviewDate.getFullYear()} */}
-                                    February 8, 2022
-                                </p>
-                                <p className='singleBlogPage__comment__content__review'>
-                                    This is a awesome post
-                                </p>
+                                        February 8, 2022
+                                    </p>
+                                    <p className='singleBlogPage__comment__content__review'>
+                                        This is a awesome post
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='singleBlogPage__form-wrapper'>
-                    <h3>Leave a Reply</h3>
-                    <p className='singleBlogPage__form-wrapper__info'>
-                        Your email address will not be published. Required
-                        fields are marked <span>*</span>
-                    </p>
-                    <form className='singleBlogPage__form'>
-                        <textarea
-                            name=''
-                            id=''
-                            cols='30'
-                            rows='10'
-                            placeholder='Comment *'
-                            required
-                        ></textarea>
-                        <input type='text' placeholder='Name' required />
-                        <input type='email' placeholder='Email' required />
-                        {/* <p className='singleBlogPage__form__error'>
+                    <div className='singleBlogPage__form-wrapper'>
+                        <h3>Leave a Reply</h3>
+                        <p className='singleBlogPage__form-wrapper__info'>
+                            Your email address will not be published. Required
+                            fields are marked <span>*</span>
+                        </p>
+                        <form className='singleBlogPage__form'>
+                            <textarea
+                                name=''
+                                id=''
+                                cols='30'
+                                rows='10'
+                                placeholder='Comment *'
+                                required
+                            ></textarea>
+                            <input type='text' placeholder='Name' required />
+                            <input type='email' placeholder='Email' required />
+                            {/* <p className='singleBlogPage__form__error'>
                             Something went wrong, try again
                         </p> */}
-                        <button type='submit'>Post Comment</button>
-                    </form>
+                            <button type='submit'>Post Comment</button>
+                        </form>
+                    </div>
                 </div>
+                <BlogSidebar />
             </div>
             <BlankSpace />
         </div>

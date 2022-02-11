@@ -18,6 +18,8 @@ import UserDropDown from './UserDropDown/UserDropDown';
 import Loader from './Loader/Loader';
 import BlogGrid from './BlogGrid/BlogGrid';
 import MobileSidebar from './MobileSidebar/MobileSidebar';
+import BlogSidebar from './BlogSidebar/BlogSidebar';
+import BottomNav from './BottomNav/BottomNav';
 
 export {
     Navbar,
@@ -40,4 +42,6 @@ export {
     Loader,
     BlogGrid,
     MobileSidebar,
+    BlogSidebar,
+    BottomNav,
 };

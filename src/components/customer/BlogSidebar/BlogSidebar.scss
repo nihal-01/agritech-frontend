@@ -1,0 +1,13 @@
+.blogSidebar {
+    width: 100%;
+
+    input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1280px) {
+    .blogSidebar {
+        display: none;
+    }
+}

@@ -3,8 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import {
     Admin404Page,
     AdminCategoriesPage,
+    AdminCustomersPage,
     AdminHomePage,
     AdminProductsPage,
+    AdminSettingsPage,
 } from '../pages/admin';
 import { AdminSidebar, AdminNavbar } from '../components/admin';
 
@@ -23,6 +25,14 @@ const AdminRoutes = () => {
                     <Route
                         path='/categories'
                         element={<AdminCategoriesPage />}
+                    ></Route>
+                    <Route
+                        path='/customers'
+                        element={<AdminCustomersPage />}
+                    ></Route>
+                    <Route
+                        path='/settings'
+                        element={<AdminSettingsPage />}
                     ></Route>
                     <Route path='*' element={<Admin404Page />} />
                 </Routes>

@@ -13,8 +13,11 @@ import {
     updateSkip,
     updateSort,
     updateIsEdit,
+    clearFilters,
 } from '../../../redux/slices/productsSlice';
 import axios from '../../../axios';
+import { Loader } from '../../../components/customer';
+import { adminNotFoundImg } from '../../../assets/images';
 
 function AdminProductsPage() {
     const [isProductSidebarOpen, setIsProductSidebarOpen] = useState(false);
@@ -22,9 +25,8 @@ function AdminProductsPage() {
 
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories.categories);
-    const { products, skip, limit, totalProducts, filters, sort } = useSelector(
-        (state) => state.products
-    );
+    const { products, skip, limit, totalProducts, filters, sort, loading } =
+        useSelector((state) => state.products);
 
     const handleDelete = async (_id) => {
         try {
@@ -37,6 +39,10 @@ function AdminProductsPage() {
             console.log(err.response);
         }
     };
+
+    useEffect(() => {
+        dispatch(clearFilters());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(fetchProducts());
@@ -105,117 +111,143 @@ function AdminProductsPage() {
                 isProductSidebarOpen={isProductSidebarOpen}
                 setIsProductSidebarOpen={setIsProductSidebarOpen}
             />
-            <div className='admin__table'>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Thumbnail</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Details</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => {
-                            const { _id, name, thumbnail, stock, price } =
-                                product;
-                            return (
-                                <tr key={_id}>
-                                    <td>#{_id.substr(_id.length - 5)}</td>
-                                    <td>
-                                        <div className='table--image'>
-                                            <img src={thumbnail} alt='' />
-                                        </div>
-                                    </td>
-                                    <td>{name}</td>
-                                    <td>₹{price}</td>
-                                    <td>{stock}</td>
-                                    <td>
-                                        <button className='table--viewbtn'>
-                                            <FiEye />
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button
-                                            className='table--editbtn'
-                                            onClick={() => {
-                                                dispatch(
-                                                    updateIsEdit({
-                                                        isEdit: true,
-                                                        editProductId: _id,
-                                                    })
-                                                );
-                                                setIsProductSidebarOpen(true);
-                                            }}
-                                        >
-                                            <FiEdit />
-                                        </button>
-                                        <button
-                                            className='table--deletebtn'
-                                            onClick={() => {
-                                                handleDelete(_id);
-                                            }}
-                                        >
-                                            <MdDeleteOutline />
-                                        </button>
-                                    </td>
+            {loading ? (
+                <div className='admin--products__loading'>
+                    <Loader color={'#fff'} />
+                </div>
+            ) : products.length < 1 ? (
+                <div className='admin--products__notfound'>
+                    <img src={adminNotFoundImg} alt='' />
+                    <p>Sorry, products not found</p>
+                </div>
+            ) : (
+                <div className='admin__table-wrapper'>
+                    <div className='admin__table'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Thumbnail</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Details</th>
+                                    <th>Actions</th>
                                 </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <div className='admin__table__bottom'>
-                    <div className='admin__table__bottom__results'>
-                        SHOWING {limit * skip + 1} -{' '}
-                        {limit * (skip + 1) <= totalProducts
-                            ? limit * (skip + 1)
-                            : totalProducts}{' '}
-                        OF {totalProducts}
+                            </thead>
+                            <tbody>
+                                {products.map((product) => {
+                                    const {
+                                        _id,
+                                        name,
+                                        thumbnail,
+                                        stock,
+                                        price,
+                                    } = product;
+                                    return (
+                                        <tr key={_id}>
+                                            <td>
+                                                #{_id.substr(_id.length - 5)}
+                                            </td>
+                                            <td>
+                                                <div className='table--image'>
+                                                    <img
+                                                        src={thumbnail}
+                                                        alt=''
+                                                    />
+                                                </div>
+                                            </td>
+                                            <td>{name}</td>
+                                            <td>₹{price}</td>
+                                            <td>{stock}</td>
+                                            <td>
+                                                <button className='table--viewbtn'>
+                                                    <FiEye />
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    className='table--editbtn'
+                                                    onClick={() => {
+                                                        dispatch(
+                                                            updateIsEdit({
+                                                                isEdit: true,
+                                                                editProductId:
+                                                                    _id,
+                                                            })
+                                                        );
+                                                        setIsProductSidebarOpen(
+                                                            true
+                                                        );
+                                                    }}
+                                                >
+                                                    <FiEdit />
+                                                </button>
+                                                <button
+                                                    className='table--deletebtn'
+                                                    onClick={() => {
+                                                        handleDelete(_id);
+                                                    }}
+                                                >
+                                                    <MdDeleteOutline />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
                     </div>
-                    <div className='admin__table__bottom__pagination'>
-                        <button
-                            className='admin__table__bottom__pagination__btn'
-                            onClick={() => {
-                                dispatch(updateSkip(skip - 1));
-                            }}
-                            disabled={skip <= 0}
-                        >
-                            &lt;
-                        </button>
-                        {pageNumbers.map((number) => {
-                            return (
-                                <button
-                                    key={number}
-                                    onClick={() => {
-                                        dispatch(updateSkip(number - 1));
-                                    }}
-                                    className={
-                                        skip + 1 === number
-                                            ? 'admin__table__bottom__pagination__btn admin__table__bottom__pagination__btn__active'
-                                            : 'admin__table__bottom__pagination__btn'
-                                    }
-                                >
-                                    {number}
-                                </button>
-                            );
-                        })}
-                        <button
-                            className='admin__table__bottom__pagination__btn'
-                            onClick={() => {
-                                dispatch(updateSkip(skip + 1));
-                            }}
-                            disabled={
-                                skip + 1 >= Math.ceil(totalProducts / limit)
-                            }
-                        >
-                            &gt;
-                        </button>
+                    <div className='admin__table__bottom'>
+                        <div className='admin__table__bottom__results'>
+                            SHOWING {limit * skip + 1} -{' '}
+                            {limit * (skip + 1) <= totalProducts
+                                ? limit * (skip + 1)
+                                : totalProducts}{' '}
+                            OF {totalProducts}
+                        </div>
+                        <div className='admin__table__bottom__pagination'>
+                            <button
+                                className='admin__table__bottom__pagination__btn'
+                                onClick={() => {
+                                    dispatch(updateSkip(skip - 1));
+                                }}
+                                disabled={skip <= 0}
+                            >
+                                &lt;
+                            </button>
+                            {pageNumbers.map((number) => {
+                                return (
+                                    <button
+                                        key={number}
+                                        onClick={() => {
+                                            dispatch(updateSkip(number - 1));
+                                        }}
+                                        className={
+                                            skip + 1 === number
+                                                ? 'admin__table__bottom__pagination__btn admin__table__bottom__pagination__btn__active'
+                                                : 'admin__table__bottom__pagination__btn'
+                                        }
+                                    >
+                                        {number}
+                                    </button>
+                                );
+                            })}
+                            <button
+                                className='admin__table__bottom__pagination__btn'
+                                onClick={() => {
+                                    dispatch(updateSkip(skip + 1));
+                                }}
+                                disabled={
+                                    skip + 1 >= Math.ceil(totalProducts / limit)
+                                }
+                            >
+                                &gt;
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

@@ -1,15 +1,28 @@
-import React from 'react';
-import { FiMenu } from 'react-icons/fi';
-import { BsBellFill } from 'react-icons/bs';
+import React, { useState } from 'react';
+import { FiLogOut, FiMenu } from 'react-icons/fi';
+import { BsBellFill, BsGear, BsGrid } from 'react-icons/bs';
 // import { AiOutlineClose, AiOutlineCheck } from 'react-icons/ai';
 
 import './AdminNavbar.scss';
 import { avatar } from '../../../assets/images';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateAdminSidebar } from '../../../redux/slices/layoutSlice';
+import { Link } from 'react-router-dom';
 
 function AdminNavbar() {
+    const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+    const dispatch = useDispatch();
+    const { adminSidebar } = useSelector((state) => state.layout);
+    const { user } = useSelector((state) => state.user);
+
     return (
         <div className='admin__navbar'>
-            <i className='admin__navbar__menu'>
+            <i
+                className='admin__navbar__menu'
+                onClick={() => {
+                    dispatch(updateAdminSidebar(true));
+                }}
+            >
                 <FiMenu />
             </i>
             <div className='admin__navbar__right'>
@@ -18,9 +31,49 @@ function AdminNavbar() {
                     <span></span>
                 </button>
                 <div className='admin__navbar__avatar'>
-                    <img src={avatar} alt='' />
+                    <img
+                        src={user?.avatar ? user?.avatar : avatar}
+                        alt=''
+                        onClick={() => {
+                            setIsDropDownOpen(!isDropDownOpen);
+                        }}
+                    />
+                    {isDropDownOpen && (
+                        <div className='admin__navbar__avatar__dropdown'>
+                            <ul>
+                                <li>
+                                    <Link to='/admin'>
+                                        <BsGrid />
+                                        <span>Dashboard</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to='/admin/settings'>
+                                        <BsGear />
+                                        <span>Edit Profile</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to='#'>
+                                        <FiLogOut />
+                                        <span>Logout</span>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </div>
+            <div
+                className={
+                    adminSidebar
+                        ? 'admin__navbar__overlay admin__navbar__overlay__active'
+                        : 'admin__navbar__overlay'
+                }
+                onClick={() => {
+                    dispatch(updateAdminSidebar(false));
+                }}
+            ></div>
             {/* <div className='admin__navbar__alert'>
                 <div className='admin__navbar__alert__content'>
                     <div className='admin__navbar__alert__content__icon'>

@@ -33,6 +33,12 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
+        clearFilters: (state) => {
+            state.skip = 0;
+            state.filters.category = 'all';
+            state.filters.price = 0;
+            state.sort = 'default';
+        },
         updateSkip: (state, action) => {
             state.skip = action.payload;
         },
@@ -52,6 +58,12 @@ export const productsSlice = createSlice({
         updateIsEdit: (state, action) => {
             state.isEdit = action.payload.isEdit;
             state.editProductId = action.payload?.editProductId;
+        },
+        updateProduct: (state, action) => {
+            const objIndex = state.products.findIndex((product) => {
+                return product._id === action.payload._id;
+            });
+            state.products[objIndex] = action.payload;
         },
     },
     extraReducers: {
@@ -75,6 +87,8 @@ export const {
     updateSort,
     deleteProduct,
     updateIsEdit,
+    updateProduct,
+    clearFilters,
 } = productsSlice.actions;
 
 export { fetchProducts };

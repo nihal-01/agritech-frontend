@@ -12,7 +12,10 @@ import '../../../firebase/config';
 import axios from '../../../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { BtnLoading, Loader } from '../../customer';
-import { updateIsEdit } from '../../../redux/slices/productsSlice';
+import {
+    updateIsEdit,
+    updateProduct,
+} from '../../../redux/slices/productsSlice';
 
 function AdminProductSidebar({
     isProductSidebarOpen,
@@ -187,13 +190,27 @@ function AdminProductSidebar({
                 imagesPath.push(img3State.url);
             }
 
-            await axios.post('/products', {
-                ...product,
-                price: Number(product.price),
-                stock: Number(product.stock),
-                thumbnail: thumbnail.url,
-                imagesPath: imagesPath,
-            });
+            if (isEdit) {
+                const response = await axios.patch(
+                    `/products/${editProductId}`,
+                    {
+                        ...product,
+                        price: Number(product.price),
+                        stock: Number(product.stock),
+                        thumbnail: thumbnail.url,
+                        imagesPath: imagesPath,
+                    }
+                );
+                dispatch(updateProduct(response.data));
+            } else {
+                await axios.post('/products', {
+                    ...product,
+                    price: Number(product.price),
+                    stock: Number(product.stock),
+                    thumbnail: thumbnail.url,
+                    imagesPath: imagesPath,
+                });
+            }
 
             setProductState((prev) => {
                 return {
@@ -203,10 +220,10 @@ function AdminProductSidebar({
             });
 
             setIsProductSidebarOpen(false);
-
             clearAll();
+            dispatch(updateIsEdit({ isEdit: false }));
         } catch (err) {
-            console.log(err.response);
+            console.log(err);
 
             setProductState((prev) => {
                 return {
@@ -271,6 +288,7 @@ function AdminProductSidebar({
 
         imgRef.current.value = null;
 
+        setImg1('');
         setImg1State((prev) => {
             return { ...prev, progress: 0, error: '', url: '' };
         });
@@ -300,6 +318,7 @@ function AdminProductSidebar({
     const fetchEditProduct = useCallback(async () => {
         try {
             setLoading(true);
+
             const response = await axios.get(`/products/${editProductId}`);
             const {
                 name,
@@ -312,8 +331,6 @@ function AdminProductSidebar({
                 thumbnail,
                 imagesPath,
             } = response.data;
-
-            console.log(response.data);
 
             setProduct((prev) => {
                 return {
@@ -362,7 +379,6 @@ function AdminProductSidebar({
     }, [editProductId]);
 
     useEffect(() => {
-        console.log('object');
         if (isEdit) {
             fetchEditProduct();
         }
@@ -429,7 +445,7 @@ function AdminProductSidebar({
                                         <input
                                             type='file'
                                             name='thumbnail'
-                                            required
+                                            required={!isEdit}
                                             onChange={handleThumbnail}
                                             ref={imgRef}
                                         />
@@ -447,17 +463,13 @@ function AdminProductSidebar({
                                             {thumbnail.error}
                                         </p>
                                     )}
-                                    {(thumbnailImg || thumbnail.url) && (
+                                    {thumbnailImg ? (
                                         <>
                                             <div className='admin--addProductSidebar__main__form__file__wrapper__img'>
                                                 <img
-                                                    src={
-                                                        isEdit && !thumbnailImg
-                                                            ? thumbnail.url
-                                                            : URL.createObjectURL(
-                                                                  thumbnailImg
-                                                              )
-                                                    }
+                                                    src={URL.createObjectURL(
+                                                        thumbnailImg
+                                                    )}
                                                     alt=''
                                                 />
                                                 <span>
@@ -465,7 +477,19 @@ function AdminProductSidebar({
                                                 </span>
                                             </div>
                                         </>
-                                    )}
+                                    ) : isEdit && thumbnail.url ? (
+                                        <>
+                                            <div className='admin--addProductSidebar__main__form__file__wrapper__img'>
+                                                <img
+                                                    src={thumbnail.url}
+                                                    alt=''
+                                                />
+                                                <span>
+                                                    {thumbnail.progress}%
+                                                </span>
+                                            </div>
+                                        </>
+                                    ) : null}
                                 </div>
                             </div>
                             <div className='admin--addProductSidebar__main__form__input'>

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { AdminPrivateRoute } from './pages/admin';
+import { AdminLoginPage, AdminPrivateRoute } from './pages/admin';
 import axios from './axios';
 import { saveUser } from './redux/slices/userSlice';
 import { fetchCategories } from './redux/slices/categoriesSlice';
@@ -34,7 +34,7 @@ function App() {
         <h1>Loading...</h1>
     ) : (
         <Routes>
-            <Route path='/admin/login' element={<h1>Login Admin</h1>} />
+            <Route path='/admin/login' element={<AdminLoginPage />} />
             <Route
                 path='/admin/*'
                 element={

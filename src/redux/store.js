@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
     cartReducer,
     categoriesReducer,
+    layoutReducer,
     productsReducer,
     userReducer,
     wishlistReducer,
@@ -15,6 +16,7 @@ export const store = configureStore({
         products: productsReducer,
         cart: cartReducer,
         wishlist: wishlistReducer,
+        layout: layoutReducer,
     },
     devTools: true,
 });

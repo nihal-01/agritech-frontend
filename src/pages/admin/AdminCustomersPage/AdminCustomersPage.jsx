@@ -18,7 +18,7 @@ const limit = 1;
 
 function AdminCustomersPage() {
     const [pageNumbers, setPageNumbers] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState('');
 
     const { search, skip, allUsers, totalUsers } = useSelector(

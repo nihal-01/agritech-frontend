@@ -8,10 +8,56 @@
         font-weight: 600;
     }
 
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.3em;
+
+        &__item {
+            width: 100%;
+            border-radius: 0.5em;
+            text-align: center;
+            color: #fff;
+            padding: 24px;
+
+            &:nth-child(1) {
+                background-color: #0694a2;
+            }
+
+            &:nth-child(2) {
+                background-color: #3f83f8;
+            }
+
+            &:nth-child(3) {
+                background-color: #0e9f6e;
+            }
+
+            &__icon {
+                svg {
+                    font-size: 42px;
+                }
+            }
+
+            &__text {
+                p {
+                    font-size: 17px;
+                    margin-top: 0.2em;
+                }
+
+                h4 {
+                    font-size: 30px;
+                    margin-top: 0.3em;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
     &__tiles {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1.3em;
+        margin-top: 2.5em;
 
         .admin__home__tile {
             display: flex;
@@ -21,8 +67,10 @@
             padding: 18px;
 
             &__icon {
-                width: 50px;
-                height: 50px;
+                width: 55px;
+                min-width: 55px;
+                height: 55px;
+                min-height: 55px;
                 background-color: #ff5a1f;
                 color: #fff;
                 border-radius: 50%;
@@ -30,7 +78,7 @@
                 justify-content: center;
                 align-items: center;
                 margin-right: 1em;
-                font-size: 18px;
+                font-size: 27px;
             }
 
             &__icon.order {
@@ -56,6 +104,44 @@
                     font-size: 24px;
                     font-weight: 700;
                     margin-top: 10px;
+                }
+            }
+        }
+    }
+
+    &__charts {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.3em;
+        margin: 2.5em 0;
+
+        &__item {
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            padding: 16px;
+            background-color: #1a1c23;
+            border-radius: 0.5em;
+            box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
+
+            p {
+                color: #d5d6d7;
+                font-size: 19px;
+                font-weight: 500;
+                margin-bottom: 1em;
+            }
+
+            &__chart {
+                width: 100% !important;
+                max-width: 100%;
+                // aspect-ratio: 400 / 200 !important;
+                height: 300px;
+                display: flex;
+                justify-content: center;
+
+                canvas {
+                    height: 100% !important;
+                    width: auto !important;
                 }
             }
         }

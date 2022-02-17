@@ -4,6 +4,7 @@ import {
     cartReducer,
     categoriesReducer,
     layoutReducer,
+    ordersReducer,
     productsReducer,
     userReducer,
     wishlistReducer,
@@ -17,6 +18,7 @@ export const store = configureStore({
         cart: cartReducer,
         wishlist: wishlistReducer,
         layout: layoutReducer,
+        orders: ordersReducer,
     },
     devTools: true,
 });

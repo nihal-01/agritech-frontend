@@ -8,6 +8,7 @@ const initialState = {
     limit: 12,
     totalProducts: 0,
     gridView: true,
+    search: '',
     sort: 'default',
     filters: {
         category: 'all',
@@ -21,9 +22,9 @@ const fetchProducts = createAsyncThunk(
     '/products/fetchProducts',
     async (args, { getState }) => {
         console.log('product request');
-        const { skip, sort, filters } = getState().products;
+        const { skip, sort, filters, search } = getState().products;
         const response = await axios.get(
-            `/products?skip=${skip}&sort=${sort}&category=${filters.category}`
+            `/products?skip=${skip}&sort=${sort}&category=${filters.category}&search=${search}`
         );
         return response.data;
     }
@@ -38,6 +39,7 @@ export const productsSlice = createSlice({
             state.filters.category = 'all';
             state.filters.price = 0;
             state.sort = 'default';
+            state.search = '';
         },
         updateSkip: (state, action) => {
             state.skip = action.payload;
@@ -65,6 +67,9 @@ export const productsSlice = createSlice({
             });
             state.products[objIndex] = action.payload;
         },
+        updateSearch: (state, action) => {
+            state.search = action.payload;
+        },
     },
     extraReducers: {
         [fetchProducts.pending]: (state, action) => {
@@ -89,6 +94,7 @@ export const {
     updateIsEdit,
     updateProduct,
     clearFilters,
+    updateSearch,
 } = productsSlice.actions;
 
 export { fetchProducts };

@@ -1,0 +1,118 @@
+.placeOrder {
+    border: 1px solid #f2f2f2;
+    border-radius: 24px;
+    padding: 30px 30px 40px 30px;
+    height: fit-content;
+
+    &__title {
+        color: var(--text-dark-color);
+        font-family: var(--title-font-family);
+        font-size: 23px;
+    }
+
+    &__table {
+        width: 100%;
+        margin-top: 1em;
+
+        thead {
+            width: 100%;
+
+            tr {
+                width: 100%;
+
+                th {
+                    text-align: left;
+                    padding: 18px 0px;
+                    font-weight: normal;
+                    color: var(--text-dark-color);
+                    font-size: 16px;
+
+                    &:nth-child(2) {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    border-top: 1px solid #f2f2f2;
+                    text-align: left;
+                    padding: 18px 0px;
+                    color: var(--text-dark-color);
+
+                    &:nth-child(2) {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        &__product {
+            td {
+                font-family: var(--title-font-family);
+            }
+        }
+
+        &__total {
+            td {
+                font-size: 18px;
+                font-weight: 500;
+
+                &:nth-child(2) {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    &__paytype {
+        margin-top: 1em;
+
+        &__single {
+            margin-bottom: 0.7em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            input {
+                width: 17px;
+                height: 17px;
+            }
+
+            label {
+                color: var(--text-dark-color);
+            }
+        }
+    }
+
+    &__button {
+        margin-top: 2.1em;
+
+        p {
+            color: var(--text-light-color);
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: var(--text-dark-color);
+            border-radius: 5px;
+            height: 45px;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 1.2em;
+
+            &:disabled {
+                cursor: not-allowed;
+            }
+
+            &:hover {
+                background-color: var(--primary-color);
+                color: #fff;
+            }
+        }
+    }
+}

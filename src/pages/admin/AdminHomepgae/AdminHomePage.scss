@@ -134,8 +134,8 @@
             &__chart {
                 width: 100% !important;
                 max-width: 100%;
-                // aspect-ratio: 400 / 200 !important;
-                height: 300px;
+                aspect-ratio: 400 / 200 !important;
+                // height: 300px;
                 display: flex;
                 justify-content: center;
 
@@ -145,5 +145,10 @@
                 }
             }
         }
+    }
+
+    &__loading {
+        margin-top: 2.5em;
+        text-align: center;
     }
 }

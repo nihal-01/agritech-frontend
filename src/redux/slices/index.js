@@ -4,6 +4,7 @@ import productsReducer from './productsSlice';
 import cartReducer from './cartSlice';
 import wishlistReducer from './wishlistSlice';
 import layoutReducer from './layoutSlice';
+import ordersReducer from './ordersSlice';
 
 export {
     userReducer,
@@ -12,4 +13,5 @@ export {
     cartReducer,
     wishlistReducer,
     layoutReducer,
+    ordersReducer,
 };

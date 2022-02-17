@@ -5,6 +5,7 @@ import {
     AdminCategoriesPage,
     AdminCustomersPage,
     AdminHomePage,
+    AdminOrdersPage,
     AdminProductsPage,
     AdminSettingsPage,
 } from '../pages/admin';
@@ -30,6 +31,7 @@ const AdminRoutes = () => {
                         path='/customers'
                         element={<AdminCustomersPage />}
                     ></Route>
+                    <Route path='/orders' element={<AdminOrdersPage />}></Route>
                     <Route
                         path='/settings'
                         element={<AdminSettingsPage />}

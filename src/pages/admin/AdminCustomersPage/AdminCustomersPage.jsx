@@ -1,20 +1,18 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { FiEye } from 'react-icons/fi';
-import { MdDeleteOutline } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminNotFoundImg, noImage } from '../../../assets/images';
+import { adminNotFoundImg } from '../../../assets/images';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import {
-    deleteUser,
     setAllUsers,
     updateSearch,
     updateSkip,
 } from '../../../redux/slices/userSlice';
 
 import './AdminCustomersPage.scss';
+import AdminCustomersSingleRow from './AdminCustomersSingleRow';
 
-const limit = 1;
+const limit = 12;
 
 function AdminCustomersPage() {
     const [pageNumbers, setPageNumbers] = useState([]);
@@ -35,19 +33,13 @@ function AdminCustomersPage() {
             );
             setLoading(false);
             dispatch(setAllUsers(response.data));
+            console.log(response.data);
         } catch (err) {
             console.log(err.response);
         }
     }, [dispatch, search, skip]);
 
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`/users/${id}`);
-            dispatch(deleteUser(id));
-        } catch (err) {
-            console.log(err.response);
-        }
-    };
+    console.log(allUsers);
 
     useEffect(() => {
         fetchAllUsers();
@@ -63,7 +55,7 @@ function AdminCustomersPage() {
 
     return (
         <div className='adminCustomers'>
-            <h1 className='adminCustomers__title'>Categories</h1>
+            <h1 className='adminCustomers__title'>Customers</h1>
             <form
                 className='adminCustomers__options'
                 onSubmit={(e) => {
@@ -112,41 +104,10 @@ function AdminCustomersPage() {
                             <tbody>
                                 {allUsers.map((user) => {
                                     return (
-                                        <tr key={user._id}>
-                                            <td>
-                                                #
-                                                {user._id.substr(
-                                                    user._id.length - 5
-                                                )}
-                                            </td>
-                                            <td>
-                                                <div className='table--image'>
-                                                    <img
-                                                        src={
-                                                            user?.avatar
-                                                                ? user.avatar
-                                                                : noImage
-                                                        }
-                                                        alt=''
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td>{user.fname}</td>
-                                            <td>{user.email}</td>
-                                            <td>
-                                                <button className='table--editbtn'>
-                                                    <FiEye />
-                                                </button>
-                                                <button
-                                                    className='table--deletebtn'
-                                                    onClick={() => {
-                                                        handleDelete(user._id);
-                                                    }}
-                                                >
-                                                    <MdDeleteOutline />
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        <AdminCustomersSingleRow
+                                            key={user._id}
+                                            user={user}
+                                        />
                                     );
                                 })}
                             </tbody>

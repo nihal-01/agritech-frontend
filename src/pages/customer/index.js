@@ -12,6 +12,8 @@ import CartPage from './CartPage/CartPage';
 import WishlistPage from './WishlistPage/WishlistPage';
 import BlogPage from './BlogPage/BlogPage';
 import SingleBlogPage from './SingleBlogPage/SingleBlogPage';
+import CheckoutPage from './CheckoutPage/CheckoutPage';
+import OrderRecievedPage from './OrderRecievedPage/OrderRecievedPage';
 
 export {
     HomePage,
@@ -28,4 +30,6 @@ export {
     WishlistPage,
     BlogPage,
     SingleBlogPage,
+    CheckoutPage,
+    OrderRecievedPage,
 };

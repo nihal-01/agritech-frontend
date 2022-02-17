@@ -36,15 +36,15 @@ function AdminHomePage() {
             setData((prev) => {
                 return {
                     ...prev,
-                    oneDayOrder: response.data.oneDayOrder,
-                    oneMonthOrder: response.data.oneMonthOrder,
-                    allTimeOrder: response.data.allTimeOrder,
-                    totalOrders: response.data.totalOrders,
-                    totalUsers: response.data.totalUsers,
-                    totalProducts: response.data.totalProducts,
-                    totalDeliveredOreders: response.data.totalDeliveredOreders,
-                    topSellingProducts: response.data.topSellingProducts,
-                    topSellingCategories: response.data.topSellingCategories,
+                    oneDayOrder: response.data?.oneDayOrder,
+                    oneMonthOrder: response.data?.oneMonthOrder,
+                    allTimeOrder: response.data?.allTimeOrder,
+                    totalOrders: response.data?.totalOrders,
+                    totalUsers: response.data?.totalUsers,
+                    totalProducts: response.data?.totalProducts,
+                    totalDeliveredOreders: response.data?.totalDeliveredOreders,
+                    topSellingProducts: response?.data.topSellingProducts,
+                    topSellingCategories: response.data?.topSellingCategories,
                 };
             });
             setLoading(false);
@@ -59,8 +59,8 @@ function AdminHomePage() {
 
     if (loading) {
         return (
-            <div>
-                <Loader />
+            <div className='admin__home__loading'>
+                <Loader color={'#fff'} />
             </div>
         );
     }
@@ -84,7 +84,7 @@ function AdminHomePage() {
                     </div>
                     <div className='admin__home__grid__item__text'>
                         <p>This Month</p>
-                        <h4>&#8377; {data.oneMonthOrder.total}</h4>
+                        <h4>&#8377; {data.oneMonthOrder?.total || 0}</h4>
                     </div>
                 </div>
                 <div className='admin__home__grid__item'>
@@ -93,7 +93,7 @@ function AdminHomePage() {
                     </div>
                     <div className='admin__home__grid__item__text'>
                         <p>Total Order</p>
-                        <h4>&#8377; {data.allTimeOrder.total}</h4>
+                        <h4>&#8377; {data.allTimeOrder?.total || 0}</h4>
                     </div>
                 </div>
             </div>

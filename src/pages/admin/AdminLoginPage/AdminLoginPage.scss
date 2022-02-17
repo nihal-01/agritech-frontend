@@ -8,7 +8,7 @@
 
     .adminLoginPage {
         background-color: #1a1c23;
-        width: 370px;
+        width: 400px;
         max-width: 100%;
         padding: 30px;
         border-radius: 0.5em;
@@ -39,7 +39,7 @@
 
             button {
                 height: 45px;
-                width: 130px;
+                width: 100%;
                 background-color: #0e9f6e;
                 color: #fff;
                 border-radius: 0.5em;
@@ -51,6 +51,10 @@
                     background-color: #057a55;
                 }
             }
+        }
+
+        &__error {
+            color: #f05252;
         }
     }
 }

@@ -1,0 +1,127 @@
+.orderReceivedPage {
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0px 30px;
+
+    &__thankyou {
+        background-color: #f2f2f2;
+        padding: 24px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #347758;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    &__list {
+        max-width: 900px;
+        margin: 0 auto;
+        margin-top: 3em;
+
+        ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            text-align: center;
+
+            li {
+                color: var(--text-light-color);
+                border-right: 1px solid #f2f2f2;
+                padding: 15px;
+                font-size: 14px;
+                line-height: 24px;
+
+                &:last-child {
+                    border-right: none;
+                }
+
+                strong {
+                    color: var(--text-dark-color);
+                    font-weight: 600;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    &__details {
+        max-width: 900px;
+        margin: 0 auto;
+        margin-top: 3.5em;
+
+        h2 {
+            text-align: center;
+            color: var(--text-dark-color);
+            font-size: 22px;
+        }
+
+        &__table {
+            width: 100%;
+            margin-top: 1em;
+
+            thead {
+                width: 100%;
+
+                tr {
+                    width: 100%;
+
+                    th {
+                        text-align: left;
+                        padding: 18px 0px;
+                        font-weight: normal;
+                        color: var(--text-dark-color);
+                        font-size: 16px;
+
+                        &:nth-child(2) {
+                            text-align: right;
+                        }
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    td {
+                        border-top: 1px solid #f2f2f2;
+                        text-align: left;
+                        padding: 18px 0px;
+                        color: var(--text-dark-color);
+                        font-size: 16px;
+
+                        &:nth-child(2) {
+                            text-align: right;
+                        }
+                    }
+                }
+            }
+
+            &__product {
+                td {
+                    color: var(--text-light-color) !important;
+                    font-family: var(--title-font-family);
+                }
+            }
+
+            &__total {
+                td {
+                    font-size: 18px;
+                    font-weight: 500;
+
+                    &:nth-child(2) {
+                        font-size: 22px;
+                        color: var(--primary-color);
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+
+    &__loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5em 0;
+    }
+}

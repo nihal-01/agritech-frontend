@@ -13,10 +13,6 @@ function BarChart({ chartData }) {
                 backgroundColor: [
                     '#49ba82',
                     '#3a82f6',
-                    '#f97326',
-                    '#0ca5e9',
-                    '#f8cb3f',
-                    '#f85c3f',
                 ],
                 data: chartData.map((dt) => {
                     return dt.total;

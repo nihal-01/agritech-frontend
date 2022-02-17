@@ -20,6 +20,8 @@ import BlogGrid from './BlogGrid/BlogGrid';
 import MobileSidebar from './MobileSidebar/MobileSidebar';
 import BlogSidebar from './BlogSidebar/BlogSidebar';
 import BottomNav from './BottomNav/BottomNav';
+import AddressForm from './AddressForm/AddressForm';
+import PlaceOrder from './PlaceOrder/PlaceOrder';
 
 export {
     Navbar,
@@ -44,4 +46,6 @@ export {
     MobileSidebar,
     BlogSidebar,
     BottomNav,
+    AddressForm,
+    PlaceOrder,
 };

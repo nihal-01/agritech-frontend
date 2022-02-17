@@ -1,43 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { FiEdit, FiEye } from 'react-icons/fi';
-import { MdDeleteOutline } from 'react-icons/md';
 
 import './AdminProductsPage.scss';
 import { AdminProductSidebar } from '../../../components/admin';
 import {
-    deleteProduct,
     fetchProducts,
     updateCategory,
     updateSkip,
     updateSort,
     updateIsEdit,
     clearFilters,
+    updateSearch,
 } from '../../../redux/slices/productsSlice';
-import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import { adminNotFoundImg } from '../../../assets/images';
+import AdminProductsSingleRow from './AdminProductsSingleRow';
 
 function AdminProductsPage() {
     const [isProductSidebarOpen, setIsProductSidebarOpen] = useState(false);
     const [pageNumbers, setPageNumbers] = useState([]);
+    const [searchText, setSearchText] = useState('');
+
+    console.log('products page');
 
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories.categories);
-    const { products, skip, limit, totalProducts, filters, sort, loading } =
-        useSelector((state) => state.products);
+    const {
+        products,
+        skip,
+        limit,
+        totalProducts,
+        filters,
+        sort,
+        loading,
+        search,
+    } = useSelector((state) => state.products);
 
-    const handleDelete = async (_id) => {
-        try {
-            const resp = window.confirm(`are you sure ${_id}`);
-            if (resp) {
-                await axios.delete(`/products/${_id}`);
-                dispatch(deleteProduct(_id));
-            }
-        } catch (err) {
-            console.log(err.response);
-        }
+    const handleSearch = (e) => {
+        e.preventDefault();
+        dispatch(updateSearch(searchText));
     };
 
     useEffect(() => {
@@ -46,7 +48,7 @@ function AdminProductsPage() {
 
     useEffect(() => {
         dispatch(fetchProducts());
-    }, [dispatch, skip, filters, sort]);
+    }, [dispatch, skip, filters, sort, search]);
 
     useEffect(() => {
         const pageNo = [];
@@ -60,9 +62,18 @@ function AdminProductsPage() {
         <div className='admin--products'>
             <h1 className='admin--products__title'>Products</h1>
             <div className='admin--products--options'>
-                <div className='admin--products--options__search'>
-                    <input type='text' placeholder='Search by product name' />
-                </div>
+                <form
+                    className='admin--products--options__search'
+                    onSubmit={handleSearch}
+                >
+                    <input
+                        type='text'
+                        placeholder='Search by product name'
+                        onChange={(e) => {
+                            setSearchText(e.target.value);
+                        }}
+                    />
+                </form>
                 <div className='admin--products--options__category'>
                     <select
                         name=''
@@ -107,6 +118,7 @@ function AdminProductsPage() {
                     </button>
                 </div>
             </div>
+            
             <AdminProductSidebar
                 isProductSidebarOpen={isProductSidebarOpen}
                 setIsProductSidebarOpen={setIsProductSidebarOpen}
@@ -137,67 +149,20 @@ function AdminProductsPage() {
                             </thead>
                             <tbody>
                                 {products.map((product) => {
-                                    const {
-                                        _id,
-                                        name,
-                                        thumbnail,
-                                        stock,
-                                        price,
-                                    } = product;
                                     return (
-                                        <tr key={_id}>
-                                            <td>
-                                                #{_id.substr(_id.length - 5)}
-                                            </td>
-                                            <td>
-                                                <div className='table--image'>
-                                                    <img
-                                                        src={thumbnail}
-                                                        alt=''
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td>{name}</td>
-                                            <td>₹{price}</td>
-                                            <td>{stock}</td>
-                                            <td>
-                                                <button className='table--viewbtn'>
-                                                    <FiEye />
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button
-                                                    className='table--editbtn'
-                                                    onClick={() => {
-                                                        dispatch(
-                                                            updateIsEdit({
-                                                                isEdit: true,
-                                                                editProductId:
-                                                                    _id,
-                                                            })
-                                                        );
-                                                        setIsProductSidebarOpen(
-                                                            true
-                                                        );
-                                                    }}
-                                                >
-                                                    <FiEdit />
-                                                </button>
-                                                <button
-                                                    className='table--deletebtn'
-                                                    onClick={() => {
-                                                        handleDelete(_id);
-                                                    }}
-                                                >
-                                                    <MdDeleteOutline />
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        <AdminProductsSingleRow
+                                            key={product._id}
+                                            product={product}
+                                            setIsProductSidebarOpen={
+                                                setIsProductSidebarOpen
+                                            }
+                                        />
                                     );
                                 })}
                             </tbody>
                         </table>
                     </div>
+
                     <div className='admin__table__bottom'>
                         <div className='admin__table__bottom__results'>
                             SHOWING {limit * skip + 1} -{' '}

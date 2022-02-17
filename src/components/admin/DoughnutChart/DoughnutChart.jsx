@@ -34,6 +34,7 @@ function DoughnutChart({ chartData }) {
                     },
                 },
                 maintainAspectRatio: false,
+                cutout: 130,
             }}
         />
     );

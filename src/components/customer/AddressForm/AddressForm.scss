@@ -1,0 +1,61 @@
+.addressForm {
+    &__title {
+        color: var(--text-dark-color);
+        font-family: var(--title-font-family);
+        font-size: 23px;
+    }
+
+    &__form {
+        label {
+            font-size: 15px;
+            color: var(--text-dark-color);
+
+            span {
+                color: red;
+            }
+        }
+
+        &__names {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5em;
+        }
+
+        &__input {
+            margin-top: 20px;
+
+            input {
+                width: 100%;
+                border: 2px solid #f2f2f2;
+                border-radius: 5px;
+                height: 45px;
+                outline: none;
+                color: var(--text-light-color);
+                padding: 0px 10px;
+                margin-top: 5px;
+            }
+        }
+
+        &__select {
+            margin-top: 20px;
+
+            select {
+                width: 100%;
+                border: 2px solid #f2f2f2;
+                border-radius: 5px;
+                height: 45px;
+                background-color: transparent;
+                outline: none;
+                padding: 0px 10px;
+                color: var(--text-light-color);
+                margin-top: 5px;
+                appearance: none;
+                background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0aec0'%3E%3Cpath d='M15.3 9.3a1 1 0 011.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4l3.3 3.29 3.3-3.3z'/%3E%3C/svg%3E");
+                background-position: calc(100% - 10px) center;
+                background-repeat: no-repeat;
+                background-size: 16px 12px;
+                background-size: 25px;
+            }
+        }
+    }
+}

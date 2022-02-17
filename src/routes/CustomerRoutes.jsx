@@ -6,10 +6,12 @@ import {
     AboutPage,
     BlogPage,
     CartPage,
+    CheckoutPage,
     ContactPage,
     HomePage,
     LoginPage,
     NotFoundPage,
+    OrderRecievedPage,
     PrivateRoute,
     ProductsPage,
     ResetPasswordPage,
@@ -64,6 +66,11 @@ const CustomerRoutes = () => {
                                 <CartPage />
                             </PrivateRoute>
                         }
+                    />
+                    <Route path='/checkout' element={<CheckoutPage />} />
+                    <Route
+                        path='/checkout/order-received/:id'
+                        element={<OrderRecievedPage />}
                     />
                     <Route path='/wishlist' element={<WishlistPage />} />
                     <Route path='/about' element={<AboutPage />} />

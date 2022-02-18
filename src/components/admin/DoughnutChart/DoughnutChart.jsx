@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 
 function DoughnutChart({ chartData }) {
+    const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+
     const data = {
         labels: chartData.map((dt) => {
             return dt._id;
@@ -24,6 +26,17 @@ function DoughnutChart({ chartData }) {
             },
         ],
     };
+
+    useEffect(() => {
+        console.log('window');
+        function handleResize() {
+            setInnerWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <Doughnut
             data={data}
@@ -34,7 +47,7 @@ function DoughnutChart({ chartData }) {
                     },
                 },
                 maintainAspectRatio: false,
-                cutout: 130,
+                cutout: innerWidth / 10 - 55,
             }}
         />
     );

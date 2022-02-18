@@ -23,6 +23,7 @@
         right: 0;
         background-color: #1a1c23;
         width: 750px;
+        max-width: 100%;
         height: 100%;
         z-index: 9;
         box-shadow: -2px 0 8px rgb(0 0 0 / 15%);
@@ -55,7 +56,9 @@
                 background-color: #fff;
                 color: #f05252;
                 width: 40px;
+                min-width: 40px;
                 height: 40px;
+                min-height: 40px;
                 border-radius: 50%;
                 font-size: 19px;
 
@@ -377,5 +380,163 @@
 
     &__main__active {
         transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .admin--addProductSidebar {
+        &__main {
+            &__header {
+                padding: 1.5em;
+
+                &__content {
+                    color: #d5d6d7;
+
+                    h4 {
+                        font-size: 20px;
+                    }
+
+                    p {
+                        margin-top: 4px;
+                        font-size: 14px;
+                    }
+                }
+
+                &__closebtn {
+                    width: 35px;
+                    min-width: 35px;
+                    height: 35px;
+                    min-height: 35px;
+                }
+            }
+
+            &__form {
+                padding: 1.5em;
+
+                &__file {
+                    display: block;
+
+                    label {
+                        font-size: 15px;
+                    }
+
+                    &__wrapper {
+                        width: 100%;
+                        margin-top: 10px;
+
+                        &__input {
+                            span {
+                                font-size: 32px;
+                            }
+
+                            p {
+                                text-align: center;
+                                font-size: 13px;
+                            }
+                        }
+                    }
+                }
+
+                &__input {
+                    display: block;
+                    margin-top: 1.4em;
+
+                    label {
+                        font-size: 15px;
+                    }
+
+                    input {
+                        width: 100%;
+                        height: 50px;
+                        font-size: 14px;
+                        margin-top: 10px;
+                    }
+                }
+
+                &__select {
+                    display: block;
+                    margin-top: 1.4em;
+
+                    label {
+                        font-size: 15px;
+                    }
+
+                    select {
+                        width: 100%;
+                        height: 50px;
+                        font-size: 14px;
+                        margin-top: 10px;
+                    }
+                }
+
+                &__textarea {
+                    display: block;
+                    margin-top: 1.5em;
+
+                    label {
+                        font-size: 15px;
+                    }
+
+                    textarea {
+                        width: 100%;
+                        height: 130px;
+                        font-size: 14px;
+                        margin-top: 10px;
+                    }
+                }
+
+                &__imagePaths {
+                    display: block;
+                    margin-top: 1.5em;
+
+                    label {
+                        font-size: 15px;
+                    }
+
+                    &__right {
+                        width: 100%;
+                        display: flex;
+                        gap: 0.8em;
+                        margin-top: 10px;
+
+                        &__single-img {
+                            width: 100%;
+                            height: 85px;
+
+                            .admin--addProductSidebar__images__uploadIcon {
+                                font-size: 22px;
+                            }
+
+                            p {
+                                color: #fff;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+            &__btns {
+                gap: 1.2em;
+                padding: 1.5em;
+
+                &__cancel {
+                    height: 50px;
+                    font-size: 14px;
+                }
+
+                &__add {
+                    height: 50px;
+                    font-size: 14px;
+                }
+            }
+
+            &__error {
+                font-size: 14px;
+            }
+
+            &__err {
+                font-size: 14px;
+            }
+        }
     }
 }

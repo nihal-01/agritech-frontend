@@ -1,12 +1,13 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminNotFoundImg } from '../../../assets/images';
-import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import {
-    setAllUsers,
+    clearUserFilters,
+    fetchUsers,
     updateSearch,
     updateSkip,
+    updateUserLoading,
 } from '../../../redux/slices/userSlice';
 
 import './AdminCustomersPage.scss';
@@ -16,34 +17,24 @@ const limit = 12;
 
 function AdminCustomersPage() {
     const [pageNumbers, setPageNumbers] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState('');
 
-    const { search, skip, allUsers, totalUsers } = useSelector(
+    const { search, skip, allUsers, totalUsers, loading } = useSelector(
         (state) => state.user
     );
     const dispatch = useDispatch();
 
-    const fetchAllUsers = useCallback(async () => {
-        try {
-            setLoading(true);
-            console.log('fetchall users request');
-            const response = await axios.get(
-                `/users/all?skip=${skip}&search=${search}`
-            );
-            setLoading(false);
-            dispatch(setAllUsers(response.data));
-            console.log(response.data);
-        } catch (err) {
-            console.log(err.response);
-        }
+    useEffect(() => {
+        console.log('fetchall users request');
+        dispatch(updateUserLoading(true));
+        dispatch(fetchUsers());
     }, [dispatch, search, skip]);
 
-    console.log(allUsers);
-
     useEffect(() => {
-        fetchAllUsers();
-    }, [fetchAllUsers]);
+        return () => {
+            dispatch(clearUserFilters());
+        };
+    }, [dispatch]);
 
     useEffect(() => {
         const pageNo = [];

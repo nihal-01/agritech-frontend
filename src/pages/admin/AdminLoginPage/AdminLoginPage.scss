@@ -7,6 +7,7 @@
     align-items: center;
 
     .adminLoginPage {
+        margin: 0 1.5em;
         background-color: #1a1c23;
         width: 400px;
         max-width: 100%;
@@ -55,6 +56,24 @@
 
         &__error {
             color: #f05252;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .adminLoginPage-wrapper {
+        .adminLoginPage {
+            padding: 1.3em;
+
+            h2 {
+                font-size: 22px;
+                margin-bottom: 1.5em;
+            }
+
+            &__error {
+                color: #f05252;
+                font-size: 14px;
+            }
         }
     }
 }

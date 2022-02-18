@@ -75,7 +75,9 @@ function AdminHomePage() {
                     </div>
                     <div className='admin__home__grid__item__text'>
                         <p>Today Order</p>
-                        <h4>&#8377; {data.oneDayOrder?.total || 0}</h4>
+                        <h4>
+                            <span>&#8377;</span> {data.oneDayOrder?.total || 0}
+                        </h4>
                     </div>
                 </div>
                 <div className='admin__home__grid__item'>
@@ -84,7 +86,10 @@ function AdminHomePage() {
                     </div>
                     <div className='admin__home__grid__item__text'>
                         <p>This Month</p>
-                        <h4>&#8377; {data.oneMonthOrder?.total || 0}</h4>
+                        <h4>
+                            <span>&#8377;</span>{' '}
+                            {data.oneMonthOrder?.total || 0}
+                        </h4>
                     </div>
                 </div>
                 <div className='admin__home__grid__item'>
@@ -93,7 +98,9 @@ function AdminHomePage() {
                     </div>
                     <div className='admin__home__grid__item__text'>
                         <p>Total Order</p>
-                        <h4>&#8377; {data.allTimeOrder?.total || 0}</h4>
+                        <h4>
+                            <span>&#8377;</span> {data.allTimeOrder?.total || 0}
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -149,13 +156,6 @@ function AdminHomePage() {
                     </div>
                 </div>
             </div>
-            {/* <div>
-                <p>hi</p>
-                <p>hi</p>
-                <p>hi</p>
-                <p>hi</p>
-                <p>hi</p>
-            </div> */}
         </div>
     );
 }

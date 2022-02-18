@@ -152,3 +152,77 @@
         text-align: center;
     }
 }
+
+@media (max-width: 1536px) {
+    .admin__home {
+        &__tiles {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .admin__home {
+        padding: 0em 1.5em;
+
+        &__title {
+            font-size: 20px;
+        }
+
+        &__grid {
+            grid-template-columns: repeat(1, 1fr);
+
+            &__item {
+                padding: 20px;
+
+                &__icon {
+                    svg {
+                        font-size: 35px;
+                    }
+                }
+
+                &__text {
+                    p {
+                        font-size: 14px;
+                    }
+
+                    h4 {
+                        font-family: var(--title-font-family);
+                        font-size: 25px;
+                        margin-top: 0.1em;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        &__tiles {
+            grid-template-columns: repeat(1, 1fr);
+
+            .admin__home__tile {
+                &__icon {
+                    width: 50px;
+                    min-width: 50px;
+                    height: 50px;
+                    min-height: 50px;
+                    font-size: 24px;
+                }
+
+                &__content {
+                    p {
+                        font-size: 16px;
+                    }
+                    span {
+                        font-size: 23px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        &__charts {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}

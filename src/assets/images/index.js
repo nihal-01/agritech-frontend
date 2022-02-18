@@ -21,6 +21,7 @@ import about8Img from './about8.webp';
 import about9Img from './about9.webp';
 import about10Img from './about10.webp';
 import about11Img from './about11.webp';
+import admin404 from './admin404.svg';
 
 export {
     leavesImg,
@@ -46,4 +47,5 @@ export {
     about9Img,
     about10Img,
     about11Img,
+    admin404,
 };

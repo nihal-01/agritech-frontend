@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from '../../axios';
 
 const initialState = {
     isLoggedIn: false,
@@ -8,12 +9,30 @@ const initialState = {
     search: '',
     skip: 0,
     totalUsers: 0,
+    loading: true,
 };
+
+const fetchUsers = createAsyncThunk(
+    '/user/fetchUsers',
+    async (args, { getState }) => {
+        const { skip, search } = getState().user;
+        const response = await axios.get(
+            `/users/all?skip=${skip}&search=${search}`
+        );
+        return response.data;
+    }
+);
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        clearUserFilters: (state, action) => {
+            state.loading = true;
+            state.allUsers = [];
+            state.skip = 0;
+            state.search = '';
+        },
         saveUser: (state, action) => {
             state.user = action.payload.user;
             state.token = action.payload.token;
@@ -26,10 +45,6 @@ export const userSlice = createSlice({
             state.user = {};
             state.token = '';
             localStorage.removeItem('token');
-        },
-        setAllUsers: (state, action) => {
-            state.allUsers = action.payload.users;
-            state.totalUsers = action.payload.totalUsers;
         },
         updateSkip: (state, action) => {
             state.skip = action.payload;
@@ -48,17 +63,31 @@ export const userSlice = createSlice({
             state.user.email = action.payload.email;
             state.user.avatar = action.payload.avatar;
         },
+        updateUserLoading: (state, action) => {
+            state.loading = action.payload;
+        },
+    },
+    extraReducers: {
+        [fetchUsers.fulfilled]: (state, action) => {
+            state.allUsers = action.payload.users;
+            state.totalUsers = action.payload.totalUsers;
+            state.skip = action.payload.skip;
+            state.loading = false;
+        },
     },
 });
 
 export const {
     saveUser,
     logout,
-    setAllUsers,
     updateSkip,
     updateSearch,
     deleteUser,
     updateUser,
+    clearUserFilters,
+    updateUserLoading,
 } = userSlice.actions;
+
+export { fetchUsers };
 
 export default userSlice.reducer;

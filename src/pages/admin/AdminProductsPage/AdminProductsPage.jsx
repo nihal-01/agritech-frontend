@@ -12,6 +12,7 @@ import {
     updateIsEdit,
     clearFilters,
     updateSearch,
+    updateProductLoading,
 } from '../../../redux/slices/productsSlice';
 import { Loader } from '../../../components/customer';
 import { adminNotFoundImg } from '../../../assets/images';
@@ -43,12 +44,15 @@ function AdminProductsPage() {
     };
 
     useEffect(() => {
-        dispatch(clearFilters());
-    }, [dispatch]);
-
-    useEffect(() => {
+        dispatch(updateProductLoading(true));
         dispatch(fetchProducts());
     }, [dispatch, skip, filters, sort, search]);
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearFilters());
+        };
+    }, [dispatch]);
 
     useEffect(() => {
         const pageNo = [];
@@ -118,7 +122,7 @@ function AdminProductsPage() {
                     </button>
                 </div>
             </div>
-            
+
             <AdminProductSidebar
                 isProductSidebarOpen={isProductSidebarOpen}
                 setIsProductSidebarOpen={setIsProductSidebarOpen}

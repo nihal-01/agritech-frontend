@@ -1,0 +1,46 @@
+.admin404 {
+    width: 100%;
+    text-align: center;
+    margin-top: 5em;
+    padding: 0 2em;
+
+    img {
+        width: 700px;
+        max-width: 100%;
+    }
+
+    p {
+        color: #f4f5f7;
+        font-size: 25px;
+        font-weight: 600;
+        margin-top: 0.5em;
+    }
+
+    button {
+        padding: 14px 23px;
+        background-color: #0e9f6e;
+        color: #fff;
+        font-weight: 600;
+        margin-top: 1.5em;
+        border-radius: 0.5em;
+
+        &:hover {
+            background-color: #057a55;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .admin404 {
+        padding: 0 1.5em;
+
+        p {
+            font-size: 22px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 13px;
+        }
+    }
+}

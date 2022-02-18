@@ -160,3 +160,79 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .adminSettings {
+        padding: 0em 1.5em;
+        margin-bottom: 2em;
+
+        &__title {
+            font-size: 20px;
+        }
+
+        &__main {
+            padding: 1.2em;
+
+            &__file {
+                display: block;
+
+                label {
+                    font-size: 15px;
+                }
+
+                &__wrapper {
+                    width: 100%;
+                    margin-top: 10px;
+
+                    &__input {
+                        span {
+                            font-size: 30px;
+                        }
+
+                        p {
+                            text-align: center;
+                            font-size: 13px;
+                        }
+                    }
+
+                    &__error {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            &__input {
+                display: block;
+                margin-top: 1.2em;
+
+                label {
+                    font-size: 15px;
+                }
+
+                input {
+                    width: 100%;
+                    height: 50px;
+                    font-size: 14px;
+                    margin-top: 10px;
+                }
+            }
+
+            &__submit {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 2em;
+
+                button {
+                    height: 50px;
+                    font-size: 14px;
+                }
+            }
+
+            &__error {
+                color: #f98080;
+                margin-top: 1.7em;
+                font-size: 14px;
+            }
+        }
+    }
+}

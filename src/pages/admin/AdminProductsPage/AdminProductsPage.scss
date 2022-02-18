@@ -9,7 +9,8 @@
     }
 
     .admin--products--options {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         align-items: center;
         gap: 2em;
         background-color: #1a1c23;
@@ -17,9 +18,7 @@
         border-radius: 0.5rem;
 
         &__search {
-            flex: 1;
             width: 100%;
-            min-width: 250px;
             height: 3.6em;
 
             input {
@@ -38,7 +37,7 @@
 
         &__category,
         &__price {
-            width: 350px;
+            width: 100%;
             height: 3.6em;
 
             select {
@@ -61,12 +60,8 @@
             }
         }
 
-        &__price {
-            width: 300px;
-        }
-
         &__add {
-            width: 260px;
+            width: 100%;
             height: 3.6em;
 
             button {
@@ -273,6 +268,67 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .admin--products {
+        .admin--products--options {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .admin--products {
+        padding: 0em 1.5em;
+        margin-bottom: 1.5em;
+
+        &__title {
+            font-size: 20px;
+        }
+
+        &__notfound {
+            margin-top: 2.5em;
+
+            img {
+                max-width: 80%;
+            }
+
+            p {
+                font-size: 20px;
+            }
+        }
+
+        .admin--products--options {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5em;
+
+            &__search {
+                height: 3.2em;
+
+                input {
+                    font-size: 14px;
+                }
+            }
+
+            &__category,
+            &__price {
+                height: 3.3em;
+
+                select {
+                    font-size: 14px;
+                }
+            }
+
+            &__add {
+                height: 3.2em;
+
+                button {
+                    font-size: 14px;
+                }
+            }
         }
     }
 }

@@ -35,6 +35,8 @@ export const productsSlice = createSlice({
     initialState,
     reducers: {
         clearFilters: (state) => {
+            state.loading = true;
+            state.products = [];
             state.skip = 0;
             state.filters.category = 'all';
             state.filters.price = 0;
@@ -70,11 +72,11 @@ export const productsSlice = createSlice({
         updateSearch: (state, action) => {
             state.search = action.payload;
         },
+        updateProductLoading: (state, action) => {
+            state.loading = action.payload;
+        },
     },
     extraReducers: {
-        [fetchProducts.pending]: (state, action) => {
-            state.loading = true;
-        },
         [fetchProducts.fulfilled]: (state, action) => {
             state.products = action.payload.products;
             state.skip = action.payload.skip;
@@ -95,6 +97,7 @@ export const {
     updateProduct,
     clearFilters,
     updateSearch,
+    updateProductLoading,
 } = productsSlice.actions;
 
 export { fetchProducts };

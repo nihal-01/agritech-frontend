@@ -7,12 +7,12 @@ import './AdminNavbar.scss';
 import { avatar } from '../../../assets/images';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAdminSidebar } from '../../../redux/slices/layoutSlice';
+import { logout } from '../../../redux/slices/userSlice';
 import { Link } from 'react-router-dom';
 
 function AdminNavbar() {
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const dispatch = useDispatch();
-    const { adminSidebar } = useSelector((state) => state.layout);
     const { user } = useSelector((state) => state.user);
 
     return (
@@ -54,7 +54,12 @@ function AdminNavbar() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to='#'>
+                                    <Link
+                                        to='#'
+                                        onClick={() => {
+                                            dispatch(logout());
+                                        }}
+                                    >
                                         <FiLogOut />
                                         <span>Logout</span>
                                     </Link>
@@ -64,16 +69,6 @@ function AdminNavbar() {
                     )}
                 </div>
             </div>
-            <div
-                className={
-                    adminSidebar
-                        ? 'admin__navbar__overlay admin__navbar__overlay__active'
-                        : 'admin__navbar__overlay'
-                }
-                onClick={() => {
-                    dispatch(updateAdminSidebar(false));
-                }}
-            ></div>
             {/* <div className='admin__navbar__alert'>
                 <div className='admin__navbar__alert__content'>
                     <div className='admin__navbar__alert__content__icon'>

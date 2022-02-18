@@ -173,10 +173,6 @@
     }
 }
 
-// @media (max-width: 1280px) {
-
-// }
-
 @media (max-width: 1024px) {
     .admin__navbar {
         &__menu {
@@ -185,10 +181,28 @@
     }
 }
 
-// @media (max-width: 768px) {
+@media (max-width: 640px) {
+    .admin__navbar {
+        &__right {
+            .admin__navbar__avatar {
+                &__dropdown {
+                    width: 250px;
 
-// }
+                    ul {
+                        li {
+                            a {
+                                span {
+                                    font-size: 15px;
+                                }
 
-// @media (max-width: 640px) {
-
-// }
+                                svg {
+                                    font-size: 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

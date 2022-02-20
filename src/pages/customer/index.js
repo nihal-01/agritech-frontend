@@ -19,6 +19,7 @@ import MyAccountDashboardPage from './MyAccountDashboardPage/MyAccountDashboardP
 import MyAccountOrdersPage from './MyAccountOrdersPage/MyAccountOrdersPage';
 import MyAccountDetailsPage from './MyAccountDetailsPage/MyAccountDetailsPage';
 import MyAccountAddressPage from './MyAccountAddressPage/MyAccountAddressPage';
+import SearchPage from './SearchPage/SearchPage';
 
 export {
     HomePage,
@@ -42,4 +43,5 @@ export {
     MyAccountOrdersPage,
     MyAccountDetailsPage,
     MyAccountAddressPage,
+    SearchPage,
 };

@@ -20,6 +20,7 @@ import {
     PrivateRoute,
     ProductsPage,
     ResetPasswordPage,
+    SearchPage,
     SignupPage,
     SingleBlogPage,
     SingleProductPage,
@@ -32,6 +33,7 @@ const CustomerRoutes = () => {
     return (
         <>
             <Header />
+            <BottomNav />
             <main>
                 <Routes>
                     <Route path='/' element={<HomePage />} />
@@ -89,6 +91,14 @@ const CustomerRoutes = () => {
                         }
                     />
                     <Route path='/wishlist' element={<WishlistPage />} />
+                    <Route
+                        path='/products/category/:category'
+                        element={<SearchPage />}
+                    />
+                    <Route
+                        path='/products/search/:search'
+                        element={<SearchPage />}
+                    />
                     <Route path='/about' element={<AboutPage />} />
                     <Route path='/contact' element={<ContactPage />} />
                     <Route path='/blog' element={<BlogPage />} />
@@ -118,7 +128,6 @@ const CustomerRoutes = () => {
                     <Route path='/*' element={<NotFoundPage />} />
                 </Routes>
             </main>
-            <BottomNav />
             <Footer />
         </>
     );

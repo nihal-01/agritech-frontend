@@ -7,6 +7,7 @@
     height: 60px;
     border-top: 1px solid #f2f2f2;
     display: none;
+    z-index: 9;
 
     ul {
         list-style: none;
@@ -33,6 +34,84 @@
                 width: 100%;
                 height: 100%;
                 text-decoration: none;
+                color: var(--text-dark-color);
+                font-size: 20px;
+
+                span {
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    &__search-wrapper {
+        z-index: 999;
+
+        .bottomNav__search__overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            opacity: 0;
+            z-index: 999;
+            visibility: hidden;
+            transition: 0.4s;
+
+            &__active {
+                visibility: visible;
+                opacity: 0.6;
+            }
+        }
+
+        .bottomNav__search {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: auto;
+            background-color: white;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: 0.4s;
+            padding: 20px;
+
+            form {
+                border: 1px solid #f2f2f2;
+                height: 45px;
+                border-radius: 12px;
+                display: flex;
+                overflow: hidden;
+
+                input {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    padding: 0px 15px;
+                    outline: none;
+                }
+
+                button {
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                    width: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+
+            &__active {
+                transform: translateY(0);
             }
         }
     }

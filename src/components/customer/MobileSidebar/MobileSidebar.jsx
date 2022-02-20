@@ -11,7 +11,6 @@ function MobileSidebar({ isMobileSidebarOpen, setIsMobileSidebarOpen }) {
     const [isMainMenu, setIsMainMenu] = useState(true);
 
     const { categories } = useSelector((state) => state.categories);
-
     return (
         <>
             <div
@@ -82,7 +81,7 @@ function MobileSidebar({ isMobileSidebarOpen, setIsMobileSidebarOpen }) {
                                 return (
                                     <li key={category._id}>
                                         <Link
-                                            to='/'
+                                            to={`/products/category/${category.name}`}
                                             onClick={() => {
                                                 setIsMobileSidebarOpen(false);
                                             }}

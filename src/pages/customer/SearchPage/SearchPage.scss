@@ -1,0 +1,11 @@
+.searchPage {
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0px 30px;
+}
+
+@media (max-width: 640px) {
+    .searchPage {
+        padding: 0px 20px;
+    }
+}

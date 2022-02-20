@@ -7,6 +7,7 @@ import axios from './axios';
 import { saveUser } from './redux/slices/userSlice';
 import { fetchCategories } from './redux/slices/categoriesSlice';
 import { AdminRoutes, CustomerRoutes } from './routes';
+import { Loader } from './components/customer';
 
 const Wrapper = ({ children }) => {
     const location = useLocation();
@@ -41,7 +42,9 @@ function App() {
     }, [fetchUser, dispatch]);
 
     return isLoading ? (
-        <h1>Loading...</h1>
+        <div className='loading'>
+            <Loader />
+        </div>
     ) : (
         <Wrapper>
             <Routes>

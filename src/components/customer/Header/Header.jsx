@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiPhoneCall, BiSearch, BiUser, BiHeart, BiCart } from 'react-icons/bi';
 import { CgMenuLeft } from 'react-icons/cg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +27,12 @@ function Header() {
     const { wishlistItems } = useSelector((state) => state.wishlist);
 
     const dispatch = useDispatch();
-    console.log(searchKeyword);
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        navigate(`/products/search/${searchKeyword}`);
+    };
 
     useEffect(() => {
         localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
@@ -62,7 +67,7 @@ function Header() {
                     </div>
                 </div>
                 <div className='header__search__wrapper'>
-                    <div className='header__search'>
+                    <form className='header__search' onSubmit={handleSearch}>
                         <input
                             type='text'
                             placeholder='Search products...'
@@ -71,7 +76,7 @@ function Header() {
                         <button>
                             <BiSearch />
                         </button>
-                    </div>
+                    </form>
                 </div>
                 <div className='header__left'>
                     {!isLoggedIn ? (

@@ -12,12 +12,10 @@ import { Link } from 'react-router-dom';
 import './Footer.scss';
 import { BlankSpace } from '..';
 import { paymentCardsImg } from '../../../assets/images';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateCategory } from '../../../redux/slices/productsSlice';
+import { useSelector } from 'react-redux';
 
 function Footer() {
     const { categories } = useSelector((state) => state.categories);
-    const dispatch = useDispatch();
 
     return (
         <>
@@ -114,17 +112,10 @@ function Footer() {
                             <ul className='footer__middle__categories__list'>
                                 {categories.map((category, index) => {
                                     return (
-                                        <li
-                                            key={index}
-                                            onClick={() => {
-                                                dispatch(
-                                                    updateCategory(
-                                                        category._id
-                                                    )
-                                                );
-                                            }}
-                                        >
-                                            <Link to='/products'>
+                                        <li key={index}>
+                                            <Link
+                                                to={`/products/category/${category.name}`}
+                                            >
                                                 {category.name}
                                             </Link>
                                         </li>

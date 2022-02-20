@@ -1,0 +1,72 @@
+.myAccountPage {
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0px 30px;
+    display: grid;
+    grid-template-columns: 27% auto;
+    gap: 2.5em;
+
+    &__nav {
+        ul {
+            list-style: none;
+
+            li {
+                a {
+                    display: block;
+                    padding: 12px 0px;
+                    border-top: 1px solid #f2f2f2;
+                    text-decoration: none;
+                    color: var(--text-dark-color);
+                    font-size: 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    transition: 0.5s;
+
+                    &:hover {
+                        color: var(--primary-color);
+                    }
+
+                    span {
+                        font-size: 17px;
+                    }
+                }
+
+                &:last-child {
+                    a {
+                        border-bottom: 1px solid #f2f2f2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .myAccountPage {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .myAccountPage {
+        padding: 0px 20px;
+        grid-template-columns: 1fr;
+
+        &__nav {
+            ul {
+                li {
+                    a {
+                        padding: 10px 0px;
+                        display: flex;
+                        font-size: 14px;
+
+                        span {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

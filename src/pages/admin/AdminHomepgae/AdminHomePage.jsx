@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     MdPayment,
     MdShoppingCart,
@@ -12,6 +12,7 @@ import './AdminHomePage.scss';
 import { BarChart, DoughnutChart } from '../../../components/admin';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
+import { useSelector } from 'react-redux';
 
 function AdminHomePage() {
     const [loading, setLoading] = useState(true);
@@ -28,11 +29,14 @@ function AdminHomePage() {
     });
 
     console.log('admin home');
+    const { token } = useSelector((state) => state.user);
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             console.log('fetch admin data');
-            const response = await axios.get('/admin');
+            const response = await axios.get('/admin', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             setData((prev) => {
                 return {
                     ...prev,
@@ -51,11 +55,11 @@ function AdminHomePage() {
         } catch (err) {
             console.log(err.response);
         }
-    };
+    }, [token]);
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     if (loading) {
         return (

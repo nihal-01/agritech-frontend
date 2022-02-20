@@ -17,6 +17,7 @@ import { useState } from 'react';
 const CartPage = () => {
     const [clearCartLoading, setClearCartLoading] = useState(false);
 
+    const { token } = useSelector((state) => state.user);
     const { cartItems, cartTotal, cartLoading } = useSelector(
         (state) => state.cart
     );
@@ -27,7 +28,9 @@ const CartPage = () => {
     const clearCart = async () => {
         try {
             setClearCartLoading(true);
-            await axios.delete('/cart');
+            await axios.delete('/cart', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             setClearCartLoading(false);
             dispatch(clearCartItems());
         } catch (err) {
@@ -62,7 +65,9 @@ const CartPage = () => {
                                     <th></th>
                                     <th>Product</th>
                                     <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Quantity
+                                    </th>
                                     <th>Subtotal</th>
                                 </tr>
                             </thead>
@@ -103,14 +108,16 @@ const CartPage = () => {
                                 <h2>Cart totals</h2>
                                 <div className='CartPage__total__box__subtotal'>
                                     <p>Subtotal</p>
-                                    <h5>&#8377; {cartTotal}</h5>
+                                    <h5>&#8377;{cartTotal}</h5>
                                 </div>
                                 <hr />
                                 <div className='CartPage__total__box__total'>
                                     <p>Total</p>
-                                    <h5>&#8377; {cartTotal}</h5>
+                                    <h5>&#8377;{cartTotal}</h5>
                                 </div>
-                                <button>Proceed to checkout</button>
+                                <Link to='/checkout'>
+                                    <button>Proceed to checkout</button>
+                                </Link>
                             </div>
                         </div>
                     </div>

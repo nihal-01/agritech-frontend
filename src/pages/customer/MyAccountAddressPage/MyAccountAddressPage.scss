@@ -1,0 +1,49 @@
+.myAccountAddressPage {
+    &__loading {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__form {
+        width: 100%;
+
+        &__error {
+            margin-top: 12px;
+            color: #e24021;
+        }
+
+        &__btn {
+            button {
+                color: var(--text-dark-color);
+                background-color: var(--secondary-color);
+                font-weight: 500;
+                border-radius: 5px;
+                height: 45px;
+                width: 140px;
+                margin-top: 2em;
+                font-size: 14px;
+
+                &:hover {
+                    background-color: var(--primary-color);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .myAccountAddressPage {
+        &__form {
+            &__error {
+                font-size: 14px;
+            }
+            
+            &__btn {
+                button {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}

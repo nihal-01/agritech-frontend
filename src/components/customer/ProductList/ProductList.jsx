@@ -5,7 +5,11 @@ import { useDispatch } from 'react-redux';
 import './ProductList.scss';
 import { noProductImg } from '../../../assets/images';
 import { ListView, GridView, Pagination } from '..';
-import { fetchProducts } from '../../../redux/slices/productsSlice';
+import {
+    clearFilters,
+    fetchProducts,
+    updateProductLoading,
+} from '../../../redux/slices/productsSlice';
 import { GridViewLoading, ListViewLoading } from '.';
 
 function ProductList() {
@@ -18,8 +22,16 @@ function ProductList() {
     );
 
     useEffect(() => {
+        console.log('product fetching...');
+        dispatch(updateProductLoading(true));
         dispatch(fetchProducts());
     }, [dispatch, skip, sort, filters]);
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearFilters());
+        };
+    }, [dispatch]);
 
     if (loading) {
         if (gridView) {

@@ -21,6 +21,11 @@
                         background-color: transparent;
                         font-size: 16px;
 
+                        &:disabled {
+                            color: var(--text-dark-color);
+                            cursor: not-allowed;
+                        }
+
                         &:hover {
                             color: red;
                         }
@@ -66,12 +71,18 @@
                     }
                     button {
                         background-color: var(--secondary-color);
-                        padding: 8px 20px;
+                        width: 114px;
+                        height: 36px;
                         font-size: 13px;
                         border-radius: 5px;
                         font-weight: 600;
                         color: var(--text-dark-color);
                         margin-top: 6px;
+
+
+                        &:disabled {
+                            cursor: not-allowed;
+                        }
 
                         &:hover {
                             background-color: var(--primary-color);
@@ -87,6 +98,60 @@
     }
 
     &__noWishlist {
+        font-weight: 500;
         color: var(--text-dark-color);
+    }
+}
+
+@media (max-width: 640px) {
+    .wishlistPage {
+        padding: 0px 20px;
+
+        &__table {
+            tbody {
+                tr {
+                    td {
+                        padding: 10px;
+                    }
+
+                    .wishlistPage__table__thumbnail {
+                        display: none;
+                    }
+                    .wishlistPage__table__main {
+                        &__name {
+                            span {
+                                font-size: 15px;
+                            }
+                        }
+
+                        &__price {
+                            font-size: 14px;
+                            margin-top: 2px;
+                        }
+
+                        &__date {
+                            font-size: 12px;
+                            margin-top: 2px;
+                        }
+                    }
+
+                    .wishlistPage__table__stock {
+                        p {
+                            font-size: 13px;
+                        }
+                        button {
+                            width: 98px;
+                            height: 31px;
+                            font-size: 11px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__noWishlist {
+            font-weight: 400;
+            font-size: 15px;
+        }
     }
 }

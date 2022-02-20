@@ -112,6 +112,10 @@
             p {
                 display: none;
             }
+
+            &__loading {
+                display: none;
+            }
         }
     }
 }
@@ -129,8 +133,8 @@
             }
 
             select {
-                width: 170px;
-                padding: 10px 15px;
+                width: 150px;
+                padding: 8px 12px;
             }
         }
     }

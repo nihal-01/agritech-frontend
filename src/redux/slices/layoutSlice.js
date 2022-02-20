@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     adminSidebar: false,
+    filterSidebar: false,
 };
 
 export const layoutSlice = createSlice({
@@ -11,9 +12,12 @@ export const layoutSlice = createSlice({
         updateAdminSidebar: (state, action) => {
             state.adminSidebar = action.payload;
         },
+        updateFilterSidebar: (state, action) => {
+            state.filterSidebar = action.payload;
+        },
     },
 });
 
-export const { updateAdminSidebar } = layoutSlice.actions;
+export const { updateAdminSidebar, updateFilterSidebar } = layoutSlice.actions;
 
 export default layoutSlice.reducer;

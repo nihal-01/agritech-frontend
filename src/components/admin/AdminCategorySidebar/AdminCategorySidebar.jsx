@@ -36,6 +36,7 @@ function AdminCategorySidebar({
     const storage = getStorage();
     const dispatch = useDispatch();
     const { isEdit, editCategory } = useSelector((state) => state.categories);
+    const { token } = useSelector((state) => state.user);
 
     const handleIcon = (e) => {
         if (e.target.files[0]) {
@@ -124,14 +125,23 @@ function AdminCategorySidebar({
                     {
                         name: categoryName,
                         icon: icon?.url || editCategory.icon,
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
                     }
                 );
                 dispatch(updateCategory(response.data));
             } else {
-                const response = await axios.post('/categories', {
-                    name: categoryName,
-                    icon: icon.url,
-                });
+                const response = await axios.post(
+                    '/categories',
+                    {
+                        name: categoryName,
+                        icon: icon.url,
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
 
                 dispatch(addCategory(response.data));
             }

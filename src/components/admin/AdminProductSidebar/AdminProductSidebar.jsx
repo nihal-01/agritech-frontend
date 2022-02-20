@@ -66,6 +66,7 @@ function AdminProductSidebar({
     const storage = getStorage();
     const categories = useSelector((state) => state.categories.categories);
     const imgRef = useRef(null);
+    const { token } = useSelector((state) => state.user);
     const { isEdit, editProductId } = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
@@ -199,17 +200,26 @@ function AdminProductSidebar({
                         stock: Number(product.stock),
                         thumbnail: thumbnail.url,
                         imagesPath: imagesPath,
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
                     }
                 );
                 dispatch(updateProduct(response.data));
             } else {
-                await axios.post('/products', {
-                    ...product,
-                    price: Number(product.price),
-                    stock: Number(product.stock),
-                    thumbnail: thumbnail.url,
-                    imagesPath: imagesPath,
-                });
+                await axios.post(
+                    '/products',
+                    {
+                        ...product,
+                        price: Number(product.price),
+                        stock: Number(product.stock),
+                        thumbnail: thumbnail.url,
+                        imagesPath: imagesPath,
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
             }
 
             setProductState((prev) => {

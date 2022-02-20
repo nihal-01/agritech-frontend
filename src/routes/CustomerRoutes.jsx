@@ -10,6 +10,11 @@ import {
     ContactPage,
     HomePage,
     LoginPage,
+    MyAccountAddressPage,
+    MyAccountDashboardPage,
+    MyAccountDetailsPage,
+    MyAccountOrdersPage,
+    MyAccountPage,
     NotFoundPage,
     OrderRecievedPage,
     PrivateRoute,
@@ -67,16 +72,49 @@ const CustomerRoutes = () => {
                             </PrivateRoute>
                         }
                     />
-                    <Route path='/checkout' element={<CheckoutPage />} />
+                    <Route
+                        path='/checkout'
+                        element={
+                            <PrivateRoute redirectTo={'/login'}>
+                                <CheckoutPage />
+                            </PrivateRoute>
+                        }
+                    />
                     <Route
                         path='/checkout/order-received/:id'
-                        element={<OrderRecievedPage />}
+                        element={
+                            <PrivateRoute redirectTo={'/login'}>
+                                <OrderRecievedPage />
+                            </PrivateRoute>
+                        }
                     />
                     <Route path='/wishlist' element={<WishlistPage />} />
                     <Route path='/about' element={<AboutPage />} />
                     <Route path='/contact' element={<ContactPage />} />
                     <Route path='/blog' element={<BlogPage />} />
                     <Route path='/blog/:id' element={<SingleBlogPage />} />
+                    <Route
+                        path='/my-account'
+                        element={
+                            <PrivateRoute redirectTo={'/login'}>
+                                <MyAccountPage />
+                            </PrivateRoute>
+                        }
+                    >
+                        <Route path='' element={<MyAccountDashboardPage />} />
+                        <Route
+                            path='orders'
+                            element={<MyAccountOrdersPage />}
+                        />
+                        <Route
+                            path='address'
+                            element={<MyAccountAddressPage />}
+                        />
+                        <Route
+                            path='edit-account'
+                            element={<MyAccountDetailsPage />}
+                        />
+                    </Route>
                     <Route path='/*' element={<NotFoundPage />} />
                 </Routes>
             </main>

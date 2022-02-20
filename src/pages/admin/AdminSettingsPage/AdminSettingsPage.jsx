@@ -28,7 +28,7 @@ function AdminSettingsPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const { user } = useSelector((state) => state.user);
+    const { user, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const storage = getStorage();
 
@@ -39,7 +39,7 @@ function AdminSettingsPage() {
     const handleAvatar = (e) => {
         if (e.target.files[0]) {
             setAvatarState((prev) => {
-                return { ...prev, error: '', progress: 0, url: '' };
+                return { ...prev, error: '' };
             });
 
             if (!e.target.files[0].name.match(/\.(jpg|jpeg|png)/gm)) {
@@ -67,10 +67,16 @@ function AdminSettingsPage() {
             }
             setLoading(true);
             setError('');
-            const response = await axios.patch('/users', {
-                ...userData,
-                avatar: avatarState.url,
-            });
+            const response = await axios.patch(
+                '/users',
+                {
+                    ...userData,
+                    avatar: avatarState.url,
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             setLoading(false);
             dispatch(updateUser(response.data));
         } catch (err) {

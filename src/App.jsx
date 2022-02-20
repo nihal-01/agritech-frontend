@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { AdminLoginPage, AdminPrivateRoute } from './pages/admin';
@@ -7,6 +7,14 @@ import axios from './axios';
 import { saveUser } from './redux/slices/userSlice';
 import { fetchCategories } from './redux/slices/categoriesSlice';
 import { AdminRoutes, CustomerRoutes } from './routes';
+
+const Wrapper = ({ children }) => {
+    const location = useLocation();
+    useLayoutEffect(() => {
+        document.documentElement.scrollTo(0, 0);
+    }, [location.pathname]);
+    return children;
+};
 
 function App() {
     const dispatch = useDispatch();
@@ -16,7 +24,9 @@ function App() {
         try {
             const token = localStorage.getItem('token');
             if (token) {
-                const response = await axios.get('/users');
+                const response = await axios.get('/users', {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
                 dispatch(saveUser(response.data));
             }
             setIsLoading(false);
@@ -33,18 +43,20 @@ function App() {
     return isLoading ? (
         <h1>Loading...</h1>
     ) : (
-        <Routes>
-            <Route path='/admin/login' element={<AdminLoginPage />} />
-            <Route
-                path='/admin/*'
-                element={
-                    <AdminPrivateRoute>
-                        <AdminRoutes />
-                    </AdminPrivateRoute>
-                }
-            />
-            <Route path='/*' element={<CustomerRoutes />} />
-        </Routes>
+        <Wrapper>
+            <Routes>
+                <Route path='/admin/login' element={<AdminLoginPage />} />
+                <Route
+                    path='/admin/*'
+                    element={
+                        <AdminPrivateRoute>
+                            <AdminRoutes />
+                        </AdminPrivateRoute>
+                    }
+                />
+                <Route path='/*' element={<CustomerRoutes />} />
+            </Routes>
+        </Wrapper>
     );
 }
 

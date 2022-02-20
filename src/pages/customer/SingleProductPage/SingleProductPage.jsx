@@ -1,16 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import './SingleProductPage.scss';
 import {
     BlankSpace,
     BtnLoading,
-    GridView,
     PageHero,
     Stars,
 } from '../../../components/customer';
-import { products } from '../../../utils/constants';
 import axios from '../../../axios';
 import {
     SingleProductLoading,
@@ -18,10 +16,9 @@ import {
     SingleProductThumbnail,
 } from '.';
 import { NotFoundPage } from '..';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../../../redux/slices/cartSlice';
 
-const items = products.slice(0, 5);
 
 function SingleProductPage() {
     const [productLoading, setProductLoading] = useState(true);
@@ -31,9 +28,12 @@ function SingleProductPage() {
     const [error, setError] = useState(false);
     const [cartBtnLoading, setCartBtnLoading] = useState(false);
 
+    const { isLoggedIn, token } = useSelector((state) => state.user);
+
     const imgs = useRef(null);
     const { id } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleClick = (index) => {
         imgs.current.style.transform = `translateX(-${index * 100}%)`;
@@ -57,11 +57,7 @@ function SingleProductPage() {
 
             const response = await axios.get(`/products/${id}`);
             setProduct(response.data);
-            setImages([
-                response.data.thumbnail,
-                ...response.data.imagesPath,
-                'https://previews.123rf.com/images/f8studio/f8studio1611/f8studio161100357/73163174-girl-full-height-on-white.jpg',
-            ]);
+            setImages([response.data.thumbnail, ...response.data.imagesPath]);
 
             setProductLoading(false);
         } catch (err) {
@@ -72,12 +68,21 @@ function SingleProductPage() {
 
     const addToCart = async () => {
         try {
+            if (!isLoggedIn) {
+                navigate('/login');
+            }
             setCartBtnLoading(true);
 
-            await axios.post('/cart', {
-                productId: product._id,
-                quantity: itemCount,
-            });
+            await axios.post(
+                '/cart',
+                {
+                    productId: product._id,
+                    quantity: itemCount,
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
 
             dispatch(addItemToCart({ product, quantity: itemCount }));
             setCartBtnLoading(false);
@@ -162,7 +167,7 @@ function SingleProductPage() {
                                         </p>
                                     </div>
                                     <h3 className='singleProductPage__content__price'>
-                                        ${product.price}
+                                        &#8377;{product.price}
                                     </h3>
                                     <p className='singleProductPage__content__desc'>
                                         {product.shortDescription}
@@ -246,12 +251,14 @@ function SingleProductPage() {
                             </div>
                         )}
                         <BlankSpace />
-                        <SingleProductReview
-                            description={product.description}
-                        />
+                        {!productLoading && (
+                            <SingleProductReview
+                                description={product.description}
+                            />
+                        )}
                         <BlankSpace />
-                        <GridView products={items} count={5} />
-                        <BlankSpace />
+                        {/* <GridView products={items} count={5} />
+                        <BlankSpace /> */}
                     </div>
                 </>
             )}

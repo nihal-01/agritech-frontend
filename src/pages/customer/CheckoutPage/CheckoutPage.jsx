@@ -30,31 +30,41 @@ function CheckoutPage() {
         phone: '',
         email: '',
     });
+    const [error, setError] = useState('');
     console.log('checkout page');
 
+    const { token } = useSelector((state) => state.user);
     const { cartTotal, cartItems } = useSelector((state) => state.cart);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const postAddress = async () => {
-        try {
-            const response = await axios.post('/address', { ...address });
-            setAddressId(response.data);
-        } catch (err) {
-            console.log(err.response);
-        }
-    };
 
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
             setLoading(true);
-            await postAddress();
-            const response = await axios.post('/orders', {
-                address: addressId,
-                paymentType: paymentType,
-                totalAmount: cartTotal,
-            });
+            setError('');
+
+            const myAddress = await axios.post(
+                '/address',
+                { ...address },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            console.log(myAddress);
+            setAddressId(myAddress.data);
+
+            const response = await axios.post(
+                '/orders',
+                {
+                    address: myAddress.data,
+                    paymentType: paymentType,
+                    totalAmount: cartTotal,
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             if (paymentType === 'card') {
                 return loadRazorpay(response);
             }
@@ -63,14 +73,18 @@ function CheckoutPage() {
             dispatch(clearCartItems());
         } catch (err) {
             setLoading(false);
-            console.log(err.response);
+            setError(
+                err.response.data?.error || 'something went wrong, Try again'
+            );
         }
     };
 
     const fetchAddress = useCallback(async () => {
         try {
             console.log('fetch adddress request');
-            const response = await axios.get('/address');
+            const response = await axios.get('/address', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             setAddressLoading(false);
             if (response.data) {
                 setAddress((prev) => {
@@ -92,7 +106,7 @@ function CheckoutPage() {
         } catch (err) {
             console.log(err.response);
         }
-    }, [setAddress]);
+    }, [token]);
 
     const loadRazorpay = (result) => {
         const script = document.createElement('script');
@@ -114,17 +128,21 @@ function CheckoutPage() {
                     description: 'Eat Organic & Healthy Food',
                     order_id: order_id,
                     handler: async function (response) {
-                        const rsp = await axios.post('/orders/pay-order', {
-                            address: addressId,
-                            paymentType: 'card',
-                            totalAmount: cartTotal,
-                            razorpayPaymentId: response.razorpay_payment_id,
-                            razorpayOrderId: response.razorpay_order_id,
-                            razorpaySignature: response.razorpay_signature,
-                        });
-                        navigate(
-                            `/checkout/order-received/${rsp.data._id}`
+                        const rsp = await axios.post(
+                            '/orders/pay-order',
+                            {
+                                address: addressId,
+                                paymentType: 'card',
+                                totalAmount: cartTotal,
+                                razorpayPaymentId: response.razorpay_payment_id,
+                                razorpayOrderId: response.razorpay_order_id,
+                                razorpaySignature: response.razorpay_signature,
+                            },
+                            {
+                                headers: { Authorization: `Bearer ${token}` },
+                            }
                         );
+                        navigate(`/checkout/order-received/${rsp.data._id}`);
                         dispatch(clearCartItems());
                     },
                     prefill: {
@@ -175,6 +193,7 @@ function CheckoutPage() {
                     <PlaceOrder
                         setPaymentType={setPaymentType}
                         loading={loading}
+                        error={error}
                     />
                 </form>
             )}

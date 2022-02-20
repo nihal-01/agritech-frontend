@@ -15,12 +15,12 @@ const userLinks = [
         link: '/my-account/orders',
     },
     {
-        name: 'Account Details',
-        link: '/my-account/account-details',
+        name: 'Edit Address',
+        link: '/my-account/address',
     },
     {
-        name: 'Edit Address',
-        link: '/my-account/edit-address',
+        name: 'Account Details',
+        link: '/my-account/edit-account',
     },
     {
         name: 'Logout',

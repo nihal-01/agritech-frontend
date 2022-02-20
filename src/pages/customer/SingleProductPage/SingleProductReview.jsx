@@ -59,7 +59,7 @@ const Review = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const { isLoggedIn, user } = useSelector((state) => state.user);
+    const { isLoggedIn, user, token } = useSelector((state) => state.user);
     const { id } = useParams();
 
     const handleSubmit = async (e) => {
@@ -67,11 +67,17 @@ const Review = () => {
             e.preventDefault();
             setLoading(true);
 
-            const response = await axios.post('/reviews', {
-                feedback: review,
-                stars: starCount,
-                productId: id,
-            });
+            const response = await axios.post(
+                '/reviews',
+                {
+                    feedback: review,
+                    stars: starCount,
+                    productId: id,
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             response.data.userId = user;
             setReviews((prev) => {
                 return [...prev, response.data];

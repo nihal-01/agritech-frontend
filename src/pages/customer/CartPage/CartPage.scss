@@ -4,13 +4,14 @@
     padding: 0px 30px;
 
     &__content {
-        display: flex;
-        gap: 5em;
+        display: grid;
+        grid-template-columns: auto 355px;
+        gap: 4em;
     }
 
     &__table {
-        min-width: 67%;
         position: relative;
+        width: 100%;
 
         thead {
             tr {
@@ -37,6 +38,13 @@
                         width: 90px;
                         height: 90px;
                         object-fit: cover;
+                    }
+
+                    &:nth-child(4),
+                    &:nth-child(6) {
+                        font-family: -apple-system, BlinkMacSystemFont,
+                            'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+                            'Open Sans', 'Helvetica Neue', sans-serif;
                     }
                 }
             }
@@ -85,13 +93,12 @@
         &__quantity {
             border: 1px solid #f4f4f4;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            align-items: center;
-            justify-content: center;
+            grid-template-columns: repeat(3, 40px);
             height: 40px;
             border-radius: 10px;
             overflow: hidden;
-            max-width: 130px;
+            width: fit-content;
+            margin: 0 auto;
 
             span {
                 background-color: #f4f4f4;
@@ -141,6 +148,10 @@
             background-color: #fff;
             opacity: 0.5;
         }
+
+        &__mob-head {
+            display: none;
+        }
     }
 
     &__total {
@@ -167,6 +178,9 @@
                 h5 {
                     font-weight: 500;
                     font-size: 16px;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                        'Helvetica Neue', sans-serif;
                 }
             }
 
@@ -179,6 +193,9 @@
                 h5 {
                     font-weight: 600;
                     font-size: 20px;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                        'Helvetica Neue', sans-serif;
                 }
             }
 
@@ -256,6 +273,154 @@
                 100% {
                     transform: rotate(360deg);
                 }
+            }
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .CartPage {
+        &__content {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 4em;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .CartPage {
+        padding: 0px 20px;
+
+        &__content {
+            gap: 1em;
+        }
+
+        &__table {
+            position: relative;
+            width: 100%;
+
+            thead {
+                display: none;
+            }
+
+            tbody {
+                tr {
+                    position: relative;
+                    display: grid;
+                    margin-bottom: 2em;
+
+                    td {
+                        padding: 10px 0px;
+                        margin-left: 100px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        font-size: 15px;
+
+                        img {
+                            width: 80px;
+                            height: 80px;
+                            object-fit: cover;
+                        }
+
+                        &:nth-child(1) {
+                            display: none;
+                        }
+
+                        &:nth-child(2) {
+                            position: absolute;
+                            left: -100px;
+                            border-top: none;
+                        }
+
+                        &:nth-child(3) {
+                            font-family: var(--title-font-family);
+                        }
+                    }
+                }
+            }
+
+            &__closeBtn {
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            &__quantity {
+                grid-template-columns: repeat(3, 30px);
+                height: 35px;
+                margin: 0;
+
+                span {
+                    font-size: 12px;
+                }
+
+                button {
+                    font-size: 14px;
+                }
+            }
+
+            &__mob-head {
+                display: block;
+                font-size: 12px;
+            }
+        }
+
+        &__total {
+            &__box {
+                padding: 1.5em;
+
+                h2 {
+                    font-size: 22px;
+                }
+
+                &__subtotal {
+                    margin-top: 1.2em;
+
+                    h5 {
+                        font-size: 15px;
+                    }
+
+                    p {
+                        font-size: 15px;
+                    }
+                }
+
+                &__total {
+                    h5 {
+                        font-size: 19px;
+                    }
+
+                    p {
+                        font-size: 15px;
+                    }
+                }
+
+                hr {
+                    margin: 1em 0;
+                }
+
+                button {
+                    height: 45px;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        &__noItem {
+            img {
+                width: 280px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            button {
+                padding: 10px 23px;
+                font-size: 13px;
             }
         }
     }

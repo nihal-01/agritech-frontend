@@ -20,6 +20,7 @@ function AdminOrdersPage() {
 
     const dispatch = useDispatch();
     const { orders, skip, totalOrders } = useSelector((state) => state.orders);
+    const { token } = useSelector((state) => state.user);
 
     console.log('admin orders page');
     const fetchOrders = useCallback(async () => {
@@ -27,7 +28,10 @@ function AdminOrdersPage() {
             console.log('fetching orders');
             setLoading(true);
             const response = await axios.get(
-                `/orders?status=${status}&createdAt=${time}&paymentType=${payType}&skip=${skip}`
+                `/orders?status=${status}&createdAt=${time}&paymentType=${payType}&skip=${skip}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
             );
 
             dispatch(setAllOrders(response.data));
@@ -35,7 +39,7 @@ function AdminOrdersPage() {
         } catch (err) {
             console.log(err.response);
         }
-    }, [dispatch, status, payType, time, skip]);
+    }, [dispatch, status, payType, time, skip, token]);
 
     useEffect(() => {
         fetchOrders();

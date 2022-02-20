@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiEdit, FiEye } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import {
@@ -14,6 +14,7 @@ function AdminProductsSingleRow({ product, setIsProductSidebarOpen }) {
 
     const { _id, name, thumbnail, stock, price } = product;
 
+    const { token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     const handleDelete = async (_id) => {
@@ -21,7 +22,9 @@ function AdminProductsSingleRow({ product, setIsProductSidebarOpen }) {
             const resp = window.confirm(`are you sure ${_id}`);
             if (resp) {
                 setLoading(true);
-                await axios.delete(`/products/${_id}`);
+                await axios.delete(`/products/${_id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
                 setLoading(false);
                 dispatch(deleteProduct(_id));
             }

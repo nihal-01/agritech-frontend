@@ -30,7 +30,7 @@
         &__images {
             min-width: 45%;
             max-width: 45%;
-            height: auto; 
+            height: auto;
 
             &__thumbnail {
                 position: relative;
@@ -212,7 +212,7 @@
                 .addToCart__btn {
                     background-color: var(--secondary-color);
                     color: var(--text-dark-color);
-                    padding: 0px 30px;
+                    width: 170px;
                     border-radius: 5px;
                     display: flex;
                     align-items: center;
@@ -339,6 +339,9 @@
                 position: relative;
                 overflow: hidden;
                 @include loading();
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                    'Helvetica Neue', sans-serif;
             }
 
             &__description {
@@ -460,14 +463,17 @@
                 margin-bottom: 2.5em;
 
                 &__img {
+                    width: 50px;
                     min-width: 50px;
                     height: 50px;
+                    min-height: 50px;
                     border-radius: 50%;
 
                     img {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
+                        border-radius: 50%;
                     }
                 }
 
@@ -657,6 +663,265 @@
                     position: relative;
                     overflow: hidden;
                     @include loading();
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .singleProductPage__wrapper {
+        .singleProductPage {
+            display: block;
+
+            &__images {
+                min-width: 100%;
+                max-width: 100%;
+            }
+
+            &__content {
+                margin-top: 3em;
+            }
+        }
+
+        .singleProductLoading {
+            display: block;
+
+            &__images {
+                min-width: 100%;
+                max-width: 100%;
+            }
+
+            &__content {
+                margin-top: 3em;
+            }
+        }
+    }
+    .singleProductReview {
+        &__reviews {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2em;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .singleProductPage__wrapper {
+        padding: 0px 20px;
+
+        .singleProductPage {
+            &__content {
+                &__stock {
+                    padding: 3px 13px;
+                    font-size: 11px;
+                }
+
+                &__name {
+                    font-size: 25px;
+                }
+
+                &__stars {
+                    margin-top: 0.7em;
+
+                    .stars {
+                        font-size: 14px;
+                    }
+
+                    p {
+                        font-size: 12px;
+                    }
+                }
+
+                &__price {
+                    font-size: 20px;
+                    font-family: -a;
+                }
+
+                &__desc {
+                    font-size: 14px;
+                    line-height: 25px;
+                }
+
+                &__unit {
+                    font-size: 14px;
+                }
+
+                &__addToCart {
+                    gap: 1.5em;
+                    justify-content: space-between;
+
+                    .addToCart__unit__wrapper {
+                        width: 140px;
+                        height: 45px;
+
+                        .addToCart__unit__incdec__btn {
+                            font-size: 14px;
+                        }
+
+                        .addToCart__unit__input {
+                            font-size: 14px;
+                        }
+                    }
+
+                    .addToCart__btn {
+                        padding: 0px 20px;
+                        font-size: 13px;
+                    }
+
+                    .addToCart__outOfStockBtn {
+                        max-width: 100%;
+                        width: 100%;
+                        height: 45px;
+                        font-size: 15px;
+                    }
+                }
+
+                &__category {
+                    font-size: 15px;
+                }
+            }
+        }
+
+        .singleProductLoading {
+            &__content {
+                &__stock {
+                    height: 20px;
+                }
+
+                &__title {
+                    height: 35px;
+                }
+
+                &__addToCart {
+                    gap: 1.5em;
+                    justify-content: space-between;
+
+                    span {
+                        width: 43%;
+                        height: 45px;
+                    }
+                }
+            }
+        }
+    }
+
+    .singleProductReview {
+        &__heading {
+            justify-content: flex-start;
+            gap: 2em;
+
+            &__item {
+                font-size: 19px;
+                padding: 10px 0px;
+            }
+        }
+
+        &__description {
+            margin-top: 1.3em;
+            font-size: 14px;
+            line-height: 25px;
+        }
+
+        &__reviews {
+            grid-template-columns: 1fr;
+            gap: 2em;
+            margin-top: 1.3em;
+
+            &__notFound {
+                h3 {
+                    font-size: 42px;
+                }
+
+                p {
+                    font-size: 16px;
+                }
+            }
+
+            &__content {
+                .singleProductReview__reviewList {
+                    gap: 1.5em;
+                    margin-bottom: 2em;
+
+                    &__content {
+                        h5 {
+                            font-size: 15px;
+                        }
+
+                        &__date {
+                            font-size: 13px;
+                        }
+
+                        &__feedback {
+                            margin-top: 5px;
+                            font-size: 14px;
+                            line-height: 25px;
+                        }
+                    }
+                }
+            }
+
+            &__form {
+                &__title {
+                    margin-bottom: 1.2em;
+                    font-size: 14px;
+                }
+                &__stars {
+                    button {
+                        font-size: 17px;
+                    }
+                }
+                label {
+                    color: #555555;
+                    font-size: 15px;
+
+                    span {
+                        color: #e2401c;
+                    }
+                }
+                textarea {
+                    height: 200px;
+                }
+
+                &__user {
+                    gap: 1em;
+                }
+
+                input {
+                    font-size: 12px;
+                }
+
+                &__error {
+                    font-size: 14px;
+                }
+
+                &__submit {
+                    font-size: 14px;
+                }
+
+                &__login {
+                    svg {
+                        font-size: 50px;
+                    }
+
+                    h3 {
+                        font-size: 16px;
+                    }
+
+                    a {
+                        padding: 8px 25px;
+                    }
+                }
+            }
+
+            &__loading {
+                gap: 1.5em;
+                margin-bottom: 2em;
+
+                &__content {
+                    :nth-child(4) {
+                        display: none;
+                    }
                 }
             }
         }

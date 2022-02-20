@@ -14,6 +14,11 @@ import BlogPage from './BlogPage/BlogPage';
 import SingleBlogPage from './SingleBlogPage/SingleBlogPage';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import OrderRecievedPage from './OrderRecievedPage/OrderRecievedPage';
+import MyAccountPage from './MyAccountPage/MyAccountPage';
+import MyAccountDashboardPage from './MyAccountDashboardPage/MyAccountDashboardPage';
+import MyAccountOrdersPage from './MyAccountOrdersPage/MyAccountOrdersPage';
+import MyAccountDetailsPage from './MyAccountDetailsPage/MyAccountDetailsPage';
+import MyAccountAddressPage from './MyAccountAddressPage/MyAccountAddressPage';
 
 export {
     HomePage,
@@ -32,4 +37,9 @@ export {
     SingleBlogPage,
     CheckoutPage,
     OrderRecievedPage,
+    MyAccountPage,
+    MyAccountDashboardPage,
+    MyAccountOrdersPage,
+    MyAccountDetailsPage,
+    MyAccountAddressPage,
 };

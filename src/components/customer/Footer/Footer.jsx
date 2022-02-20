@@ -12,10 +12,13 @@ import { Link } from 'react-router-dom';
 import './Footer.scss';
 import { BlankSpace } from '..';
 import { paymentCardsImg } from '../../../assets/images';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCategory } from '../../../redux/slices/productsSlice';
 
 function Footer() {
     const { categories } = useSelector((state) => state.categories);
+    const dispatch = useDispatch();
+
     return (
         <>
             <BlankSpace />
@@ -93,7 +96,7 @@ function Footer() {
                             <h2>MY ACCOUNT</h2>
                             <ul className='footer__middle__account__list'>
                                 <li>
-                                    <Link to='/account'>My Account</Link>
+                                    <Link to='/my-account'>My Account</Link>
                                 </li>
                                 <li>
                                     <Link to='/contact'>Contact</Link>
@@ -111,8 +114,19 @@ function Footer() {
                             <ul className='footer__middle__categories__list'>
                                 {categories.map((category, index) => {
                                     return (
-                                        <li key={index}>
-                                            <Link to='/'>{category.name}</Link>
+                                        <li
+                                            key={index}
+                                            onClick={() => {
+                                                dispatch(
+                                                    updateCategory(
+                                                        category._id
+                                                    )
+                                                );
+                                            }}
+                                        >
+                                            <Link to='/products'>
+                                                {category.name}
+                                            </Link>
                                         </li>
                                     );
                                 })}

@@ -15,9 +15,12 @@ const initialState = {
 const fetchUsers = createAsyncThunk(
     '/user/fetchUsers',
     async (args, { getState }) => {
-        const { skip, search } = getState().user;
+        const { skip, search, token } = getState().user;
         const response = await axios.get(
-            `/users/all?skip=${skip}&search=${search}`
+            `/users/all?skip=${skip}&search=${search}`,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
         );
         return response.data;
     }
@@ -34,11 +37,11 @@ export const userSlice = createSlice({
             state.search = '';
         },
         saveUser: (state, action) => {
+            localStorage.setItem('token', action.payload.token);
+
             state.user = action.payload.user;
             state.token = action.payload.token;
             state.isLoggedIn = true;
-
-            localStorage.setItem('token', action.payload.token);
         },
         logout: (state) => {
             state.isLoggedIn = false;

@@ -6,17 +6,21 @@ import { useParams } from 'react-router-dom';
 import axios from '../../../axios';
 import { monthNames } from '../../../utils/constants';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import { useSelector } from 'react-redux';
 
 function OrderRecievedPage() {
     const [order, setOrder] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    const { token } = useSelector((state) => state.user);
     const { id } = useParams();
 
     const fetchSingleOrder = useCallback(async () => {
         try {
-            const response = await axios.get(`/orders/${id}`);
+            const response = await axios.get(`/orders/${id}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             setOrder(response.data);
             setLoading(false);
         } catch (err) {
@@ -24,7 +28,7 @@ function OrderRecievedPage() {
             setLoading(false);
             console.log(err.response);
         }
-    }, [id]);
+    }, [id, token]);
 
     const myDate = new Date(order?.createdAt);
 
@@ -67,7 +71,7 @@ function OrderRecievedPage() {
                                     Email: <br />
                                     <strong>{order?.address?.email}</strong>
                                 </li>
-                                <li>
+                                <li className='orderReceivedPage__list__price'>
                                     Total:
                                     <br />
                                     <strong>&#8377;{order?.totalAmount}</strong>

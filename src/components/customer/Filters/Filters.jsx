@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { updateFilterSidebar } from '../../../redux/slices/layoutSlice';
 import { updateCategory } from '../../../redux/slices/productsSlice';
 
 import './Filters.scss';
@@ -18,9 +19,11 @@ const tags = [
 ];
 
 function Filters() {
-    const categories = useSelector((state) => state.categories.categories);
     const [totalProducts, setTotalProducts] = useState(0);
+
+    const categories = useSelector((state) => state.categories.categories);
     const dispatch = useDispatch();
+    const { filterSidebar } = useSelector((state) => state.layout);
 
     useEffect(() => {
         let total = 0;
@@ -31,40 +34,69 @@ function Filters() {
     }, [categories]);
 
     return (
-        <div className='filters'>
-            <div className='filters__categories'>
-                <h3>Explore</h3>
-                <hr />
-                <ul className='filters__categories__list'>
-                    <li>
-                        <Link
-                            to='#'
-                            onClick={() => {
-                                dispatch(updateCategory('all'));
-                            }}
-                        >
-                            All
-                        </Link>{' '}
-                        ({totalProducts})
-                    </li>
-                    {categories.map((category, index) => {
-                        return (
-                            <li key={index}>
-                                <Link
-                                    to='#'
-                                    onClick={() => {
-                                        dispatch(updateCategory(category._id));
-                                    }}
-                                >
-                                    {category.name}
-                                </Link>{' '}
-                                ({category.count})
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-            {/* <div className='filters__price'>
+        <div className='filters-wrapper'>
+            <div
+                className={
+                    filterSidebar
+                        ? 'filters__overlay filters__overlay__active'
+                        : 'filters__overlay'
+                }
+                onClick={() => {
+                    dispatch(updateFilterSidebar(false));
+                }}
+            ></div>
+            <div
+                className={
+                    filterSidebar ? 'filters filters__mobile' : 'filters'
+                }
+            >
+                <span
+                    className='filters__hide'
+                    onClick={() => {
+                        dispatch(updateFilterSidebar(false));
+                    }}
+                >
+                    HIDE FILTER
+                </span>
+                <div className='filters__categories'>
+                    <h3>Explore</h3>
+                    <hr />
+                    <ul className='filters__categories__list'>
+                        <li>
+                            <Link
+                                to='#'
+                                onClick={() => {
+                                    dispatch(updateFilterSidebar(false));
+                                    dispatch(updateCategory('all'));
+                                }}
+                            >
+                                All
+                            </Link>{' '}
+                            ({totalProducts})
+                        </li>
+                        {categories.map((category, index) => {
+                            return (
+                                <li key={index}>
+                                    <Link
+                                        to='#'
+                                        onClick={() => {
+                                            dispatch(
+                                                updateFilterSidebar(false)
+                                            );
+                                            dispatch(
+                                                updateCategory(category._id)
+                                            );
+                                        }}
+                                    >
+                                        {category.name}
+                                    </Link>{' '}
+                                    ({category.count})
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+                {/* <div className='filters__price'>
                 <h3>Price</h3>
                 <hr />
                 <input
@@ -80,17 +112,24 @@ function Filters() {
                     <button>Filter</button>
                 </div>
             </div> */}
-            <div className='filters__tags'>
-                <h3>Product tags</h3>
-                <hr />
-                <div className='filters__tags__list'>
-                    {tags.map((tag, index) => {
-                        return (
-                            <Link to='/' key={index}>
-                                {tag}
-                            </Link>
-                        );
-                    })}
+                <div className='filters__tags'>
+                    <h3>Product tags</h3>
+                    <hr />
+                    <div className='filters__tags__list'>
+                        {tags.map((tag, index) => {
+                            return (
+                                <Link
+                                    to='/'
+                                    key={index}
+                                    onClick={() => {
+                                        dispatch(updateFilterSidebar(false));
+                                    }}
+                                >
+                                    {tag}
+                                </Link>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

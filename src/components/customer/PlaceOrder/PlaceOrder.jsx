@@ -4,7 +4,7 @@ import BtnLoading from '../BtnLoading/BtnLoading';
 
 import './PlaceOrder.scss';
 
-function PlaceOrder({ setPaymentType, loading }) {
+function PlaceOrder({ setPaymentType, loading, error }) {
     const { cartItems, cartTotal } = useSelector((state) => state.cart);
 
     return (
@@ -71,10 +71,11 @@ function PlaceOrder({ setPaymentType, loading }) {
                 </div>
             </div>
             <div className='placeOrder__button'>
-                <p>
+                <p className='placeOrder__button__policy'>
                     Your personal data will be used to process your order,
                     support your experience throughout this website.
                 </p>
+                {error && <p className='placeOrder__button__error'>{error}</p>}
                 <button disabled={loading}>
                     {loading ? <BtnLoading /> : 'Place order'}
                 </button>

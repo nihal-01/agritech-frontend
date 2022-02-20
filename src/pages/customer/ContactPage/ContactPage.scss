@@ -126,6 +126,8 @@
 
 @media (max-width: 768px) {
     .contactPage {
+        padding: 0px 20px;
+
         &__main {
             &__desc {
                 font-size: 16px;
@@ -150,6 +152,25 @@
                     h3 {
                         margin-top: 1.5em;
                     }
+                }
+            }
+
+            &__form {
+                h2 {
+                    margin-bottom: 1em;
+                }
+                input {
+                    height: 45px;
+                    font-size: 14px;
+                }
+
+                textarea {
+                    font-size: 14px;
+                }
+
+                button {
+                    height: 45px;
+                    font-size: 15px;
                 }
             }
         }

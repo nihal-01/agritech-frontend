@@ -47,3 +47,21 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .pagination {
+        gap: 5px;
+
+        &__btn {
+            width: 35px;
+            height: 35px;
+            font-size: 13px;
+        }
+
+        &__nextBtn,
+        &__prevBtn {
+            font-weight: 600;
+            font-size: 13px;
+        }
+    }
+}

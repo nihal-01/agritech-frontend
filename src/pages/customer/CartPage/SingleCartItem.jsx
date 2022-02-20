@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
@@ -16,13 +16,20 @@ const SingleCartItem = ({ item, clearCartLoading }) => {
     const { productId, quantity } = item;
     const { name, price, thumbnail } = item.product;
 
+    const { token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     const decrementQuantity = async (productId, price) => {
         try {
             setLoading(true);
 
-            await axios.patch(`/cart/decrement/${productId}`);
+            await axios.patch(
+                `/cart/decrement/${productId}`,
+                {},
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             dispatch(decrementCartItem({ productId, price }));
 
             setLoading(false);
@@ -36,7 +43,13 @@ const SingleCartItem = ({ item, clearCartLoading }) => {
         try {
             setLoading(true);
 
-            await axios.patch(`/cart/increment/${productId}`);
+            await axios.patch(
+                `/cart/increment/${productId}`,
+                {},
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             dispatch(incrementCartItem({ productId, price }));
 
             setLoading(false);
@@ -49,7 +62,13 @@ const SingleCartItem = ({ item, clearCartLoading }) => {
     const handleRemove = async () => {
         try {
             setLoading(true);
-            await axios.patch(`/cart/${productId}`);
+            await axios.patch(
+                `/cart/${productId}`,
+                {},
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             setLoading(false);
             dispatch(deleteCartItem(item));
         } catch (err) {
@@ -61,12 +80,6 @@ const SingleCartItem = ({ item, clearCartLoading }) => {
     return (
         <tr>
             <td>
-                {loading && <div className='CartPage__table__wrapper'></div>}
-                {loading && (
-                    <div className='CartPage__table__loader'>
-                        <Loader />
-                    </div>
-                )}
                 <button
                     className='CartPage__table__closeBtn'
                     onClick={() => {
@@ -80,9 +93,30 @@ const SingleCartItem = ({ item, clearCartLoading }) => {
             <td>
                 <img src={thumbnail} alt='' />
             </td>
-            <td>{name}</td>
-            <td>&#8377; {price}</td>
             <td>
+                {loading && <div className='CartPage__table__wrapper'></div>}
+                {loading && (
+                    <div className='CartPage__table__loader'>
+                        <Loader />
+                    </div>
+                )}
+                {name}
+                <button
+                    className='CartPage__table__closeBtn'
+                    onClick={() => {
+                        handleRemove();
+                    }}
+                    disabled={clearCartLoading}
+                >
+                    <AiOutlineClose />
+                </button>
+            </td>
+            <td>
+                <span className='CartPage__table__mob-head'>PRICE:</span>&#8377;{' '}
+                {price}
+            </td>
+            <td style={{ textAlign: 'center' }}>
+                <span className='CartPage__table__mob-head'>QUANTITY:</span>
                 <div className='CartPage__table__quantity'>
                     <button
                         onClick={() => {
@@ -103,7 +137,10 @@ const SingleCartItem = ({ item, clearCartLoading }) => {
                     </button>
                 </div>
             </td>
-            <td>₹ {(price * parseInt(quantity)).toFixed(0)}</td>
+            <td>
+                <span className='CartPage__table__mob-head'>SUBTOTAL</span>₹{' '}
+                {(price * parseInt(quantity)).toFixed(0)}
+            </td>
         </tr>
     );
 };

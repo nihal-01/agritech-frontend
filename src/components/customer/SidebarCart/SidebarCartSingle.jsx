@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import axios from '../../../axios';
@@ -9,6 +9,8 @@ import { Loader } from '..';
 
 const SidebarCartSingle = ({ item, setIsSidebarOpen }) => {
     const [loading, setLoading] = useState(false);
+
+    const { token } = useSelector((state) => state.user);
 
     const { productId, quantity } = item;
     const { thumbnail, name, price } = item.product;
@@ -19,7 +21,13 @@ const SidebarCartSingle = ({ item, setIsSidebarOpen }) => {
         try {
             setLoading(true);
 
-            await axios.patch(`/cart/${cartItem.productId}`);
+            await axios.patch(
+                `/cart/${cartItem.productId}`,
+                {},
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             setLoading(false);
             dispatch(deleteCartItem(cartItem));
         } catch (err) {
@@ -50,7 +58,7 @@ const SidebarCartSingle = ({ item, setIsSidebarOpen }) => {
                     {name}
                 </Link>
                 <p>
-                    {quantity} x <span>${price}</span>
+                    {quantity} x <span>&#8377;{price}</span>
                 </p>
             </div>
             <button

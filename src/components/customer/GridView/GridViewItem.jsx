@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     AiOutlineShoppingCart,
     AiOutlineHeart,
@@ -7,7 +7,7 @@ import {
     AiFillHeart,
 } from 'react-icons/ai';
 import { HiOutlineChevronDoubleRight } from 'react-icons/hi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Stars } from '..';
 import axios from '../../../axios';
@@ -35,14 +35,23 @@ const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
     const [imgLoaded, setImgLoaded] = useState(false);
     const [loved, setLoved] = useState(isLoved(_id));
 
+    const { isLoggedIn, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
-
-    console.log('object');
+    const navigate = useNavigate();
 
     const addToCart = async (product) => {
         try {
+            if (!isLoggedIn) {
+                navigate('/login');
+            }
             setAddToCartLoading(true);
-            await axios.post('/cart', { productId: product._id });
+            await axios.post(
+                '/cart',
+                { productId: product._id },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             dispatch(addItemToCart({ product, quantity: 1 }));
             setAddToCartLoading(false);
         } catch (err) {
@@ -98,7 +107,7 @@ const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
                         onClick={() => {
                             addToCart({ _id, name, thumbnail, price });
                         }}
-                        disabled={addToCartLoading}
+                        disabled={addToCartLoading || stock < 1}
                     >
                         {addToCartLoading ? (
                             <BtnLoading />
@@ -122,7 +131,7 @@ const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
             <h3 className='gridView__item__name'>
                 <Link to={`/products/${_id}`}>{name}</Link>
             </h3>
-            <p className='gridView__item__price'>${price}</p>
+            <p className='gridView__item__price'>&#8377;{price}</p>
             <hr className='gridView__item__line' />
             {stock > 0 ? (
                 <button

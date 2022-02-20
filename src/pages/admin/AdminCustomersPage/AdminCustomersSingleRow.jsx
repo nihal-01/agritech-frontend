@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiEye } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { noImage } from '../../../assets/images';
 import { deleteUser } from '../../../redux/slices/userSlice';
 
@@ -11,6 +11,7 @@ import { Loader } from '../../../components/customer';
 function AdminCustomersSingleRow({ user }) {
     const [loading, setLoading] = useState(false);
 
+    const { token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     const handleDelete = async (id) => {
@@ -18,7 +19,9 @@ function AdminCustomersSingleRow({ user }) {
             const resp = window.confirm(`are you sure ${user._id}`);
             if (resp) {
                 setLoading(true);
-                await axios.delete(`/users/${id}`);
+                await axios.delete(`/users/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
                 setLoading(false);
                 dispatch(deleteUser(id));
             }

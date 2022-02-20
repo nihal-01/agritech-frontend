@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
     deleteCategory,
@@ -14,6 +14,7 @@ import { Loader } from '../../../components/customer';
 function AdminCategoriesSingleRow({ category, setIsCategorySidebarOpen }) {
     const [loading, setLoading] = useState(false);
 
+    const { token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     const handleDelete = async (_id) => {
@@ -21,7 +22,9 @@ function AdminCategoriesSingleRow({ category, setIsCategorySidebarOpen }) {
             const resp = window.confirm(`are you sure ${_id}`);
             if (resp) {
                 setLoading(true);
-                await axios.delete(`/categories/${_id}`);
+                await axios.delete(`/categories/${_id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
                 setLoading(false);
                 dispatch(deleteCategory(_id));
             }

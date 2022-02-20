@@ -7,6 +7,7 @@ import './Sort.scss';
 import { useDispatch } from 'react-redux';
 import { updateSort } from '../../../redux/slices/productsSlice';
 import { useSelector } from 'react-redux';
+import { updateFilterSidebar } from '../../../redux/slices/layoutSlice';
 
 function Sort() {
     const dispatch = useDispatch();
@@ -16,7 +17,12 @@ function Sort() {
         <div className='sort__wrapper'>
             <div className='sort'>
                 <div className='sort__left'>
-                    <button className='sort__left__filter'>
+                    <button
+                        className='sort__left__filter'
+                        onClick={() => {
+                            dispatch(updateFilterSidebar(true));
+                        }}
+                    >
                         <HiOutlineFilter /> Filter
                     </button>
                     {loading ? (

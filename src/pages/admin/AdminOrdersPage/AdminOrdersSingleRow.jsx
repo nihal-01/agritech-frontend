@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { FiEye } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import { updateStatus } from '../../../redux/slices/ordersSlice';
@@ -10,6 +10,8 @@ import { monthNames } from '../../../utils/constants';
 function AdminOrdersSingleRow({ product }) {
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState(product?.orderStatus);
+
+    const { token } = useSelector((state) => state.user);
 
     const { _id, createdAt, address, paymentType, totalAmount, orderStatus } =
         product;
@@ -21,9 +23,15 @@ function AdminOrdersSingleRow({ product }) {
         try {
             setStatus(e.target.value);
             setLoading(true);
-            await axios.patch(`/orders/${_id}`, {
-                orderStatus: e.target.value,
-            });
+            await axios.patch(
+                `/orders/${_id}`,
+                {
+                    orderStatus: e.target.value,
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
             setLoading(false);
             dispatch(updateStatus({ _id, status: e.target.value }));
         } catch (err) {

@@ -116,13 +116,15 @@
 
 @media (max-width: 768px) {
     .signupPage__wrapper {
+        padding: 0px 20px;
+
         .signupPage {
             &__form {
                 label {
                     font-size: 15px;
                 }
                 &__policy {
-                    font-size: 15px;
+                    font-size: 14px;
                 }
             }
         }

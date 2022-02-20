@@ -159,6 +159,8 @@
 
 @media (max-width: 768px) {
     .aboutPage {
+        padding: 0px 20px;
+
         &__blog {
             display: block;
 
@@ -173,7 +175,7 @@
                 }
 
                 p {
-                    font-size: 16px;
+                    font-size: 15px;
                 }
             }
         }

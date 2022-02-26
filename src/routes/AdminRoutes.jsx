@@ -8,6 +8,9 @@ import {
     AdminOrdersPage,
     AdminProductsPage,
     AdminSettingsPage,
+    AdminSingleProductPage,
+    AdminUserOrdersPage,
+    SuperAdminPrivateRoute,
 } from '../pages/admin';
 import { AdminSidebar, AdminNavbar } from '../components/admin';
 
@@ -24,14 +27,30 @@ const AdminRoutes = () => {
                         element={<AdminProductsPage />}
                     ></Route>
                     <Route
+                        path='/products/:id'
+                        element={<AdminSingleProductPage />}
+                    ></Route>
+                    <Route
                         path='/categories'
                         element={<AdminCategoriesPage />}
                     ></Route>
                     <Route
                         path='/customers'
-                        element={<AdminCustomersPage />}
+                        element={
+                            <SuperAdminPrivateRoute>
+                                <AdminCustomersPage />
+                            </SuperAdminPrivateRoute>
+                        }
                     ></Route>
                     <Route path='/orders' element={<AdminOrdersPage />}></Route>
+                    <Route
+                        path='/customer-orders/:id'
+                        element={
+                            <SuperAdminPrivateRoute>
+                                <AdminUserOrdersPage />
+                            </SuperAdminPrivateRoute>
+                        }
+                    ></Route>
                     <Route
                         path='/settings'
                         element={<AdminSettingsPage />}

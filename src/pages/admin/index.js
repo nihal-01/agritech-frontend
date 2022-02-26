@@ -9,6 +9,7 @@ import AdminOrdersPage from './AdminOrdersPage/AdminOrdersPage';
 import AdminSingleProductPage from './AdminSingleProductPage/AdminSingleProductPage';
 import AdminUserOrdersPage from './AdminUserOrdersPage/AdminUserOrdersPage';
 import AdminLoginPage from './AdminLoginPage/AdminLoginPage';
+import SuperAdminPrivateRoute from './AdminPrivateRoute/SuperAdminPrivateRoute';
 
 export {
     AdminHomePage,
@@ -22,4 +23,5 @@ export {
     AdminSingleProductPage,
     AdminUserOrdersPage,
     AdminLoginPage,
+    SuperAdminPrivateRoute,
 };

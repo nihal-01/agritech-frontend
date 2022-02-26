@@ -14,6 +14,7 @@ function AdminCategoriesPage() {
 
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories.categories);
+    const { user } = useSelector((state) => state.user);
 
     return (
         <div className='admin--categories'>
@@ -42,7 +43,13 @@ function AdminCategoriesPage() {
                 isCategorySidebarOpen={isCategorySidebarOpen}
                 setIsCategorySidebarOpen={setIsCategorySidebarOpen}
             />
-            {categories.length < 1 ? (
+            {categories.filter((category) => {
+                if (user.role === 'admin') {
+                    return category.creator === user._id;
+                } else {
+                    return category;
+                }
+            }).length < 1 ? (
                 <div className='admin--categories__notfound'>
                     <img src={adminNotFoundImg} alt='' />
                     <p>Sorry, categories not found</p>
@@ -60,17 +67,27 @@ function AdminCategoriesPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {categories.map((category) => {
-                                    return (
-                                        <AdminCategoriesSingleRow
-                                            key={category._id}
-                                            category={category}
-                                            setIsCategorySidebarOpen={
-                                                setIsCategorySidebarOpen
-                                            }
-                                        />
-                                    );
-                                })}
+                                {categories
+                                    .filter((category) => {
+                                        if (user.role === 'admin') {
+                                            return (
+                                                category.creator === user._id
+                                            );
+                                        } else {
+                                            return category;
+                                        }
+                                    })
+                                    .map((category) => {
+                                        return (
+                                            <AdminCategoriesSingleRow
+                                                key={category._id}
+                                                category={category}
+                                                setIsCategorySidebarOpen={
+                                                    setIsCategorySidebarOpen
+                                                }
+                                            />
+                                        );
+                                    })}
                             </tbody>
                         </table>
                     </div>

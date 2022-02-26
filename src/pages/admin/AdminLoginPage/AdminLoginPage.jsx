@@ -26,7 +26,10 @@ function AdminLoginPage() {
             setError('');
 
             const response = await axios.post('/users/login', { ...user });
-            if (response.data?.user?.role !== 'admin') {
+            if (
+                response.data?.user?.role !== 'admin' &&
+                response.data?.user?.role !== 'super-admin'
+            ) {
                 setError('Admin access denied!');
                 setIsLoading(false);
             } else {

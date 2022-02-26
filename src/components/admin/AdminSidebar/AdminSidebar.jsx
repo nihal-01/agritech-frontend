@@ -6,6 +6,7 @@ import {
     BsPeople,
     BsCompass,
     BsGear,
+    BsArrowLeft,
 } from 'react-icons/bs';
 import { Link, useLocation } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
@@ -46,6 +47,11 @@ const links = [
         to: '/settings',
         icon: <BsGear />,
     },
+    {
+        name: 'Home Page',
+        to: '/..',
+        icon: <BsArrowLeft />,
+    },
 ];
 
 function AdminSidebar() {
@@ -53,6 +59,7 @@ function AdminSidebar() {
 
     const dispatch = useDispatch();
     const { adminSidebar } = useSelector((state) => state.layout);
+    const { user } = useSelector((state) => state.user);
 
     return (
         <div className='admin__sidebar-wrapper'>
@@ -83,29 +90,37 @@ function AdminSidebar() {
                     <h2>Dashboard</h2>
                 </Link>
                 <ul className='admin__sidebar__menus'>
-                    {links.map((link, index) => {
-                        return (
-                            <li key={index}>
-                                <Link
-                                    to={`/admin${link.to}`}
-                                    className={
-                                        location.pathname ===
-                                            `/admin${link.to}` ||
-                                        location.pathname ===
-                                            `/admin${link.to}/`
-                                            ? 'admin__sidebar__menu-active'
-                                            : null
-                                    }
-                                    onClick={() => {
-                                        dispatch(updateAdminSidebar(false));
-                                    }}
-                                >
-                                    <i>{link.icon}</i> {link.name}
-                                    <span></span>
-                                </Link>
-                            </li>
-                        );
-                    })}
+                    {links
+                        .filter((link) => {
+                            if (user.role === 'admin') {
+                                return link.name !== 'Customers';
+                            } else {
+                                return link;
+                            }
+                        })
+                        .map((link, index) => {
+                            return (
+                                <li key={index}>
+                                    <Link
+                                        to={`/admin${link.to}`}
+                                        className={
+                                            location.pathname ===
+                                                `/admin${link.to}` ||
+                                            location.pathname ===
+                                                `/admin${link.to}/`
+                                                ? 'admin__sidebar__menu-active'
+                                                : null
+                                        }
+                                        onClick={() => {
+                                            dispatch(updateAdminSidebar(false));
+                                        }}
+                                    >
+                                        <i>{link.icon}</i> {link.name}
+                                        <span></span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
                 </ul>
                 <button
                     className='admin__sidebar__logout-btn'

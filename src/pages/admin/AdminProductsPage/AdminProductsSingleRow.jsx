@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { FiEdit, FiEye } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import {
     deleteProduct,
     updateIsEdit,
+    updateIsProductSidebarOpen,
 } from '../../../redux/slices/productsSlice';
 
-function AdminProductsSingleRow({ product, setIsProductSidebarOpen }) {
+function AdminProductsSingleRow({ product }) {
     const [loading, setLoading] = useState(false);
 
     const { _id, name, thumbnail, stock, price } = product;
@@ -42,12 +44,14 @@ function AdminProductsSingleRow({ product, setIsProductSidebarOpen }) {
                 </div>
             </td>
             <td>{name}</td>
-            <td>₹{price}</td>
+            <td className='admin__table--price'>&#8377; {price}</td>
             <td>{stock}</td>
             <td>
-                <button className='table--viewbtn'>
-                    <FiEye />
-                </button>
+                <Link to={`${_id}`}>
+                    <button className='table--viewbtn'>
+                        <FiEye />
+                    </button>
+                </Link>
             </td>
             <td>
                 <button
@@ -59,7 +63,7 @@ function AdminProductsSingleRow({ product, setIsProductSidebarOpen }) {
                                 editProductId: _id,
                             })
                         );
-                        setIsProductSidebarOpen(true);
+                        dispatch(updateIsProductSidebarOpen(true));
                     }}
                 >
                     <FiEdit />

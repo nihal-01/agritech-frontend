@@ -14,6 +14,7 @@ const initialState = {
         category: 'all',
         price: 0,
     },
+    isProductSidebarOpen: false,
     isEdit: false,
     editProductId: '',
 };
@@ -24,7 +25,9 @@ const fetchProducts = createAsyncThunk(
         console.log('product request');
         const { skip, sort, filters, search } = getState().products;
         const response = await axios.get(
-            `/products?skip=${skip}&sort=${sort}&category=${filters.category}&search=${search}`
+            `/products?skip=${skip}&sort=${sort}&category=${
+                filters.category
+            }&search=${search}&creator=${args?.creator || ''}`
         );
         return response.data;
     }
@@ -75,6 +78,9 @@ export const productsSlice = createSlice({
         updateProductLoading: (state, action) => {
             state.loading = action.payload;
         },
+        updateIsProductSidebarOpen: (state, action) => {
+            state.isProductSidebarOpen = action.payload;
+        },
     },
     extraReducers: {
         [fetchProducts.fulfilled]: (state, action) => {
@@ -98,6 +104,8 @@ export const {
     clearFilters,
     updateSearch,
     updateProductLoading,
+    updateCreator,
+    updateIsProductSidebarOpen,
 } = productsSlice.actions;
 
 export { fetchProducts };

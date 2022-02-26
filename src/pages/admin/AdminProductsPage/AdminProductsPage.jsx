@@ -13,13 +13,13 @@ import {
     clearFilters,
     updateSearch,
     updateProductLoading,
+    updateIsProductSidebarOpen,
 } from '../../../redux/slices/productsSlice';
 import { Loader } from '../../../components/customer';
 import { adminNotFoundImg } from '../../../assets/images';
 import AdminProductsSingleRow from './AdminProductsSingleRow';
 
 function AdminProductsPage() {
-    const [isProductSidebarOpen, setIsProductSidebarOpen] = useState(false);
     const [pageNumbers, setPageNumbers] = useState([]);
     const [searchText, setSearchText] = useState('');
 
@@ -37,6 +37,7 @@ function AdminProductsPage() {
         loading,
         search,
     } = useSelector((state) => state.products);
+    const { user } = useSelector((state) => state.user);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -45,8 +46,12 @@ function AdminProductsPage() {
 
     useEffect(() => {
         dispatch(updateProductLoading(true));
-        dispatch(fetchProducts());
-    }, [dispatch, skip, filters, sort, search]);
+        if (user.role === 'admin') {
+            dispatch(fetchProducts({ creator: user._id }));
+        } else {
+            dispatch(fetchProducts());
+        }
+    }, [dispatch, skip, filters, sort, search, user._id, user.role]);
 
     useEffect(() => {
         return () => {
@@ -115,7 +120,7 @@ function AdminProductsPage() {
                     <button
                         onClick={() => {
                             dispatch(updateIsEdit({ isEdit: false }));
-                            setIsProductSidebarOpen(true);
+                            dispatch(updateIsProductSidebarOpen(true));
                         }}
                     >
                         <span>+</span> Add Product
@@ -123,10 +128,7 @@ function AdminProductsPage() {
                 </div>
             </div>
 
-            <AdminProductSidebar
-                isProductSidebarOpen={isProductSidebarOpen}
-                setIsProductSidebarOpen={setIsProductSidebarOpen}
-            />
+            <AdminProductSidebar />
             {loading ? (
                 <div className='admin--products__loading'>
                     <Loader color={'#fff'} />
@@ -157,9 +159,6 @@ function AdminProductsPage() {
                                         <AdminProductsSingleRow
                                             key={product._id}
                                             product={product}
-                                            setIsProductSidebarOpen={
-                                                setIsProductSidebarOpen
-                                            }
                                         />
                                     );
                                 })}

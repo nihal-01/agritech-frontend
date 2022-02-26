@@ -15,8 +15,8 @@ export const ordersSlice = createSlice({
     reducers: {
         setAllOrders: (state, action) => {
             state.orders = action.payload.orders;
-            state.skip = action.payload.skip;
-            state.totalOrders = action.payload.totalOrders;
+            state.skip = action.payload?.skip;
+            state.totalOrders = action.payload?.totalOrders;
         },
         updateSkip: (state, action) => {
             state.skip = action.payload;

@@ -14,13 +14,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BtnLoading, Loader } from '../../customer';
 import {
     updateIsEdit,
+    updateIsProductSidebarOpen,
     updateProduct,
 } from '../../../redux/slices/productsSlice';
 
-function AdminProductSidebar({
-    isProductSidebarOpen,
-    setIsProductSidebarOpen,
-}) {
+function AdminProductSidebar() {
     const [thumbnailImg, setThumbnailImg] = useState('');
     const [thumbnail, setThumbnail] = useState({
         error: '',
@@ -67,7 +65,9 @@ function AdminProductSidebar({
     const categories = useSelector((state) => state.categories.categories);
     const imgRef = useRef(null);
     const { token } = useSelector((state) => state.user);
-    const { isEdit, editProductId } = useSelector((state) => state.products);
+    const { isEdit, editProductId, isProductSidebarOpen } = useSelector(
+        (state) => state.products
+    );
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -229,7 +229,7 @@ function AdminProductSidebar({
                 };
             });
 
-            setIsProductSidebarOpen(false);
+            dispatch(updateIsProductSidebarOpen(false));
             clearAll();
             dispatch(updateIsEdit({ isEdit: false }));
         } catch (err) {
@@ -403,7 +403,7 @@ function AdminProductSidebar({
                         : 'admin--addProductSidebar__ovarlay'
                 }
                 onClick={() => {
-                    setIsProductSidebarOpen(false);
+                    dispatch(updateIsProductSidebarOpen(false));
                     if (isEdit) {
                         clearAll();
                         dispatch(updateIsEdit({ isEdit: false }));
@@ -430,7 +430,7 @@ function AdminProductSidebar({
                         type='button'
                         className='admin--addProductSidebar__main__header__closebtn'
                         onClick={() => {
-                            setIsProductSidebarOpen(false);
+                            dispatch(updateIsProductSidebarOpen(false));
                             if (isEdit) {
                                 clearAll();
                                 dispatch(updateIsEdit({ isEdit: false }));
@@ -786,7 +786,7 @@ function AdminProductSidebar({
                                 type='button'
                                 className='admin--addProductSidebar__main__btns__cancel'
                                 onClick={() => {
-                                    setIsProductSidebarOpen(false);
+                                    dispatch(updateIsProductSidebarOpen(false));
                                     if (isEdit) {
                                         clearAll();
                                         dispatch(

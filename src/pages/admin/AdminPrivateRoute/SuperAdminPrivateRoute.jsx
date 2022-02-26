@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-const AdminPrivateRoute = ({ children }) => {
+const SuperAdminPrivateRoute = ({ children }) => {
     const user = useSelector((state) => state.user.user);
-    return user?.role === 'admin' || user?.role === 'super-admin' ? (
+    return user?.role === 'super-admin' ? (
         children
     ) : (
         <Navigate replace to='/admin/login' />
     );
 };
 
-export default AdminPrivateRoute;
+export default SuperAdminPrivateRoute;

@@ -52,7 +52,7 @@ function AdminOrdersSingleRow({ product }) {
             <td>{address?.city}</td>
             <td>{address?.phone}</td>
             <td>{paymentType}</td>
-            <td>&#8377; {totalAmount}</td>
+            <td className='admin__table--price'>&#8377; {totalAmount}</td>
             <td className='admin__table__center'>
                 <span
                     style={{

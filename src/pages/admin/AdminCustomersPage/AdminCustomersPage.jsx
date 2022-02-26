@@ -89,6 +89,9 @@ function AdminCustomersPage() {
                                     <th>Avatar</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Role
+                                    </th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>

@@ -155,9 +155,17 @@ function AdminHomePage() {
                 </div>
                 <div className='admin__home__charts__item'>
                     <p>Top Revenue Product</p>
-                    <div className='admin__home__charts__item__chart'>
-                        <DoughnutChart chartData={data.topSellingProducts} />
-                    </div>
+                    {data.topSellingProducts?.length < 1 ? (
+                        <p className='admin__home__charts__item__nodata'>
+                            No Data to display!
+                        </p>
+                    ) : (
+                        <div className='admin__home__charts__item__chart'>
+                            <DoughnutChart
+                                chartData={data.topSellingProducts}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

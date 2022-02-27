@@ -8,3 +8,13 @@
         font-weight: 600;
     }
 }
+
+@media (max-width: 768px) {
+    .adminCustomerOrders {
+        padding: 0em 1.5em;
+
+        &__title {
+            font-size: 20px;
+        }
+    }
+}

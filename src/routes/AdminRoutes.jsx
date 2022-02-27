@@ -11,6 +11,7 @@ import {
     AdminSingleProductPage,
     AdminUserOrdersPage,
     SuperAdminPrivateRoute,
+    AdminInvoicePage,
 } from '../pages/admin';
 import { AdminSidebar, AdminNavbar } from '../components/admin';
 
@@ -43,6 +44,10 @@ const AdminRoutes = () => {
                         }
                     ></Route>
                     <Route path='/orders' element={<AdminOrdersPage />}></Route>
+                    <Route
+                        path='/orders/:id'
+                        element={<AdminInvoicePage />}
+                    ></Route>
                     <Route
                         path='/customer-orders/:id'
                         element={

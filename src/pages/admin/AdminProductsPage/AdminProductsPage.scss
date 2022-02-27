@@ -337,4 +337,46 @@
             }
         }
     }
+
+    .admin__table-wrapper {
+        .admin__table {
+            table {
+                thead {
+                    tr {
+                        th {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                tbody {
+                    tr {
+                        position: relative;
+
+                        td {
+                            font-size: 14px;
+
+                            select {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__bottom {
+                display: block;
+                text-align: center;
+
+                &__results {
+                    font-size: 13px;
+                }
+
+                &__pagination {
+                    justify-content: center;
+                    margin-top: 0.8em;
+                }
+            }
+        }
+    }
 }

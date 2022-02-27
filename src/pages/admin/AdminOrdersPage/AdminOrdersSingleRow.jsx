@@ -1,6 +1,7 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { FiEye } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import { updateStatus } from '../../../redux/slices/ordersSlice';
@@ -49,7 +50,17 @@ function AdminOrdersSingleRow({ product }) {
                     ', ' +
                     myDate.getFullYear()}
             </td>
-            <td>{address?.city}</td>
+            <td>
+                {loading && (
+                    <div className='admin__table__loading-wrapper'></div>
+                )}
+                {loading && (
+                    <div className='admin__table__loading'>
+                        <Loader color={'#fff'} />
+                    </div>
+                )}
+                {address?.city}
+            </td>
             <td>{address?.phone}</td>
             <td>{paymentType}</td>
             <td className='admin__table--price'>&#8377; {totalAmount}</td>
@@ -79,18 +90,12 @@ function AdminOrdersSingleRow({ product }) {
                 </select>
             </td>
             <td className='admin__table__center'>
-                <button className='table--viewbtn'>
-                    <FiEye />
-                </button>
+                <Link to={`${_id}`}>
+                    <button className='table--viewbtn'>
+                        <FiEye />
+                    </button>
+                </Link>
             </td>
-            {loading && (
-                <>
-                    <td className='admin__table__loading-wrapper'></td>
-                    <td className='admin__table__loading'>
-                        <Loader color={'#fff'} />
-                    </td>
-                </>
-            )}
         </tr>
     );
 }

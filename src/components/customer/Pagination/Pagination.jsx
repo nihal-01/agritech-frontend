@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 
 import './Pagination.scss';
-import { updateSkip } from '../../../redux/slices/productsSlice';
 
-function Pagination() {
+function Pagination({ limit, skip, totalItems, updateSkip }) {
     const [pageNumbers, setPageNumbers] = useState([]);
 
     const dispatch = useDispatch();
-    const { limit, skip, totalProducts } = useSelector(
-        (state) => state.products
-    );
 
     useEffect(() => {
         const pageNo = [];
-        for (var i = 1; i <= Math.ceil(totalProducts / limit); i++) {
+        for (var i = 1; i <= Math.ceil(totalItems / limit); i++) {
             pageNo.push(i);
         }
         setPageNumbers(pageNo);
-    }, [limit, totalProducts]);
+    }, [limit, totalItems]);
 
     return (
         <div className='pagination'>
@@ -54,7 +49,7 @@ function Pagination() {
                 onClick={() => {
                     dispatch(updateSkip(skip + 1));
                 }}
-                disabled={skip + 1 >= Math.ceil(totalProducts / limit)}
+                disabled={skip + 1 >= Math.ceil(totalItems / limit)}
             >
                 Next &gt;
             </button>

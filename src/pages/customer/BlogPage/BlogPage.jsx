@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import './BlogPage.scss';
 import {
     BlankSpace,
@@ -6,6 +9,12 @@ import {
     PageHero,
     Pagination,
 } from '../../../components/customer';
+import {
+    clearPostFilters,
+    fetchPostCategories,
+    fetchPosts,
+    updatePostLoading,
+} from '../../../redux/slices/blogSlice';
 
 const posts = [
     {
@@ -82,6 +91,22 @@ const posts = [
 
 const BlogPage = () => {
     console.log('blog page..!');
+
+    // const dispatch = useDispatch();
+    // const { posts, skip } = useSelector((state) => state.blog);
+
+    // useEffect(() => {
+    //     dispatch(updatePostLoading(true));
+    //     dispatch(fetchPostCategories());
+    //     dispatch(fetchPosts());
+    // }, [dispatch, skip]);
+
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(clearPostFilters());
+    //     };
+    // }, [dispatch]);
+
     return (
         <div className='blogPage-wrapper'>
             <PageHero title='Blog' />

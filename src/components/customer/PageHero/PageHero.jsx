@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './PageHero.scss';
 
-function PageHero({ title, product, blog, checkout }) {
+function PageHero({ title, product, blog, checkout, myAccount }) {
     return (
         <div className='page__hero'>
             <h3>{title?.slice(0, 25)}</h3>
@@ -23,6 +23,11 @@ function PageHero({ title, product, blog, checkout }) {
                     <>
                         {' '}
                         &gt; <Link to='/checkout'> Checkout </Link>
+                    </>
+                ) : myAccount ? (
+                    <>
+                        {' '}
+                        &gt; <Link to='/my-account'> My-Account </Link>
                     </>
                 ) : null}{' '}
                 &gt; {title}

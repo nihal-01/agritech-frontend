@@ -9,6 +9,7 @@ import {
     clearFilters,
     fetchProducts,
     updateProductLoading,
+    updateSkip,
 } from '../../../redux/slices/productsSlice';
 import { GridViewLoading, ListViewLoading } from '.';
 
@@ -17,9 +18,8 @@ function ProductList() {
 
     const products = useSelector((state) => state.products.products);
     const dispatch = useDispatch();
-    const { skip, sort, filters, loading, gridView } = useSelector(
-        (state) => state.products
-    );
+    const { skip, sort, filters, loading, gridView, totalProducts, limit } =
+        useSelector((state) => state.products);
 
     useEffect(() => {
         console.log('product fetching...');
@@ -62,7 +62,12 @@ function ProductList() {
         return (
             <>
                 <GridView products={products} />
-                <Pagination />
+                <Pagination
+                    limit={limit}
+                    skip={skip}
+                    totalItems={totalProducts}
+                    updateSkip={updateSkip}
+                />
             </>
         );
     }

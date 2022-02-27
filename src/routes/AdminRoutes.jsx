@@ -57,7 +57,14 @@ const AdminRoutes = () => {
                             </SuperAdminPrivateRoute>
                         }
                     ></Route>
-                    <Route path='/blog' element={<AdminBlogPage />}></Route>
+                    <Route
+                        path='/blog'
+                        element={
+                            <SuperAdminPrivateRoute>
+                                <AdminBlogPage />
+                            </SuperAdminPrivateRoute>
+                        }
+                    ></Route>
                     <Route
                         path='/settings'
                         element={<AdminSettingsPage />}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import {
     AiOutlineUser,
     AiOutlineHome,
@@ -16,9 +16,27 @@ import { useDispatch } from 'react-redux';
 function MyAccountPage() {
     const dispatch = useDispatch();
 
+    const location = useLocation();
+
+    const getTitle = () => {
+        const names = location.pathname.split('/');
+        if (names[3]) {
+            return `Order #${names[3].slice(0, 5)}`;
+        }
+        if (names[2]) {
+            return names[2];
+        }
+        return names[1];
+    };
+
+    const isMyAccountTrue = () => {
+        const names = location.pathname.split('/');
+        return Boolean(names[2]);
+    };
+
     return (
         <div className='myAccountPage-wrapper'>
-            <PageHero title='My account' />
+            <PageHero title={getTitle()} myAccount={isMyAccountTrue()} />
             <BlankSpace />
             <div className='myAccountPage'>
                 <div className='myAccountPage__nav'>

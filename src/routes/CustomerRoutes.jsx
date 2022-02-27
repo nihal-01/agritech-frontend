@@ -15,6 +15,7 @@ import {
     MyAccountDetailsPage,
     MyAccountOrdersPage,
     MyAccountPage,
+    MyAccountSingleOrderPage,
     NotFoundPage,
     OrderRecievedPage,
     PrivateRoute,
@@ -115,6 +116,10 @@ const CustomerRoutes = () => {
                         <Route
                             path='orders'
                             element={<MyAccountOrdersPage />}
+                        />
+                        <Route
+                            path='orders/:id'
+                            element={<MyAccountSingleOrderPage />}
                         />
                         <Route
                             path='address'

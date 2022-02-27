@@ -1,0 +1,40 @@
+.jodit-container {
+    border: 1px solid #4c4f52 !important;
+}
+
+.jodit-toolbar__box,
+.jodit-status-bar {
+    background-color: #24262d !important;
+    color: #9e9e9e !important;
+    border: none !important;
+}
+
+.jodit-ui-group {
+    background-color: #24262d !important;
+    border: none !important;
+}
+
+.jodit-ui-separator {
+    display: none;
+}
+
+.jodit-icon,
+.jodit-toolbar-button__trigger {
+    fill: #9e9e9e !important;
+}
+
+.jodit-toolbar-editor-collection_mode_horizontal:after {
+    background-color: #4c4f52 !important;
+}
+
+.jodit-status-bar__item-right a {
+    display: none;
+}
+
+.jodit-popup__content {
+    background-color: #24262d;
+}
+
+.jodit-toolbar-button__text {
+    color: #9e9e9e !important;
+}

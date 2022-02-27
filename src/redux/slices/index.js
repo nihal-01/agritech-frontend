@@ -5,6 +5,7 @@ import cartReducer from './cartSlice';
 import wishlistReducer from './wishlistSlice';
 import layoutReducer from './layoutSlice';
 import ordersReducer from './ordersSlice';
+import blogReducer from './blogSlice';
 
 export {
     userReducer,
@@ -14,4 +15,5 @@ export {
     wishlistReducer,
     layoutReducer,
     ordersReducer,
+    blogReducer,
 };

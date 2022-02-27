@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import {
+    blogReducer,
     cartReducer,
     categoriesReducer,
     layoutReducer,
@@ -19,6 +20,7 @@ export const store = configureStore({
         wishlist: wishlistReducer,
         layout: layoutReducer,
         orders: ordersReducer,
+        blog: blogReducer,
     },
     devTools: true,
 });

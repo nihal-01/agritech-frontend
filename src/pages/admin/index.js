@@ -11,6 +11,7 @@ import AdminUserOrdersPage from './AdminUserOrdersPage/AdminUserOrdersPage';
 import AdminLoginPage from './AdminLoginPage/AdminLoginPage';
 import SuperAdminPrivateRoute from './AdminPrivateRoute/SuperAdminPrivateRoute';
 import AdminInvoicePage from './AdminInvoicePage/AdminInvoicePage';
+import AdminBlogPage from './AdminBlogPage/AdminBlogPage';
 
 export {
     AdminHomePage,
@@ -26,4 +27,5 @@ export {
     AdminLoginPage,
     SuperAdminPrivateRoute,
     AdminInvoicePage,
+    AdminBlogPage,
 };

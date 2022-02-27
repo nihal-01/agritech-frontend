@@ -43,6 +43,11 @@ const links = [
         icon: <BsCompass />,
     },
     {
+        name: 'Blog',
+        to: '/blog',
+        icon: <BsCompass />,
+    },
+    {
         name: 'Settings',
         to: '/settings',
         icon: <BsGear />,
@@ -93,7 +98,10 @@ function AdminSidebar() {
                     {links
                         .filter((link) => {
                             if (user.role === 'admin') {
-                                return link.name !== 'Customers';
+                                return (
+                                    link.name !== 'Customers' &&
+                                    link.name !== 'Blog'
+                                );
                             } else {
                                 return link;
                             }

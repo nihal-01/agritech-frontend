@@ -8,6 +8,9 @@ const initialState = {
     totalPosts: 0,
     limit: 0,
     loading: true,
+    blogComments: [],
+    recentPosts: [],
+    recentLoading: true,
 };
 
 const fetchPosts = createAsyncThunk(
@@ -25,6 +28,15 @@ const fetchPostCategories = createAsyncThunk(
     async (args, { getState }) => {
         console.log('post categories fetching');
         const response = await axios.get('/post-categories');
+        return response.data;
+    }
+);
+
+const fetchRecentPosts = createAsyncThunk(
+    '/blog/fetchRecentPosts',
+    async (args, { getState }) => {
+        console.log('recent post fetching');
+        const response = await axios.get(`/posts?limit=${5}`);
         return response.data;
     }
 );
@@ -51,6 +63,12 @@ const blogSlice = createSlice({
         updatePostLoading: (state, action) => {
             state.loading = action.payload;
         },
+        setBlogComments: (state, action) => {
+            state.blogComments = action.payload;
+        },
+        updateBlogComments: (state, action) => {
+            state.blogComments.push(action.payload);
+        },
     },
     extraReducers: {
         [fetchPosts.fulfilled]: (state, action) => {
@@ -63,12 +81,22 @@ const blogSlice = createSlice({
         [fetchPostCategories.fulfilled]: (state, action) => {
             state.postCategories = action.payload;
         },
+        [fetchRecentPosts.fulfilled]: (state, action) => {
+            state.recentPosts = action.payload.posts;
+            state.recentLoading = false;
+        },
     },
 });
 
-export { fetchPostCategories, fetchPosts };
+export { fetchPostCategories, fetchPosts, fetchRecentPosts };
 
-export const { updateSkip, deletePost, clearPostFilters, updatePostLoading } =
-    blogSlice.actions;
+export const {
+    updateSkip,
+    deletePost,
+    clearPostFilters,
+    updatePostLoading,
+    setBlogComments,
+    updateBlogComments,
+} = blogSlice.actions;
 
 export default blogSlice.reducer;

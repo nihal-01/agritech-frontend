@@ -110,11 +110,11 @@ function AdminBlogSidebar({ isBlogSidebarOpen, setBlogSidebarOpen }) {
                 };
             });
 
-            if (body.replace(/(<([^>]+)>)/gi, '').length < 100) {
+            if (body.replace(/(<([^>]+)>)/gi, '').length < 200) {
                 setBlogStatus((prev) => {
                     return {
                         ...prev,
-                        error: 'Must contain at least 100 characters..!',
+                        error: 'Must contain at least 200 characters..!',
                         loading: false,
                     };
                 });

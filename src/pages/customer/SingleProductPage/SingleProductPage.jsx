@@ -19,7 +19,6 @@ import { NotFoundPage } from '..';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../../../redux/slices/cartSlice';
 
-
 function SingleProductPage() {
     const [productLoading, setProductLoading] = useState(true);
     const [product, setProduct] = useState({});
@@ -245,6 +244,12 @@ function SingleProductPage() {
                                         <Link to={`/`}>
                                             {product.category?.name ||
                                                 'uncategorized'}
+                                        </Link>
+                                    </p>
+                                    <p className='singleProductPage__content__category'>
+                                        Seller:{' '}
+                                        <Link to={`#`}>
+                                            {product?.user?.fname || 'Admin'}
                                         </Link>
                                     </p>
                                 </div>

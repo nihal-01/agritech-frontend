@@ -237,6 +237,13 @@
 
         &__charts {
             grid-template-columns: repeat(1, 1fr);
+
+            &__item {
+                &__nodata {
+                    position: relative;
+                    text-align: center;
+                }
+            }
         }
     }
 }

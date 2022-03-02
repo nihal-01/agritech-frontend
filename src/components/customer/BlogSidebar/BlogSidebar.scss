@@ -1,3 +1,23 @@
+@mixin loading {
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: translateX(-100%);
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.3),
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
+        animation: loading 1.2s infinite;
+    }
+}
+
 .blogSidebar {
     width: 100%;
 
@@ -49,6 +69,7 @@
                 color: #9999;
                 margin-bottom: 12px;
                 font-size: 17px;
+                text-transform: capitalize;
 
                 ::before {
                     content: '';
@@ -115,6 +136,87 @@
                     span {
                         color: var(--text-light-color);
                         font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__loading {
+        &__categories {
+            margin-bottom: 3em;
+
+            &__title {
+                width: 60%;
+                height: 20px;
+                background-color: #f2f2f2;
+                padding-bottom: 12px;
+                margin-bottom: 1.2em;
+                position: relative;
+                overflow: hidden;
+                @include loading();
+            }
+
+            &__li {
+                margin-bottom: 1em;
+                background-color: #f2f2f2;
+                width: 40%;
+                height: 16px;
+                position: relative;
+                overflow: hidden;
+                @include loading();
+            }
+        }
+
+        &__recent {
+            &__title {
+                width: 60%;
+                height: 20px;
+                background-color: #f2f2f2;
+                padding-bottom: 12px;
+                margin-bottom: 1.2em;
+                position: relative;
+                overflow: hidden;
+                @include loading();
+            }
+
+            &__posts {
+                &__item {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.2em;
+                    margin-bottom: 1.5em;
+
+                    &__img {
+                        min-width: 110px;
+                        min-height: 110px;
+                        background-color: #f2f2f2;
+                        position: relative;
+                        overflow: hidden;
+                        @include loading();
+                    }
+
+                    &__content {
+                        width: 100%;
+
+                        &__h4 {
+                            height: 16px;
+                            width: 80%;
+                            background-color: #f2f2f2;
+                            position: relative;
+                            overflow: hidden;
+                            @include loading();
+                        }
+
+                        &__date {
+                            height: 14px;
+                            width: 50%;
+                            background-color: #f2f2f2;
+                            margin-top: 10px;
+                            position: relative;
+                            overflow: hidden;
+                            @include loading();
+                        }
                     }
                 }
             }

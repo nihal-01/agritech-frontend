@@ -11,111 +11,65 @@ import {
 } from '../../../components/customer';
 import {
     clearPostFilters,
-    fetchPostCategories,
     fetchPosts,
     updatePostLoading,
+    updateSkip,
 } from '../../../redux/slices/blogSlice';
-
-const posts = [
-    {
-        _id: '003',
-        title: 'Benefits of Sushi: Is Raw Fish Safe to Eat?',
-        description:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
-        thumbnail:
-            'https://demo2.pavothemes.com/freshio/wp-content/uploads/2019/12/blog-1-410x250.jpg',
-        category: 'Countryside',
-        createdAt: '2022-02-07T15:28:26.301Z',
-    },
-    {
-        _id: '004',
-        title: 'Benefits of Sushi: Is Raw Fish Safe to Eat?',
-        description:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
-        thumbnail:
-            'https://pediasure.com.ph/Static/websites/pediasure-com-ph/img/WMG-results-boy.png',
-        category: 'Countryside',
-        createdAt: '2022-02-07T15:28:26.301Z',
-    },
-    {
-        _id: '005',
-        title: 'Benefits of Sushi: Is Raw Fish Safe to Eat?',
-        description:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
-        thumbnail:
-            'https://demo2.wpopal.com/ecolive/wp-content/uploads/2021/10/blog-22-1024x683.jpg',
-        category: 'Countryside',
-        createdAt: '2022-02-07T15:28:26.301Z',
-    },
-    {
-        _id: '006',
-        title: 'Benefits of Sushi: Is Raw Fish Safe to Eat?',
-        description:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
-        thumbnail:
-            'https://demo2.wpopal.com/ecolive/wp-content/uploads/2021/10/blog-22-1024x683.jpg',
-        category: 'Countryside',
-        createdAt: '2022-02-07T15:28:26.301Z',
-    },
-    {
-        _id: '007',
-        title: 'Benefits of Sushi: Is Raw Fish Safe to Eat?',
-        description:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
-        thumbnail:
-            'https://demo2.wpopal.com/ecolive/wp-content/uploads/2021/10/blog-22-1024x683.jpg',
-        category: 'Countryside',
-        createdAt: '2022-02-07T15:28:26.301Z',
-    },
-    {
-        _id: '008',
-        title: 'Benefits of Sushi: Is Raw Fish Safe to Eat?',
-        description:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
-        thumbnail:
-            'https://demo2.wpopal.com/ecolive/wp-content/uploads/2021/10/blog-22-1024x683.jpg',
-        category: 'Countryside',
-        createdAt: '2022-02-07T15:28:26.301Z',
-    },
-    {
-        _id: '009',
-        title: 'Benefits of Sushi: Is Raw Fish Safe to Eat?',
-        description:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat…',
-        thumbnail:
-            'https://demo2.wpopal.com/ecolive/wp-content/uploads/2021/10/blog-22-1024x683.jpg',
-        category: 'Countryside',
-        createdAt: '2022-02-07T15:28:26.301Z',
-    },
-];
 
 const BlogPage = () => {
     console.log('blog page..!');
 
-    // const dispatch = useDispatch();
-    // const { posts, skip } = useSelector((state) => state.blog);
+    const dispatch = useDispatch();
+    const { skip, limit, totalPosts, loading } = useSelector(
+        (state) => state.blog
+    );
 
-    // useEffect(() => {
-    //     dispatch(updatePostLoading(true));
-    //     dispatch(fetchPostCategories());
-    //     dispatch(fetchPosts());
-    // }, [dispatch, skip]);
+    useEffect(() => {
+        dispatch(updatePostLoading(true));
+        dispatch(fetchPosts());
+    }, [dispatch, skip]);
 
-    // useEffect(() => {
-    //     return () => {
-    //         dispatch(clearPostFilters());
-    //     };
-    // }, [dispatch]);
+    useEffect(() => {
+        return () => {
+            dispatch(clearPostFilters());
+        };
+    }, [dispatch]);
 
     return (
         <div className='blogPage-wrapper'>
             <PageHero title='Blog' />
             <BlankSpace />
             <div className='blogPage'>
-                <div className='blogPage__main'>
-                    <BlogGrid posts={posts} />
-                    <Pagination />
-                </div>
+                {loading ? (
+                    <div className='blogPage__main__loading'>
+                        {Array.from({ length: 12 }).map((_, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className='blogPage__main__loading__item'
+                                >
+                                    <div className='blogPage__main__loading__item__image'></div>
+                                    <div className='blogPage__main__loading__item__meta'></div>
+                                    <div className='blogPage__main__loading__item__title'></div>
+                                    <div className='blogPage__main__loading__item__desc'></div>
+                                    <div className='blogPage__main__loading__item__desc'></div>
+                                    <div className='blogPage__main__loading__item__desc blogPage__main__loading__item__last-desc'></div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <div className='blogPage__main'>
+                        <BlogGrid />
+                        <Pagination
+                            limit={limit}
+                            skip={skip}
+                            totalItems={totalPosts}
+                            updateSkip={updateSkip}
+                        />
+                    </div>
+                )}
+
                 <BlogSidebar />
             </div>
             <BlankSpace />

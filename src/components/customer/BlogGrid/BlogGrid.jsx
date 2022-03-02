@@ -3,19 +3,18 @@ import { AiOutlineCalendar, AiOutlineComment } from 'react-icons/ai';
 
 import './BlogGrid.scss';
 import { monthNames } from '../../../utils/constants';
+import { useSelector } from 'react-redux';
 
-const BlogGrid = ({ posts }) => {
+const BlogGrid = () => {
+    const { posts } = useSelector((state) => state.blog);
+
+    console.log(posts);
+
     return (
         <div className='blogGrid'>
             {posts.map((post) => {
-                const {
-                    _id,
-                    title,
-                    thumbnail,
-                    description,
-                    createdAt,
-                    category,
-                } = post;
+                const { _id, title, thumbnail, createdAt, category, body } =
+                    post;
 
                 const myDate = new Date(createdAt);
 
@@ -29,7 +28,7 @@ const BlogGrid = ({ posts }) => {
                                 to={`/blog/categories/${category}`}
                                 className='blogGrid__item__category'
                             >
-                                {category}
+                                {category?.name || 'Uncategorized'}
                             </Link>
                         </div>
                         <div className='blogGrid__item__meta'>
@@ -51,7 +50,9 @@ const BlogGrid = ({ posts }) => {
                         <h3 className='blogGrid__item__title'>
                             <Link to={`/blog/${_id}`}>{title}</Link>
                         </h3>
-                        <p className='blogGrid__item__desc'>{description}</p>
+                        <p className='blogGrid__item__desc'>
+                            {body} ...
+                        </p>
                     </div>
                 );
             })}

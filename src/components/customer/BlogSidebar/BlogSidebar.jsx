@@ -1,13 +1,26 @@
 import React, { useEffect } from 'react';
 import { BsSearch } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+    fetchPostCategories,
+    fetchRecentPosts,
+} from '../../../redux/slices/blogSlice';
 
 import './BlogSidebar.scss';
+import RecentPost from './RecentPost';
 
 function BlogSidebar() {
+    const { recentPosts, postCategories, recentLoading } = useSelector(
+        (state) => state.blog
+    );
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        console.log('blog sidebar');
-    }, []);
+        console.log('fetching blog sidebar...');
+        dispatch(fetchPostCategories());
+        dispatch(fetchRecentPosts());
+    }, [dispatch]);
 
     return (
         <div className='blogSidebar'>
@@ -18,66 +31,86 @@ function BlogSidebar() {
                 <input type='text' placeholder='Search...' />
                 <button>Search</button>
             </form>
-            <div className='blogSidebar__categories'>
-                <h2>Blog Categories</h2>
-                <ul>
-                    <li>
-                        <Link to='/'>Home</Link>
-                    </li>
-                    <li>
-                        <Link to='/'>Home</Link>
-                    </li>
-                </ul>
-            </div>
-            <div className='blogSidebar__posts'>
-                <h2>Recent Posts</h2>
-                <div className='blogSidebar__posts__wrapper'>
-                    <div className='blogSidebar__posts__wrapper__single'>
-                        <div className='blogSidebar__posts__wrapper__single__image'>
-                            <Link to='/'>
-                                <img
-                                    src='https://demo2.pavothemes.com/freshio/wp-content/uploads/2019/12/blog-1-150x150.jpg'
-                                    alt=''
-                                />
-                            </Link>
-                        </div>
-                        <div className='blogSidebar__posts__wrapper__single__content'>
-                            <Link to='/'>
-                                <h4>My blog title</h4>
-                            </Link>
-                            <span>February 29, 2001</span>
+            {recentLoading ? (
+                <div className='blogSidebar__loading'>
+                    <div className='blogSidebar__loading__categories'>
+                        <div className='blogSidebar__loading__categories__title'></div>
+                        <div className='blogSidebar__loading__categories__ul'>
+                            <div className='blogSidebar__loading__categories__li'></div>
+                            <div className='blogSidebar__loading__categories__li'></div>
+                            <div className='blogSidebar__loading__categories__li'></div>
+                            <div className='blogSidebar__loading__categories__li'></div>
+                            <div className='blogSidebar__loading__categories__li'></div>
                         </div>
                     </div>
-                    <div className='blogSidebar__posts__wrapper__single'>
-                        <div className='blogSidebar__posts__wrapper__single__image'>
-                            <img
-                                src='https://demo2.pavothemes.com/freshio/wp-content/uploads/2019/12/blog-1-150x150.jpg'
-                                alt=''
-                            />
-                        </div>
-                        <div className='blogSidebar__posts__wrapper__single__content'>
-                            <Link to='/'>
-                                <h4>My blog title</h4>
-                            </Link>
-                            <span>February 29, 2001</span>
-                        </div>
-                    </div>
-                    <div className='blogSidebar__posts__wrapper__single'>
-                        <div className='blogSidebar__posts__wrapper__single__image'>
-                            <img
-                                src='https://demo2.pavothemes.com/freshio/wp-content/uploads/2019/12/blog-1-150x150.jpg'
-                                alt=''
-                            />
-                        </div>
-                        <div className='blogSidebar__posts__wrapper__single__content'>
-                            <Link to='/'>
-                                <h4>My blog title</h4>
-                            </Link>
-                            <span>February 29, 2001</span>
+
+                    <div className='blogSidebar__loading__recent'>
+                        <div className='blogSidebar__loading__recent__title'></div>
+                        <div className='blogSidebar__loading__recent__posts'>
+                            <div className='blogSidebar__loading__recent__posts__item'>
+                                <div className='blogSidebar__loading__recent__posts__item__img'></div>
+                                <div className='blogSidebar__loading__recent__posts__item__content'>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__h4'></div>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__date'></div>
+                                </div>
+                            </div>
+                            <div className='blogSidebar__loading__recent__posts__item'>
+                                <div className='blogSidebar__loading__recent__posts__item__img'></div>
+                                <div className='blogSidebar__loading__recent__posts__item__content'>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__h4'></div>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__date'></div>
+                                </div>
+                            </div>
+                            <div className='blogSidebar__loading__recent__posts__item'>
+                                <div className='blogSidebar__loading__recent__posts__item__img'></div>
+                                <div className='blogSidebar__loading__recent__posts__item__content'>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__h4'></div>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__date'></div>
+                                </div>
+                            </div>
+                            <div className='blogSidebar__loading__recent__posts__item'>
+                                <div className='blogSidebar__loading__recent__posts__item__img'></div>
+                                <div className='blogSidebar__loading__recent__posts__item__content'>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__h4'></div>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__date'></div>
+                                </div>
+                            </div>
+                            <div className='blogSidebar__loading__recent__posts__item'>
+                                <div className='blogSidebar__loading__recent__posts__item__img'></div>
+                                <div className='blogSidebar__loading__recent__posts__item__content'>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__h4'></div>
+                                    <div className='blogSidebar__loading__recent__posts__item__content__date'></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <>
+                    <div className='blogSidebar__categories'>
+                        <h2>Blog Categories</h2>
+                        <ul>
+                            {postCategories.map((category) => {
+                                return (
+                                    <li key={category._id}>
+                                        <Link to='/'>{category.name}</Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                    <div className='blogSidebar__posts'>
+                        <h2>Recent Posts</h2>
+                        <div className='blogSidebar__posts__wrapper'>
+                            {recentPosts.map((post) => {
+                                return (
+                                    <RecentPost key={post._id} post={post} />
+                                );
+                            })}
+                        </div>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

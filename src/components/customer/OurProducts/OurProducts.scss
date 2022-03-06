@@ -1,0 +1,184 @@
+@mixin loading {
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: translateX(-100%);
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.3),
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
+        animation: loading 1.2s infinite;
+    }
+}
+
+.ourProducts {
+    max-width: 1650px;
+    padding: 0px 30px;
+    margin: 0 auto;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__title {
+            color: var(--primary-color);
+            font-family: var(--title-font-family);
+            font-size: 28px;
+        }
+
+        &__categories {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 1em;
+
+            &__item {
+                cursor: pointer;
+                color: var(--text-light-color);
+                font-weight: 500;
+                border-radius: 4px;
+                padding: 5px 10px;
+                font-size: 14px;
+                transition: 0.5s;
+
+                &:hover {
+                    background-color: #fdf3d9;
+                    color: var(--primary-color);
+                }
+
+                &__active {
+                    background-color: #fdf3d9;
+                    color: var(--primary-color);
+                }
+            }
+        }
+    }
+
+    &__loading {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2em;
+        margin-top: 2.5em;
+
+        &__item {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1em;
+
+            &__img {
+                background-color: #f2f2f2;
+                width: 100%;
+                aspect-ratio: 1 / 0.85;
+                overflow: hidden;
+                position: relative;
+                @include loading();
+            }
+
+            &__name,
+            &__price {
+                background-color: #f2f2f2;
+                width: 80%;
+                height: 20px;
+                overflow: hidden;
+                position: relative;
+                @include loading();
+            }
+
+            &__price {
+                width: 60%;
+            }
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .ourProducts {
+        &__loading {
+            grid-template-columns: repeat(3, 1fr) !important;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .ourProducts {
+        &__header {
+            display: block;
+            text-align: center;
+
+            &__title {
+                color: var(--primary-color);
+                font-family: var(--title-font-family);
+                font-size: 28px;
+            }
+
+            &__categories {
+                justify-content: center;
+                margin-top: 1em;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .ourProducts {
+        padding: 0px 20px;
+
+        &__header {
+            display: block;
+            text-align: center;
+
+            &__title {
+                font-size: 22px;
+            }
+
+            &__categories {
+                margin-top: 1em;
+                list-style: none;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5em;
+
+                &__item {
+                    padding: 4px 10px;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        &__loading {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 1.5em;
+
+            &__item {
+                text-align: center;
+                margin-bottom: 30px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.9em;
+
+                &__name,
+                &__price {
+                    height: 15px;
+                }
+
+                &__price {
+                    width: 60%;
+                }
+            }
+        }
+    }
+}

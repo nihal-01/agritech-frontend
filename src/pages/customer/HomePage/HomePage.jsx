@@ -1,5 +1,6 @@
 import React from 'react';
 import { BlankSpace, Hero } from '../../../components/customer';
+import OurProducts from '../../../components/customer/OurProducts/OurProducts';
 
 function HomePage() {
     return (
@@ -7,12 +8,7 @@ function HomePage() {
             <Hero />
             <BlankSpace />
             <div className='homePage'>
-                <div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <OurProducts />
             </div>
         </div>
     );

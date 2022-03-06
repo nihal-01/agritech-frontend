@@ -23,11 +23,11 @@ const fetchProducts = createAsyncThunk(
     '/products/fetchProducts',
     async (args, { getState }) => {
         console.log('product request');
-        const { skip, sort, filters, search } = getState().products;
+        const { skip, sort, filters, search, limit } = getState().products;
         const response = await axios.get(
             `/products?skip=${skip}&sort=${sort}&category=${
                 filters.category
-            }&search=${search}&creator=${args?.creator || ''}`
+            }&search=${search}&creator=${args?.creator || ''}&limit=${limit}`
         );
         return response.data;
     }
@@ -41,6 +41,7 @@ export const productsSlice = createSlice({
             state.loading = true;
             state.products = [];
             state.skip = 0;
+            state.limit = 12;
             state.filters.category = 'all';
             state.filters.price = 0;
             state.sort = 'default';
@@ -84,6 +85,9 @@ export const productsSlice = createSlice({
         updateGridView: (state, action) => {
             state.gridView = action.payload;
         },
+        updateLimit: (state, action) => {
+            state.limit = action.payload;
+        },
     },
     extraReducers: {
         [fetchProducts.fulfilled]: (state, action) => {
@@ -110,6 +114,7 @@ export const {
     updateCreator,
     updateIsProductSidebarOpen,
     updateGridView,
+    updateLimit,
 } = productsSlice.actions;
 
 export { fetchProducts };

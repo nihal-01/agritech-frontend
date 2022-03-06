@@ -15,12 +15,13 @@ import {
     updatePostLoading,
     updateSkip,
 } from '../../../redux/slices/blogSlice';
+import { Link } from 'react-router-dom';
 
 const BlogPage = () => {
     console.log('blog page..!');
 
     const dispatch = useDispatch();
-    const { skip, limit, totalPosts, loading } = useSelector(
+    const { skip, limit, totalPosts, loading, posts } = useSelector(
         (state) => state.blog
     );
 
@@ -58,7 +59,14 @@ const BlogPage = () => {
                             );
                         })}
                     </div>
-                ) : (
+                ) : posts.length < 1 ? (
+                    <div className='blogPage__noPosts'>
+                        <h3>Sorry, No posts found..!</h3>
+                        <Link to='/blog'>
+                            <button>See all posts</button>
+                        </Link>
+                    </div>
+                ) :  (
                     <div className='blogPage__main'>
                         <BlogGrid />
                         <Pagination

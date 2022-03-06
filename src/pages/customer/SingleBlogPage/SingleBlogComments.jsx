@@ -95,7 +95,7 @@ function SingleBlogComments({ id }) {
                                 Something went wrong, try again
                             </p>
                         )}
-                        <button type='submit'>
+                        <button type='submit' disabled={loading}>
                             {loading ? <BtnLoading /> : 'Post Comment'}
                         </button>
                     </form>

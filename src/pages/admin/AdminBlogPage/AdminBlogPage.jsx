@@ -7,6 +7,7 @@ import {
     clearPostFilters,
     fetchPostCategories,
     fetchPosts,
+    updateBlogSearch,
     updatePostLoading,
     updateSkip,
 } from '../../../redux/slices/blogSlice';
@@ -17,8 +18,9 @@ import AdminBlogSingleRow from './AdminBlogSingleRow';
 function AdminBlogPage() {
     const [isBlogSidebarOpen, setBlogSidebarOpen] = useState(false);
     const [pageNumbers, setPageNumbers] = useState([]);
+    const [searchTxt, setSearchTxt] = useState('');
 
-    const { postCategories, posts, skip, limit, totalPosts, loading } =
+    const { postCategories, posts, skip, limit, totalPosts, loading, search } =
         useSelector((state) => state.blog);
     const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ function AdminBlogPage() {
         dispatch(updatePostLoading(true));
         dispatch(fetchPostCategories());
         dispatch(fetchPosts());
-    }, [dispatch, skip]);
+    }, [dispatch, skip, search]);
 
     useEffect(() => {
         return () => {
@@ -52,14 +54,22 @@ function AdminBlogPage() {
                 setBlogSidebarOpen={setBlogSidebarOpen}
             />
             <div className='adminBlog__options'>
-                <div className='adminBlog__options__search'>
+                <form
+                    className='adminBlog__options__search'
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        dispatch(updateBlogSearch(searchTxt));
+                    }}
+                >
                     <input
                         type='text'
                         placeholder='Search blogs by name'
                         name='search'
-                        disabled
+                        onChange={(e) => {
+                            setSearchTxt(e.target.value);
+                        }}
                     />
-                </div>
+                </form>
                 <div className='adminBlog__options__button'>
                     <button
                         onClick={() => {

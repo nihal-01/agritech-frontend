@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from '../../../axios';
+import { addItemToCart } from '../../../redux/slices/cartSlice';
+import BtnLoading from '../BtnLoading/BtnLoading';
+import Stars from '../Stars/Stars';
 import {
     AiOutlineShoppingCart,
     AiOutlineHeart,
     AiOutlineEye,
     AiFillHeart,
 } from 'react-icons/ai';
-import { HiOutlineChevronDoubleRight } from 'react-icons/hi';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { Stars } from '..';
-import axios from '../../../axios';
-import { addItemToCart } from '../../../redux/slices/cartSlice';
-import BtnLoading from '../BtnLoading/BtnLoading';
 import {
     addToWishlist,
     deleteWishlist,
@@ -30,14 +28,14 @@ const isLoved = (id) => {
     return false;
 };
 
-const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
+function ListViewItem({ _id, name, avgStars, thumbnail, price, stock }) {
     const [addToCartLoading, setAddToCartLoading] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
     const [loved, setLoved] = useState(isLoved(_id));
 
     const { isLoggedIn, token } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const addToCart = async (product) => {
         try {
@@ -61,12 +59,12 @@ const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
     };
 
     return (
-        <div className='gridView__item'>
-            <div className='gridView__item__image__wrapper'>
+        <div className='listView__item'>
+            <div className='listView__item__imgWrapper'>
+                {!imgLoaded && (
+                    <div className='listView__item__imgWrapper__loading'></div>
+                )}
                 <Link to={`/products/${_id}`}>
-                    {!imgLoaded && (
-                        <div className='gridView__item__image__wrapper__loading'></div>
-                    )}
                     <img
                         src={thumbnail}
                         alt=''
@@ -75,12 +73,13 @@ const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
                         }}
                         className={
                             !imgLoaded
-                                ? 'gridView__item__image__wrapper__img gridView__item__image__wrapper__img__hidden'
-                                : 'gridView__item__image__wrapper__img'
+                                ? 'listView__item__imgWrapper__img listView__item__imgWrapper__img__hidden'
+                                : 'listView__item__imgWrapper__img'
                         }
                     />
                 </Link>
-                <div className='gridView__item__buttons'>
+
+                <div className='listView__item__imgWrapper__buttons'>
                     <button
                         onClick={() => {
                             if (loved) {
@@ -119,49 +118,49 @@ const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
                         <AiOutlineEye />
                     </button>
                 </div>
-                {stock < 1 && (
-                    <div className='gridView__item__outOfStock'>
-                        Out of stock
-                    </div>
+            </div>
+            <div className='listView__item__content'>
+                <h3 className='listView__item__content__name'>
+                    <Link to={`/products/${_id}`}>{name}</Link>
+                </h3>
+                <div className='listView__item__content__stars'>
+                    <Stars stars={avgStars} />
+                </div>
+                <p className='listView__item__content__price'>
+                    &#8377; {price}
+                </p>
+                <p className='listView__item__content__desc'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Harum modi natus doloribus molestias quaerat, expedita eum
+                    beatae voluptates commodi aliquam qui, tempore quia pariatur
+                    repellendus quasi, nam fugit a inventore?
+                    {/* slice(0, 210) */}
+                </p>
+                <hr className='listView__item__content__hr' />
+                {stock > 0 ? (
+                    <button
+                        className='listView__item__content__cartBtn'
+                        onClick={() => {
+                            addToCart({ _id, name, thumbnail, price });
+                        }}
+                        disabled={addToCartLoading}
+                    >
+                        {addToCartLoading ? (
+                            <BtnLoading height='20px' width='20px' />
+                        ) : (
+                            'ADD TO CART'
+                        )}
+                    </button>
+                ) : (
+                    <Link to={`/products/${_id}`}>
+                        <button className='listView__item__content__cartBtn'>
+                            View product
+                        </button>
+                    </Link>
                 )}
             </div>
-            <div className='gridView__item__stars'>
-                <Stars stars={avgStars} />
-            </div>
-            <h3 className='gridView__item__name'>
-                <Link to={`/products/${_id}`}>{name}</Link>
-            </h3>
-            <p className='gridView__item__price'>&#8377; {price}</p>
-            <hr className='gridView__item__line' />
-            {stock > 0 ? (
-                <button
-                    className='gridView__item__addToCart'
-                    onClick={() => {
-                        addToCart({ _id, name, thumbnail, price });
-                    }}
-                    disabled={addToCartLoading}
-                >
-                    {addToCartLoading ? (
-                        <BtnLoading height='20px' width='20px' />
-                    ) : (
-                        'ADD TO CART'
-                    )}
-                    {!addToCartLoading && (
-                        <span>
-                            <HiOutlineChevronDoubleRight />
-                        </span>
-                    )}
-                </button>
-            ) : (
-                <Link
-                    to={`/products/${_id}`}
-                    className='gridView__item__viewCart'
-                >
-                    View Product
-                </Link>
-            )}
         </div>
     );
-};
+}
 
-export default GridViewItem;
+export default ListViewItem;

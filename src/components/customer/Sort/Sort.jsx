@@ -5,7 +5,10 @@ import { BsListUl } from 'react-icons/bs';
 
 import './Sort.scss';
 import { useDispatch } from 'react-redux';
-import { updateSort } from '../../../redux/slices/productsSlice';
+import {
+    updateGridView,
+    updateSort,
+} from '../../../redux/slices/productsSlice';
 import { useSelector } from 'react-redux';
 import { updateFilterSidebar } from '../../../redux/slices/layoutSlice';
 
@@ -32,10 +35,20 @@ function Sort() {
                     )}
                 </div>
                 <div className='sort__right'>
-                    <button className='sort__right__icon'>
+                    <button
+                        className='sort__right__icon'
+                        onClick={() => {
+                            dispatch(updateGridView(true));
+                        }}
+                    >
                         <HiOutlineViewGrid />
                     </button>
-                    <button className='sort__right__icon'>
+                    <button
+                        className='sort__right__icon'
+                        onClick={() => {
+                            dispatch(updateGridView(false));
+                        }}
+                    >
                         <BsListUl />
                     </button>
                     <select

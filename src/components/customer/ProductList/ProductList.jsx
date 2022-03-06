@@ -72,7 +72,17 @@ function ProductList() {
         );
     }
 
-    return <ListView />;
+    return (
+        <>
+            <ListView products={products} />
+            <Pagination
+                limit={limit}
+                skip={skip}
+                totalItems={totalProducts}
+                updateSkip={updateSkip}
+            />
+        </>
+    );
 }
 
 export default ProductList;

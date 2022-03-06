@@ -11,14 +11,18 @@ const initialState = {
     blogComments: [],
     recentPosts: [],
     recentLoading: true,
+    search: '',
+    category: '',
 };
 
 const fetchPosts = createAsyncThunk(
     '/blog/fetchPosts',
     async (args, { getState }) => {
         console.log('posts fetching');
-        const { skip } = getState().blog;
-        const response = await axios.get(`/posts?skip=${skip}`);
+        const { skip, search, category } = getState().blog;
+        const response = await axios.get(
+            `/posts?skip=${skip}&search=${search}&category=${category}`
+        );
         return response.data;
     }
 );
@@ -59,6 +63,8 @@ const blogSlice = createSlice({
             state.posts = [];
             state.totalPosts = 0;
             state.skip = 0;
+            state.search = '';
+            state.category = '';
         },
         updatePostLoading: (state, action) => {
             state.loading = action.payload;
@@ -68,6 +74,12 @@ const blogSlice = createSlice({
         },
         updateBlogComments: (state, action) => {
             state.blogComments.push(action.payload);
+        },
+        updateBlogSearch: (state, action) => {
+            state.search = action.payload;
+        },
+        updateBlogCategory: (state, action) => {
+            state.category = action.payload;
         },
     },
     extraReducers: {
@@ -97,6 +109,8 @@ export const {
     updatePostLoading,
     setBlogComments,
     updateBlogComments,
+    updateBlogSearch,
+    updateBlogCategory,
 } = blogSlice.actions;
 
 export default blogSlice.reducer;

@@ -31,7 +31,9 @@ function Header() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        navigate(`/products/search/${searchKeyword}`);
+        if (searchKeyword) {
+            navigate(`/products/search/${searchKeyword}`);
+        }
     };
 
     useEffect(() => {

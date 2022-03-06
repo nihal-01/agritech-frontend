@@ -5,6 +5,7 @@ import { Header, Footer, BottomNav } from '../components/customer';
 import {
     AboutPage,
     BlogPage,
+    BlogSearchPage,
     CartPage,
     CheckoutPage,
     ContactPage,
@@ -103,6 +104,14 @@ const CustomerRoutes = () => {
                     <Route path='/about' element={<AboutPage />} />
                     <Route path='/contact' element={<ContactPage />} />
                     <Route path='/blog' element={<BlogPage />} />
+                    <Route
+                        path='/blog/category/:category'
+                        element={<BlogSearchPage />}
+                    />
+                    <Route
+                        path='/blog/search/:search'
+                        element={<BlogSearchPage />}
+                    />
                     <Route path='/blog/:id' element={<SingleBlogPage />} />
                     <Route
                         path='/my-account'

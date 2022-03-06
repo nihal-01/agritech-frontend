@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     fetchPostCategories,
     fetchRecentPosts,
@@ -11,10 +11,13 @@ import './BlogSidebar.scss';
 import RecentPost from './RecentPost';
 
 function BlogSidebar() {
+    const [searchTxt, setSearchTxt] = useState('');
+
     const { recentPosts, postCategories, recentLoading } = useSelector(
         (state) => state.blog
     );
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log('fetching blog sidebar...');
@@ -24,12 +27,26 @@ function BlogSidebar() {
 
     return (
         <div className='blogSidebar'>
-            <form className='blogSidebar__search'>
+            <form
+                className='blogSidebar__search'
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    if (searchTxt) {
+                        navigate(`/blog/search/${searchTxt}`);
+                    }
+                }}
+            >
                 <span>
                     <BsSearch />
                 </span>
-                <input type='text' placeholder='Search...' />
-                <button>Search</button>
+                <input
+                    type='text'
+                    placeholder='Search...'
+                    onChange={(e) => {
+                        setSearchTxt(e.target.value);
+                    }}
+                />
+                <button type='submit'>Search</button>
             </form>
             {recentLoading ? (
                 <div className='blogSidebar__loading'>
@@ -93,7 +110,11 @@ function BlogSidebar() {
                             {postCategories.map((category) => {
                                 return (
                                     <li key={category._id}>
-                                        <Link to='/'>{category.name}</Link>
+                                        <Link
+                                            to={`/blog/category/${category.name}`}
+                                        >
+                                            {category.name}
+                                        </Link>
                                     </li>
                                 );
                             })}

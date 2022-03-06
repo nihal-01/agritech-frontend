@@ -103,24 +103,26 @@ function Footer() {
                                     <Link to='/cart'>Shopping Cart</Link>
                                 </li>
                                 <li>
-                                    <Link to='/shop'>Shop</Link>
+                                    <Link to='/products'>Shop</Link>
                                 </li>
                             </ul>
                         </div>
                         <div className='footer__middle__categories'>
                             <h2>CATEGORIES</h2>
                             <ul className='footer__middle__categories__list'>
-                                {categories.map((category, index) => {
-                                    return (
-                                        <li key={index}>
-                                            <Link
-                                                to={`/products/category/${category.name}`}
-                                            >
-                                                {category.name}
-                                            </Link>
-                                        </li>
-                                    );
-                                })}
+                                {categories
+                                    .slice(0, 4)
+                                    .map((category, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <Link
+                                                    to={`/products/category/${category.name}`}
+                                                >
+                                                    {category.name}
+                                                </Link>
+                                            </li>
+                                        );
+                                    })}
                             </ul>
                         </div>
                         <div className='footer__middle__subscribe'>

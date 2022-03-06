@@ -81,6 +81,9 @@ export const productsSlice = createSlice({
         updateIsProductSidebarOpen: (state, action) => {
             state.isProductSidebarOpen = action.payload;
         },
+        updateGridView: (state, action) => {
+            state.gridView = action.payload;
+        },
     },
     extraReducers: {
         [fetchProducts.fulfilled]: (state, action) => {
@@ -106,6 +109,7 @@ export const {
     updateProductLoading,
     updateCreator,
     updateIsProductSidebarOpen,
+    updateGridView,
 } = productsSlice.actions;
 
 export { fetchProducts };

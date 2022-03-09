@@ -58,7 +58,7 @@ const SidebarCartSingle = ({ item, setIsSidebarOpen }) => {
                     {name}
                 </Link>
                 <p>
-                    {quantity} x <span>&#8377;{price}</span>
+                    {quantity} x <span>&#8377; {price}</span>
                 </p>
             </div>
             <button

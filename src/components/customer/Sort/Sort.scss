@@ -68,13 +68,23 @@
 
         &__icon {
             background-color: transparent;
-            margin-right: 1em;
+            margin-right: 0.8em;
             color: var(--text-dark-color);
             font-weight: 600;
             font-size: 21px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
 
             &:hover {
                 color: var(--primary-hover-color);
+            }
+
+            &__active {
+                background-color: #fdf3d9;
+                color: var(--primary-color);
+                border-radius: 4px;
             }
         }
 

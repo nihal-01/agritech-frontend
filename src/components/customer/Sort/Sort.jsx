@@ -14,7 +14,9 @@ import { updateFilterSidebar } from '../../../redux/slices/layoutSlice';
 
 function Sort() {
     const dispatch = useDispatch();
-    const { loading, totalProducts } = useSelector((state) => state.products);
+    const { loading, totalProducts, gridView } = useSelector(
+        (state) => state.products
+    );
 
     return (
         <div className='sort__wrapper'>
@@ -36,7 +38,11 @@ function Sort() {
                 </div>
                 <div className='sort__right'>
                     <button
-                        className='sort__right__icon'
+                        className={
+                            gridView
+                                ? 'sort__right__icon sort__right__icon__active'
+                                : 'sort__right__icon'
+                        }
                         onClick={() => {
                             dispatch(updateGridView(true));
                         }}
@@ -44,7 +50,11 @@ function Sort() {
                         <HiOutlineViewGrid />
                     </button>
                     <button
-                        className='sort__right__icon'
+                        className={
+                            !gridView
+                                ? 'sort__right__icon sort__right__icon__active'
+                                : 'sort__right__icon'
+                        }
                         onClick={() => {
                             dispatch(updateGridView(false));
                         }}

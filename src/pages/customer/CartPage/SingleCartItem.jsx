@@ -102,7 +102,7 @@ const SingleCartItem = ({ item, clearCartLoading }) => {
                 )}
                 {name}
                 <button
-                    className='CartPage__table__closeBtn'
+                    className='CartPage__table__closeBtn CartPage__table__closeBtn__mobile'
                     onClick={() => {
                         handleRemove();
                     }}

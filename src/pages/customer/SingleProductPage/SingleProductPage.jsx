@@ -166,7 +166,7 @@ function SingleProductPage() {
                                         </p>
                                     </div>
                                     <h3 className='singleProductPage__content__price'>
-                                        &#8377;{product.price}
+                                        &#8377; {product.price}
                                     </h3>
                                     <p className='singleProductPage__content__desc'>
                                         {product.shortDescription}
@@ -262,8 +262,6 @@ function SingleProductPage() {
                             />
                         )}
                         <BlankSpace />
-                        {/* <GridView products={items} count={5} />
-                        <BlankSpace /> */}
                     </div>
                 </>
             )}

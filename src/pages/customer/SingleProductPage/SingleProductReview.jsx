@@ -231,6 +231,7 @@ const Review = () => {
                         setReview(e.target.value);
                     }}
                     required
+                    value={review || ''}
                 ></textarea>
                 <div className='singleProductReview__reviews__form__user'>
                     <div className='singleProductReview__reviews__form__user__name'>

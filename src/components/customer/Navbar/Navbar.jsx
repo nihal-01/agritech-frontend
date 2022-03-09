@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaShippingFast } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
-// import { HiOutlineViewGrid } from 'react-icons/hi';
+import { HiOutlineViewGrid } from 'react-icons/hi';
 import { NavLink } from 'react-router-dom';
 
 import './Navbar.scss';
@@ -12,7 +12,7 @@ function Navbar() {
     return (
         <nav className='navbar'>
             <div className='navbar__wrapper'>
-                {/*<div className='navbar__categories'>
+                <div className='navbar__categories'>
                     <i>
                         <HiOutlineViewGrid />
                     </i>{' '}
@@ -20,7 +20,7 @@ function Navbar() {
                     <span>
                         <FiChevronDown />
                     </span>
-                </div> */}
+                </div>
                 <ul className='menu'>
                     {navLinks.map((link, index) => {
                         return (
@@ -32,6 +32,10 @@ function Navbar() {
                                             isActive &&
                                             link.to !== '#' &&
                                             '#347758',
+                                        fontWeight:
+                                            isActive &&
+                                            link.to !== '#' &&
+                                            '500',
                                     })}
                                 >
                                     {link.name}{' '}

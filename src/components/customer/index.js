@@ -22,6 +22,7 @@ import BlogSidebar from './BlogSidebar/BlogSidebar';
 import BottomNav from './BottomNav/BottomNav';
 import AddressForm from './AddressForm/AddressForm';
 import PlaceOrder from './PlaceOrder/PlaceOrder';
+import ProductCard from './ProductCard/ProductCard';
 
 export {
     Navbar,
@@ -48,4 +49,5 @@ export {
     BottomNav,
     AddressForm,
     PlaceOrder,
+    ProductCard,
 };

@@ -108,12 +108,12 @@ const CartPage = () => {
                                 <h2>Cart totals</h2>
                                 <div className='CartPage__total__box__subtotal'>
                                     <p>Subtotal</p>
-                                    <h5>&#8377;{cartTotal}</h5>
+                                    <h5>&#8377; {cartTotal}</h5>
                                 </div>
                                 <hr />
                                 <div className='CartPage__total__box__total'>
                                     <p>Total</p>
-                                    <h5>&#8377;{cartTotal}</h5>
+                                    <h5>&#8377; {cartTotal}</h5>
                                 </div>
                                 <Link to='/checkout'>
                                     <button>Proceed to checkout</button>

@@ -17,6 +17,7 @@ import {
     addToWishlist,
     deleteWishlist,
 } from '../../../redux/slices/wishlistSlice';
+import { updateProductCard } from '../../../redux/slices/layoutSlice';
 
 const isLoved = (id) => {
     if (localStorage.getItem('wishlist')) {
@@ -115,7 +116,16 @@ const GridViewItem = ({ _id, name, avgStars, thumbnail, price, stock }) => {
                             <AiOutlineShoppingCart />
                         )}
                     </button>
-                    <button>
+                    <button
+                        onClick={() => {
+                            dispatch(
+                                updateProductCard({
+                                    productCard: true,
+                                    productCardId: _id,
+                                })
+                            );
+                        }}
+                    >
                         <AiOutlineEye />
                     </button>
                 </div>

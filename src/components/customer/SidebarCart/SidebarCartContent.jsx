@@ -27,7 +27,7 @@ function SidebarCartContent({ setIsSidebarOpen }) {
                         Subtotal:
                     </span>
                     <span className='sidebarCart__bottom__total__price'>
-                        &#8377;{cartTotal}
+                        &#8377; {cartTotal}
                     </span>
                 </div>
                 <Link to='/cart' onClick={() => setIsSidebarOpen(false)}>

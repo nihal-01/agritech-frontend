@@ -88,6 +88,10 @@
             &:hover {
                 color: red;
             }
+
+            &__mobile {
+                display: none;
+            }
         }
 
         &__quantity {
@@ -342,10 +346,12 @@
             }
 
             &__closeBtn {
-                font-size: 14px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                &__mobile {
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
 
             &__quantity {

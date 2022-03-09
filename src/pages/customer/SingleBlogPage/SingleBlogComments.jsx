@@ -28,6 +28,7 @@ function SingleBlogComments({ id }) {
             );
             setLoading(false);
             dispacth(updateBlogComments({ ...response.data, userId: user }));
+            setComment('');
         } catch (err) {
             setError(true);
             setLoading(false);
@@ -75,6 +76,7 @@ function SingleBlogComments({ id }) {
                             onChange={(e) => {
                                 setComment(e.target.value);
                             }}
+                            value={comment || ''}
                         ></textarea>
                         <input
                             type='text'

@@ -4,7 +4,6 @@ import ProductsPage from './ProductsPage/ProductsPage';
 import SingleProductPage from './SingleProductPage/SingleProductPage';
 import LoginPage from './LoginPage/LoginPage';
 import SignupPage from './SignupPage/SignupPage';
-import ResetPasswordPage from './ResetPasswordPage/ResetPasswordPage';
 import ContactPage from './ContactPage/ContactPage';
 import AboutPage from './AboutPage/AboutPage';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
@@ -22,6 +21,8 @@ import MyAccountAddressPage from './MyAccountAddressPage/MyAccountAddressPage';
 import SearchPage from './SearchPage/SearchPage';
 import MyAccountSingleOrderPage from './MyAccountSingleOrderPage/MyAccountSingleOrderPage';
 import BlogSearchPage from './BlogSearchPage/BlogSearchPage';
+import ResetPasswordEmailPage from './ResetPasswordEmailPage/ResetPasswordEmailPage';
+import ResetPasswordPage from './ResetPasswordPage/ResetPasswordPage';
 
 export {
     HomePage,
@@ -30,7 +31,6 @@ export {
     SingleProductPage,
     LoginPage,
     SignupPage,
-    ResetPasswordPage,
     ContactPage,
     AboutPage,
     PrivateRoute,
@@ -48,4 +48,6 @@ export {
     SearchPage,
     MyAccountSingleOrderPage,
     BlogSearchPage,
+    ResetPasswordEmailPage,
+    ResetPasswordPage,
 };

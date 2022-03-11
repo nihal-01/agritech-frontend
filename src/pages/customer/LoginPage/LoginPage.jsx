@@ -100,7 +100,7 @@ function LoginPage() {
                                 />
                                 <label htmlFor='checkbox'>Remember me</label>
                             </div>
-                            <Link to='/my-account/lost-password'>
+                            <Link to='/my-account/reset-password'>
                                 Lost your password?
                             </Link>
                         </div>

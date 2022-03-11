@@ -21,6 +21,7 @@ import {
     OrderRecievedPage,
     PrivateRoute,
     ProductsPage,
+    ResetPasswordEmailPage,
     ResetPasswordPage,
     SearchPage,
     SignupPage,
@@ -65,7 +66,11 @@ const CustomerRoutes = () => {
                         element={<SingleProductPage />}
                     />
                     <Route
-                        path='/my-account/lost-password'
+                        path='/my-account/reset-password'
+                        element={<ResetPasswordEmailPage />}
+                    />
+                    <Route
+                        path='/my-account/reset-password/:userId/:token'
                         element={<ResetPasswordPage />}
                     />
                     <Route

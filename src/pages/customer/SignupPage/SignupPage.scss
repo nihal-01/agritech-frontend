@@ -34,6 +34,7 @@
                 padding: 13px;
                 border-radius: 5px;
                 border: 1px solid #dbdbdb;
+                margin-top: 3px;
 
                 &:focus {
                     outline: 1px solid #333;
@@ -121,11 +122,16 @@
         .signupPage {
             &__form {
                 label {
-                    font-size: 15px;
+                    font-size: 14px;
                 }
                 &__policy {
                     font-size: 14px;
+                    line-height: 25px;
                 }
+            }
+
+            &__login__btn {
+                font-size: 15px;
             }
         }
     }

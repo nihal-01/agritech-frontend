@@ -107,7 +107,7 @@ function LoginCard({ setIsLoginOpen }) {
                 </button>
             </form>
             <Link
-                to='/my-account/lost-password'
+                to='/my-account/reset-password'
                 className='loginCard__lostpassword'
                 onClick={() => setIsLoginOpen(false)}
             >

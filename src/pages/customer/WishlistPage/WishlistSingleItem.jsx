@@ -70,7 +70,7 @@ function WishlistSingleItem({ product }) {
                     <span>
                         {monthNames[myDate.getMonth()] +
                             ' ' +
-                            myDate.getDay() +
+                            myDate.getDate() +
                             ', ' +
                             myDate.getFullYear()}
                     </span>

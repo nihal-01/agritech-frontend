@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { noProductImg } from '../../../assets/images';
 import {
     clearFilters,
     fetchProducts,
@@ -83,6 +84,13 @@ function OurProducts() {
                             </div>
                         );
                     })}
+                </div>
+            ) : products.length < 1 ? (
+                <div className='productNotFound'>
+                    <div className='productNotFound__img__wrapper'>
+                        <img src={noProductImg} alt='' />
+                    </div>
+                    <h3>No Products Found!</h3>
                 </div>
             ) : (
                 <GridView products={products} count={5} />

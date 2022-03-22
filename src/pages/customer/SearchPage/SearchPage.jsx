@@ -14,6 +14,7 @@ import {
     updateCategory,
     updateProductLoading,
     updateSearch,
+    updateSkip,
 } from '../../../redux/slices/productsSlice';
 
 import './SearchPage.scss';
@@ -25,7 +26,9 @@ function SearchPage() {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const { products, loading } = useSelector((state) => state.products);
+    const { products, loading, limit, skip, totalProducts } = useSelector(
+        (state) => state.products
+    );
 
     useEffect(() => {
         if (location.pathname.split('/')[2] === 'search') {
@@ -83,7 +86,12 @@ function SearchPage() {
                 ) : (
                     <>
                         <GridView products={products} count={5} />
-                        <Pagination />
+                        <Pagination
+                            limit={limit}
+                            skip={skip}
+                            totalItems={totalProducts}
+                            updateSkip={updateSkip}
+                        />
                     </>
                 )}
             </div>

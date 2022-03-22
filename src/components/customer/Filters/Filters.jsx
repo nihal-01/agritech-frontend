@@ -74,7 +74,7 @@ function Filters() {
                             </Link>{' '}
                             ({totalProducts})
                         </li>
-                        {categories.map((category, index) => {
+                        {categories.slice(0, 6).map((category, index) => {
                             return (
                                 <li key={index}>
                                     <Link
@@ -90,7 +90,7 @@ function Filters() {
                                     >
                                         {category.name}
                                     </Link>{' '}
-                                    ({category.count})
+                                    ({category?.count || 0})
                                 </li>
                             );
                         })}

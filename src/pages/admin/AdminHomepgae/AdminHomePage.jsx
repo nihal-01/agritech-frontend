@@ -148,13 +148,13 @@ function AdminHomePage() {
             </div>
             <div className='admin__home__charts'>
                 <div className='admin__home__charts__item'>
-                    <p>Top Revenue Product</p>
+                    <p>Top Categories - (All)</p>
                     <div className='admin__home__charts__item__chart'>
                         <BarChart chartData={data.topSellingCategories} />
                     </div>
                 </div>
                 <div className='admin__home__charts__item'>
-                    <p>Top Revenue Product</p>
+                    <p>Top Selling Product</p>
                     {data.topSellingProducts?.length < 1 ? (
                         <p className='admin__home__charts__item__nodata'>
                             No Data to display!

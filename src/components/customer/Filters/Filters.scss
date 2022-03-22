@@ -58,6 +58,7 @@
                     text-decoration: none;
                     color: #111;
                     transition: 0.5s;
+                    text-transform: capitalize;
 
                     &:hover {
                         color: var(--primary-hover-color);

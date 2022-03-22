@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import './ResetPasswordPage.scss';
 import { PageHero, BlankSpace, BtnLoading } from '../../../components/customer';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import axios from '../../../axios';
-import { useNavigate, useParams } from 'react-router-dom';
 
 function ResetPasswordPage() {
     const [isShowPassword, setIsShowPassword] = useState(false);

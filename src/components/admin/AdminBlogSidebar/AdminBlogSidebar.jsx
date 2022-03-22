@@ -24,6 +24,7 @@ function AdminBlogSidebar({ isBlogSidebarOpen, setBlogSidebarOpen }) {
     const [blogStatus, setBlogStatus] = useState({ loading: false, error: '' });
     const [data, setData] = useState({
         title: '',
+        youtubeLink: '',
         category: '',
     });
 
@@ -274,6 +275,19 @@ function AdminBlogSidebar({ isBlogSidebarOpen, setBlogSidebarOpen }) {
                                 );
                             })}
                         </select>
+                    </div>
+
+                    <div className='adminBlogSidebar__form__main__input'>
+                        <label htmlFor=''>Youtube Link</label>
+                        <input
+                            type='text'
+                            placeholder='Youtube Link'
+                            name='youtubeLink'
+                            value={data.youtubeLink || ''}
+                            onChange={handleChange}
+                            required
+                            disabled={blogStatus.loading}
+                        />
                     </div>
 
                     <div className='adminBlogSidebar__form__main__editor'>

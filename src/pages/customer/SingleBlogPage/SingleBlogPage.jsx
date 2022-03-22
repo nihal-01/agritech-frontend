@@ -40,6 +40,8 @@ const SingleBlogPage = () => {
         }
     }, [id, dispatch]);
 
+    console.log(myPost?.post?.youtubeLink);
+
     useEffect(() => {
         fetchSinglePost();
     }, [fetchSinglePost]);

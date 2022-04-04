@@ -8,11 +8,11 @@ import {
     getStorage,
 } from 'firebase/storage';
 
+import './MyAccountDetailsPage.scss';
 import axios from '../../../axios';
 import { BtnLoading } from '../../../components/customer';
 import { updateUser } from '../../../redux/slices/userSlice';
 
-import './MyAccountDetailsPage.scss';
 
 function MyAccountDetailsPage() {
     const [avatar, setAvatar] = useState('');

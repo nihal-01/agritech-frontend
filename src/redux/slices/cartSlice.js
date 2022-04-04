@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import axios from '../../axios';
 import { logout, saveUser } from './userSlice';
 
@@ -13,7 +14,6 @@ const initialState = {
 const getCartItems = createAsyncThunk(
     '/cart/getCartItems',
     async (args, { getState }) => {
-        console.log('get cart request');
         const { token } = getState().user;
         const response = await axios.get('/cart', {
             headers: { Authorization: `Bearer ${token}` },

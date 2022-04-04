@@ -1,12 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import ReactCanvasConfetti from 'react-canvas-confetti';
 
 import './OrderRecievedPage.scss';
 import { PageHero, BlankSpace, Loader } from '../../../components/customer';
-import { useParams } from 'react-router-dom';
 import axios from '../../../axios';
 import { monthNames } from '../../../utils/constants';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import { useSelector } from 'react-redux';
+
+const canvasStyles = {
+    position: 'fixed',
+    pointerEvents: 'none',
+    width: '100%',
+    height: '100%',
+    top: 0,
+    left: 0,
+};
 
 function OrderRecievedPage() {
     const [order, setOrder] = useState({});
@@ -15,6 +25,50 @@ function OrderRecievedPage() {
 
     const { token } = useSelector((state) => state.user);
     const { id } = useParams();
+
+    const refAnimationInstance = useRef(null);
+
+    const getInstance = useCallback((instance) => {
+        refAnimationInstance.current = instance;
+    }, []);
+
+    const makeShot = useCallback((particleRatio, opts) => {
+        refAnimationInstance.current &&
+            refAnimationInstance.current({
+                ...opts,
+                origin: { y: 0.7 },
+                particleCount: Math.floor(200 * particleRatio),
+            });
+    }, []);
+
+    const fire = useCallback(() => {
+        makeShot(0.25, {
+            spread: 26,
+            startVelocity: 55,
+        });
+
+        makeShot(0.2, {
+            spread: 60,
+        });
+
+        makeShot(0.35, {
+            spread: 100,
+            decay: 0.91,
+            scalar: 0.8,
+        });
+
+        makeShot(0.1, {
+            spread: 120,
+            startVelocity: 25,
+            decay: 0.92,
+            scalar: 1.2,
+        });
+
+        makeShot(0.1, {
+            spread: 120,
+            startVelocity: 45,
+        });
+    }, [makeShot]);
 
     const fetchSingleOrder = useCallback(async () => {
         try {
@@ -35,9 +89,20 @@ function OrderRecievedPage() {
     useEffect(() => {
         fetchSingleOrder();
     }, [fetchSingleOrder]);
+
+    useEffect(() => {
+        if (loading === false) {
+            fire();
+        }
+    }, [fire, loading]);
+
     return (
         <div>
             <PageHero title='Order Recieved' checkout={true} />
+            <ReactCanvasConfetti
+                refConfetti={getInstance}
+                style={canvasStyles}
+            />
             {!error && <BlankSpace />}
             <div className='orderReceivedPage'>
                 {loading ? (

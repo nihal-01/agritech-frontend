@@ -16,14 +16,11 @@ function ResetPasswordPage() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    console.log('reset pass');
-
     const passRef = useRef(null);
     const cPassRef = useRef(null);
 
     const { userId, token } = useParams();
     const navigate = useNavigate();
-    console.log(userId, token);
 
     const handleSubmit = async (e) => {
         try {

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import './MyAccountAddressPage.scss';
 import { AddressForm, BtnLoading, Loader } from '../../../components/customer';
 import axios from '../../../axios';
-import { useSelector } from 'react-redux';
 
 function MyAccountAddressPage() {
     const [addressLoading, setAddressLoading] = useState(true);
@@ -47,7 +47,6 @@ function MyAccountAddressPage() {
 
     const fetchAddress = useCallback(async () => {
         try {
-            console.log('fetch adddress request');
             const response = await axios.get('/address', {
                 headers: { Authorization: `Bearer ${token}` },
             });

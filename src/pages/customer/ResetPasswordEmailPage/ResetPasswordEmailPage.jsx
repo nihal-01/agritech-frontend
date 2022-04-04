@@ -10,8 +10,6 @@ function ResetPasswordEmailPage() {
     const [isSendMail, setIsSendMail] = useState(false);
     const [laoding, setLoading] = useState(false);
 
-    console.log('reset password email');
-
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();

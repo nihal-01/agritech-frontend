@@ -7,12 +7,12 @@ import {
     MdOutlineShoppingBag,
     MdOutlineDeliveryDining,
 } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
 import './AdminHomePage.scss';
 import { BarChart, DoughnutChart } from '../../../components/admin';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
-import { useSelector } from 'react-redux';
 
 function AdminHomePage() {
     const [loading, setLoading] = useState(true);
@@ -28,12 +28,10 @@ function AdminHomePage() {
         topSellingCategories: [],
     });
 
-    console.log('admin home');
     const { token } = useSelector((state) => state.user);
 
     const fetchData = useCallback(async () => {
         try {
-            console.log('fetch admin data');
             const response = await axios.get('/admin', {
                 headers: { Authorization: `Bearer ${token}` },
             });

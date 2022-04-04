@@ -10,9 +10,9 @@ import {
 } from 'react-icons/bs';
 import { Link, useLocation } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './AdminSidebar.scss';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateAdminSidebar } from '../../../redux/slices/layoutSlice';
 import { logout } from '../../../redux/slices/userSlice';
 

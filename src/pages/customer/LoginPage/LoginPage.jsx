@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import './LoginPage.scss';
 import { BlankSpace, BtnLoading, PageHero } from '../../../components/customer';
 import { useForm } from '../../../hooks';
 import axios from '../../../axios';
-import { useDispatch } from 'react-redux';
 import { saveUser } from '../../../redux/slices/userSlice';
 
 function LoginPage() {

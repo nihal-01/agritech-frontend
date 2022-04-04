@@ -23,8 +23,6 @@ function AdminProductsPage() {
     const [pageNumbers, setPageNumbers] = useState([]);
     const [searchText, setSearchText] = useState('');
 
-    console.log('products page');
-
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories.categories);
     const {

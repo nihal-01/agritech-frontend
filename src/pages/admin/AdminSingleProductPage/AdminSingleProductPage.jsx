@@ -16,7 +16,6 @@ function AdminSingleProductPage() {
 
     const fetchSingleProduct = useCallback(async () => {
         try {
-            console.log('hi');
             const response = await axios.get(`/products/${id}`);
             setProduct(response.data);
             setLoading(false);

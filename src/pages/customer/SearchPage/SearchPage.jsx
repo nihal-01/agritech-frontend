@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
+
+import './SearchPage.scss';
 import { noProductImg } from '../../../assets/images';
 import {
     BlankSpace,
@@ -16,8 +18,6 @@ import {
     updateSearch,
     updateSkip,
 } from '../../../redux/slices/productsSlice';
-
-import './SearchPage.scss';
 
 function SearchPage() {
     const [imgLoaded, setImgLoaded] = useState(false);

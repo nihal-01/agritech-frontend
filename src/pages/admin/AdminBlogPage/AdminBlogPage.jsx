@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import './AdminBlogPage.scss';
 import { adminNotFoundImg } from '../../../assets/images';
 import AdminBlogSidebar from '../../../components/admin/AdminBlogSidebar/AdminBlogSidebar';
 import { Loader } from '../../../components/customer';
@@ -11,8 +13,6 @@ import {
     updatePostLoading,
     updateSkip,
 } from '../../../redux/slices/blogSlice';
-
-import './AdminBlogPage.scss';
 import AdminBlogSingleRow from './AdminBlogSingleRow';
 
 function AdminBlogPage() {
@@ -20,11 +20,10 @@ function AdminBlogPage() {
     const [pageNumbers, setPageNumbers] = useState([]);
     const [searchTxt, setSearchTxt] = useState('');
 
-    const { postCategories, posts, skip, limit, totalPosts, loading, search } =
-        useSelector((state) => state.blog);
+    const { posts, skip, limit, totalPosts, loading, search } = useSelector(
+        (state) => state.blog
+    );
     const dispatch = useDispatch();
-
-    console.log(postCategories);
 
     useEffect(() => {
         dispatch(updatePostLoading(true));

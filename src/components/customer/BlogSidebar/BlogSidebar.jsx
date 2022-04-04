@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+
+import './BlogSidebar.scss';
 import {
     fetchPostCategories,
     fetchRecentPosts,
 } from '../../../redux/slices/blogSlice';
-
-import './BlogSidebar.scss';
 import RecentPost from './RecentPost';
 
 function BlogSidebar() {
@@ -20,7 +20,6 @@ function BlogSidebar() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log('fetching blog sidebar...');
         dispatch(fetchPostCategories());
         dispatch(fetchRecentPosts());
     }, [dispatch]);

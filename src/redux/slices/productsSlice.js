@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import axios from '../../axios';
 
 const initialState = {
@@ -22,7 +23,6 @@ const initialState = {
 const fetchProducts = createAsyncThunk(
     '/products/fetchProducts',
     async (args, { getState }) => {
-        console.log('product request');
         const { skip, sort, filters, search, limit } = getState().products;
         const response = await axios.get(
             `/products?skip=${skip}&sort=${sort}&category=${

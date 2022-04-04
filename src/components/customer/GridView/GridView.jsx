@@ -1,9 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import './GridView.scss';
 import GridViewItem from './GridViewItem';
 import ProductCard from '../ProductCard/ProductCard';
-import { useSelector } from 'react-redux';
 
 function GridView({ products, count = 4 }) {
     const { productCard } = useSelector((state) => state.layout);

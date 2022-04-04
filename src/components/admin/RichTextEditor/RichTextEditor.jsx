@@ -14,8 +14,6 @@ const config = {
 const RichTextEditor = ({ initialValue, getValue }) => {
     const editor = useRef(null);
 
-    console.log('rich editor');
-
     return (
         <JoditEditor
             ref={editor}

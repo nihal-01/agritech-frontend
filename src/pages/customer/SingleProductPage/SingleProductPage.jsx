@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './SingleProductPage.scss';
 import {
@@ -16,7 +17,6 @@ import {
     SingleProductThumbnail,
 } from '.';
 import { NotFoundPage } from '..';
-import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../../../redux/slices/cartSlice';
 
 function SingleProductPage() {
@@ -52,7 +52,6 @@ function SingleProductPage() {
         try {
             setError(false);
             setProductLoading(true);
-            console.log('single product request');
 
             const response = await axios.get(`/products/${id}`);
             setProduct(response.data);

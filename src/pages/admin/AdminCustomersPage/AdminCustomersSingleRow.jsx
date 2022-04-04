@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { FiEye } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { noImage } from '../../../assets/images';
 import { deleteUser } from '../../../redux/slices/userSlice';
-
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
-import { Link } from 'react-router-dom';
 
 function AdminCustomersSingleRow({ user }) {
     const [loading, setLoading] = useState(false);

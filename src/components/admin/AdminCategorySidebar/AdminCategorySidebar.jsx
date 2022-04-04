@@ -6,16 +6,15 @@ import {
     getDownloadURL,
     getStorage,
 } from 'firebase/storage';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './AdminCategorySidebar.scss';
 import axios from '../../../axios';
 import { BtnLoading } from '../../customer';
-import { useDispatch } from 'react-redux';
 import {
     addCategory,
     updateCategory,
 } from '../../../redux/slices/categoriesSlice';
-import { useSelector } from 'react-redux';
 
 function AdminCategorySidebar({
     isCategorySidebarOpen,

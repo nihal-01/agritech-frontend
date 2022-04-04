@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './Admin404Page.scss';
 import { admin404 } from '../../../assets/images';
-import { Link } from 'react-router-dom';
 
 function Admin404Page() {
     return (

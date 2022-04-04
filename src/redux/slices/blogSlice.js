@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import axios from '../../axios';
 
 const initialState = {
@@ -18,7 +19,6 @@ const initialState = {
 const fetchPosts = createAsyncThunk(
     '/blog/fetchPosts',
     async (args, { getState }) => {
-        console.log('posts fetching');
         const { skip, search, category } = getState().blog;
         const response = await axios.get(
             `/posts?skip=${skip}&search=${search}&category=${category}`
@@ -30,7 +30,6 @@ const fetchPosts = createAsyncThunk(
 const fetchPostCategories = createAsyncThunk(
     '/blog/fetchPostCategories',
     async (args, { getState }) => {
-        console.log('post categories fetching');
         const response = await axios.get('/post-categories');
         return response.data;
     }
@@ -39,7 +38,6 @@ const fetchPostCategories = createAsyncThunk(
 const fetchRecentPosts = createAsyncThunk(
     '/blog/fetchRecentPosts',
     async (args, { getState }) => {
-        console.log('recent post fetching');
         const response = await axios.get(`/posts?limit=${5}`);
         return response.data;
     }

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { FiLogOut, FiMenu } from 'react-icons/fi';
 import { BsBellFill, BsGear, BsGrid } from 'react-icons/bs';
 // import { AiOutlineClose, AiOutlineCheck } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './AdminNavbar.scss';
 import { avatar } from '../../../assets/images';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateAdminSidebar } from '../../../redux/slices/layoutSlice';
 import { logout } from '../../../redux/slices/userSlice';
-import { Link } from 'react-router-dom';
 
 function AdminNavbar() {
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);

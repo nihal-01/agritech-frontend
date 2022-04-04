@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './CheckoutPage.scss';
 import {
@@ -9,9 +11,7 @@ import {
     Loader,
 } from '../../../components/customer';
 import axios from '../../../axios';
-import { useDispatch, useSelector } from 'react-redux';
 import { emptyCartImg } from '../../../assets/images';
-import { Link, useNavigate } from 'react-router-dom';
 import { clearCartItems } from '../../../redux/slices/cartSlice';
 
 function CheckoutPage() {
@@ -31,7 +31,6 @@ function CheckoutPage() {
         email: '',
     });
     const [error, setError] = useState('');
-    console.log('checkout page');
 
     const { token } = useSelector((state) => state.user);
     const { cartTotal, cartItems } = useSelector((state) => state.cart);
@@ -51,7 +50,6 @@ function CheckoutPage() {
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
-            console.log(myAddress);
             setAddressId(myAddress.data);
 
             const response = await axios.post(
@@ -81,7 +79,6 @@ function CheckoutPage() {
 
     const fetchAddress = useCallback(async () => {
         try {
-            console.log('fetch adddress request');
             const response = await axios.get('/address', {
                 headers: { Authorization: `Bearer ${token}` },
             });

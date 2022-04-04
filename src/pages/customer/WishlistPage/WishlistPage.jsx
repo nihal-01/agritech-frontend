@@ -1,6 +1,7 @@
+import { useSelector } from 'react-redux';
+
 import { BlankSpace, PageHero } from '../../../components/customer';
 import './WishlistPage.scss';
-import { useSelector } from 'react-redux';
 import WishlistSingleItem from './WishlistSingleItem';
 
 const WishlistPage = () => {

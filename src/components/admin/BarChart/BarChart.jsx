@@ -10,10 +10,7 @@ function BarChart({ chartData }) {
         datasets: [
             {
                 label: 'Amount',
-                backgroundColor: [
-                    '#49ba82',
-                    '#3a82f6',
-                ],
+                backgroundColor: ['#49ba82', '#3a82f6'],
                 data: chartData.map((dt) => {
                     return dt.total;
                 }),
@@ -21,7 +18,6 @@ function BarChart({ chartData }) {
         ],
     };
 
-    console.log(chartData);
     return (
         <Bar
             data={data}

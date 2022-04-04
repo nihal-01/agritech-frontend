@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './AdminInvoicePage.scss';
 import axios from '../../../axios';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Loader } from '../../../components/customer';
 import { adminNotFoundImg } from '../../../assets/images';
 import { monthNames } from '../../../utils/constants';
@@ -18,7 +18,6 @@ function AdminInvoicePage() {
 
     const fetchOrder = useCallback(async () => {
         try {
-            console.log('order fetching...');
             const response = await axios.get(`orders/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });

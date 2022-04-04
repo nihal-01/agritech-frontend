@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from '../../../axios';
-import { addItemToCart } from '../../../redux/slices/cartSlice';
-import BtnLoading from '../BtnLoading/BtnLoading';
-import Stars from '../Stars/Stars';
 import {
     AiOutlineShoppingCart,
     AiOutlineHeart,
     AiOutlineEye,
     AiFillHeart,
 } from 'react-icons/ai';
+
+import axios from '../../../axios';
+import { addItemToCart } from '../../../redux/slices/cartSlice';
+import BtnLoading from '../BtnLoading/BtnLoading';
+import Stars from '../Stars/Stars';
 import {
     addToWishlist,
     deleteWishlist,

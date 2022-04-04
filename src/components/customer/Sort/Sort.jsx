@@ -2,14 +2,13 @@ import React from 'react';
 import { HiOutlineFilter, HiOutlineViewGrid } from 'react-icons/hi';
 // HiViewGrid
 import { BsListUl } from 'react-icons/bs';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './Sort.scss';
-import { useDispatch } from 'react-redux';
 import {
     updateGridView,
     updateSort,
 } from '../../../redux/slices/productsSlice';
-import { useSelector } from 'react-redux';
 import { updateFilterSidebar } from '../../../redux/slices/layoutSlice';
 
 function Sort() {

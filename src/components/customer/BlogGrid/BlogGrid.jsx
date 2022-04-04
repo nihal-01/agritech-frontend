@@ -1,5 +1,6 @@
-import './BlogGrid.scss';
 import { useSelector } from 'react-redux';
+
+import './BlogGrid.scss';
 import BlogGridSingle from './BlogGridSingle';
 
 const BlogGrid = () => {

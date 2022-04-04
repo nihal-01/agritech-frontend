@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import './AdminCustomersPage.scss';
 import { adminNotFoundImg } from '../../../assets/images';
 import { Loader } from '../../../components/customer';
 import {
@@ -9,8 +11,6 @@ import {
     updateSkip,
     updateUserLoading,
 } from '../../../redux/slices/userSlice';
-
-import './AdminCustomersPage.scss';
 import AdminCustomersSingleRow from './AdminCustomersSingleRow';
 
 const limit = 12;
@@ -25,7 +25,6 @@ function AdminCustomersPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('fetchall users request');
         dispatch(updateUserLoading(true));
         dispatch(fetchUsers());
     }, [dispatch, search, skip]);

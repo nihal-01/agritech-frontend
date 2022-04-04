@@ -7,11 +7,11 @@ import {
     AiOutlineDashboard,
     AiOutlineShop,
 } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
 
 import './MyAccountPage.scss';
 import { PageHero, BlankSpace } from '../../../components/customer';
 import { logout } from '../../../redux/slices/userSlice';
-import { useDispatch } from 'react-redux';
 
 function MyAccountPage() {
     const dispatch = useDispatch();

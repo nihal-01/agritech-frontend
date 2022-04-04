@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+import './MyAccountSingleOrderPage.scss';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
 import { monthNames } from '../../../utils/constants';
 
-import './MyAccountSingleOrderPage.scss';
 
 function MyAccountSingleOrderPage() {
     const [loading, setLoading] = useState(true);
@@ -22,7 +23,6 @@ function MyAccountSingleOrderPage() {
             const response = await axios.get(`/orders/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log(response.data);
             setOrder(response.data);
             setLoading(false);
         } catch (err) {

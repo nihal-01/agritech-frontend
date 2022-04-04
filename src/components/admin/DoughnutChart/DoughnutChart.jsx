@@ -28,7 +28,6 @@ function DoughnutChart({ chartData }) {
     };
 
     useEffect(() => {
-        console.log('window');
         function handleResize() {
             setInnerWidth(window.innerWidth);
         }

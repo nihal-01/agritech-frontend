@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import BtnLoading from '../BtnLoading/BtnLoading';
 
 import './PlaceOrder.scss';
+import BtnLoading from '../BtnLoading/BtnLoading';
 
 function PlaceOrder({ setPaymentType, loading, error }) {
     const { cartItems, cartTotal } = useSelector((state) => state.cart);

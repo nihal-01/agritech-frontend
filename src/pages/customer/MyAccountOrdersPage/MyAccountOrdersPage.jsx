@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { AiOutlineEye } from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './MyAccountOrdersPage.scss';
 import axios from '../../../axios';
 import { Loader } from '../../../components/customer';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { monthNames } from '../../../utils/constants';
-import { AiOutlineEye } from 'react-icons/ai';
 
 function MyAccountOrdersPage() {
     const [orders, setOrders] = useState([]);
@@ -23,14 +23,12 @@ function MyAccountOrdersPage() {
             });
             setOrders(response.data);
             setLoading(false);
-            console.log(response.data);
         } catch (err) {
             console.log(err.response);
         }
     }, [token]);
 
     useEffect(() => {
-        console.log('myorder fetch');
         fetchOrders();
     }, [fetchOrders]);
 

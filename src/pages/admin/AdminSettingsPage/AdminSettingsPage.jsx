@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiUploadCloud } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from '../../../axios';
-import { updateUser } from '../../../redux/slices/userSlice';
 import {
     ref,
     uploadBytesResumable,
@@ -10,6 +8,8 @@ import {
     getStorage,
 } from 'firebase/storage';
 
+import axios from '../../../axios';
+import { updateUser } from '../../../redux/slices/userSlice';
 import './AdminSettingsPage.scss';
 import { BtnLoading } from '../../../components/customer';
 

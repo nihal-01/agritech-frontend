@@ -8,11 +8,11 @@ import {
     BsArrowRight,
 } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './Footer.scss';
 import { BlankSpace } from '..';
 import { paymentCardsImg } from '../../../assets/images';
-import { useSelector } from 'react-redux';
 
 function Footer() {
     const { categories } = useSelector((state) => state.categories);

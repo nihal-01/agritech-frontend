@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FiUploadCloud } from 'react-icons/fi';
 import RichTextEditor from '../RichTextEditor/RichTextEditor';
 import {
@@ -9,7 +10,6 @@ import {
 } from 'firebase/storage';
 
 import './AdminBlogSidebar.scss';
-import { useSelector } from 'react-redux';
 import axios from '../../../axios';
 import { BtnLoading } from '../../customer';
 
@@ -159,8 +159,6 @@ function AdminBlogSidebar({ isBlogSidebarOpen, setBlogSidebarOpen }) {
         }
     };
 
-    console.log('blog page');
-
     return (
         <div className='adminBlogSidebar'>
             <div
@@ -278,10 +276,10 @@ function AdminBlogSidebar({ isBlogSidebarOpen, setBlogSidebarOpen }) {
                     </div>
 
                     <div className='adminBlogSidebar__form__main__input'>
-                        <label htmlFor=''>Youtube Link</label>
+                        <label htmlFor=''>Embeded Youtube Link</label>
                         <input
                             type='text'
-                            placeholder='Youtube Link'
+                            placeholder='Embeded Youtube Link'
                             name='youtubeLink'
                             value={data.youtubeLink || ''}
                             onChange={handleChange}
@@ -329,8 +327,3 @@ function AdminBlogSidebar({ isBlogSidebarOpen, setBlogSidebarOpen }) {
 }
 
 export default AdminBlogSidebar;
-
-// title
-// body
-// category
-// thumbnail

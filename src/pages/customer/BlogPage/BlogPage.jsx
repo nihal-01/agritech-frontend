@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './BlogPage.scss';
 import {
@@ -15,11 +16,8 @@ import {
     updatePostLoading,
     updateSkip,
 } from '../../../redux/slices/blogSlice';
-import { Link } from 'react-router-dom';
 
 const BlogPage = () => {
-    console.log('blog page..!');
-
     const dispatch = useDispatch();
     const { skip, limit, totalPosts, loading, posts } = useSelector(
         (state) => state.blog
@@ -66,7 +64,7 @@ const BlogPage = () => {
                             <button>See all posts</button>
                         </Link>
                     </div>
-                ) :  (
+                ) : (
                     <div className='blogPage__main'>
                         <BlogGrid />
                         <Pagination

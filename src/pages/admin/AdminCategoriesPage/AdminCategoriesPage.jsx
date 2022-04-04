@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import './AdminCategoriesPage.scss';
 import { AdminCategorySidebar } from '../../../components/admin';
-
 import { adminNotFoundImg } from '../../../assets/images';
 import { updateIsEdit } from '../../../redux/slices/categoriesSlice';
 import AdminCategoriesSingleRow from './AdminCategoriesSingleRow';

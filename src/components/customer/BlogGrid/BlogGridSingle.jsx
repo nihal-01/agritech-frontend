@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { monthNames } from '../../../utils/constants';
 import { Link } from 'react-router-dom';
 import { AiOutlineCalendar, AiOutlineComment } from 'react-icons/ai';
+
+import { monthNames } from '../../../utils/constants';
 
 function BlogGridSingle({ _id, title, thumbnail, createdAt, category, body }) {
     const [isImgLoaded, setImgLoaded] = useState(false);

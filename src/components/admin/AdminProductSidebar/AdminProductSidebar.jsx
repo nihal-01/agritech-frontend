@@ -6,11 +6,11 @@ import {
     getDownloadURL,
     getStorage,
 } from 'firebase/storage';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './AdminProductSidebar.scss';
 import '../../../firebase/config';
 import axios from '../../../axios';
-import { useDispatch, useSelector } from 'react-redux';
 import { BtnLoading, Loader } from '../../customer';
 import {
     updateIsEdit,

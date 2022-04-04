@@ -1,9 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import './ListView.scss';
 import ListViewItem from './ListViewItem';
 import ProductCard from '../ProductCard/ProductCard';
-import { useSelector } from 'react-redux';
 
 function ListView({ products }) {
     const { productCard } = useSelector((state) => state.layout);

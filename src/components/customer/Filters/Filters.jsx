@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateFilterSidebar } from '../../../redux/slices/layoutSlice';
-import { updateCategory } from '../../../redux/slices/productsSlice';
 
 import './Filters.scss';
+import { updateCategory } from '../../../redux/slices/productsSlice';
+import { updateFilterSidebar } from '../../../redux/slices/layoutSlice';
 
 const tags = [
     'vegitables',

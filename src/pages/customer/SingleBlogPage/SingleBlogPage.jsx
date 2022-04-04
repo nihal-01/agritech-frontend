@@ -1,4 +1,7 @@
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AiFillYoutube } from 'react-icons/ai';
 
 import './SingleBlogPage.scss';
 import {
@@ -7,12 +10,9 @@ import {
     BlogSidebar,
 } from '../../../components/customer';
 import { monthNames } from '../../../utils/constants';
-import { useCallback, useEffect, useState } from 'react';
 import axios from '../../../axios';
 import SingleBlogComments from './SingleBlogComments';
 import { setBlogComments } from '../../../redux/slices/blogSlice';
-import { useDispatch } from 'react-redux';
-import { AiFillYoutube } from 'react-icons/ai';
 
 const SingleBlogPage = () => {
     const [myPost, setMyPost] = useState({});
@@ -25,13 +25,10 @@ const SingleBlogPage = () => {
 
     const myDate = new Date(myPost?.post?.createdAt);
 
-    console.log('single blog..!');
-
     const fetchSinglePost = useCallback(async () => {
         try {
             setLoading(true);
             const response = await axios.get(`/posts/${id}`);
-            console.log(response.data);
             setMyPost(response.data);
             dispatch(setBlogComments(response.data.comments));
             setLoading(false);
@@ -39,8 +36,6 @@ const SingleBlogPage = () => {
             console.log(err.response);
         }
     }, [id, dispatch]);
-
-    console.log(myPost?.post?.youtubeLink);
 
     useEffect(() => {
         fetchSinglePost();

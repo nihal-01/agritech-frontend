@@ -3,11 +3,11 @@ import { FaShippingFast } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
 import { HiOutlineViewGrid } from 'react-icons/hi';
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './Navbar.scss';
 import DropDown from '../DropDown/DropDown';
 import { navLinks } from '../../../utils/constants';
-import { useSelector } from 'react-redux';
 
 function Navbar() {
     const { categories } = useSelector((state) => state.categories);

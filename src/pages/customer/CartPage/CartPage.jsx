@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './CartPage.scss';
 import {
@@ -10,9 +12,7 @@ import {
 import axios from '../../../axios';
 import { clearCartItems } from '../../../redux/slices/cartSlice';
 import { emptyCartImg } from '../../../assets/images';
-import { Link } from 'react-router-dom';
 import SingleCartItem from './SingleCartItem';
-import { useState } from 'react';
 
 const CartPage = () => {
     const [clearCartLoading, setClearCartLoading] = useState(false);
@@ -22,7 +22,6 @@ const CartPage = () => {
         (state) => state.cart
     );
 
-    console.log('my cart');
     const dispatch = useDispatch();
 
     const clearCart = async () => {

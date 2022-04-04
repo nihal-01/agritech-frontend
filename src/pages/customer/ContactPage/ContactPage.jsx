@@ -5,7 +5,6 @@ import { PageHero, BlankSpace } from '../../../components/customer';
 import { contactImg } from '../../../assets/images';
 
 function ContactPage() {
-    console.log('contact page');
     return (
         <div>
             <PageHero title='Contact' />

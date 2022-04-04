@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import './AdminLoginPage.scss';
 import axios from '../../../axios';
 import { BtnLoading } from '../../../components/customer';
 import { saveUser } from '../../../redux/slices/userSlice';
 
-import './AdminLoginPage.scss';
 
 function AdminLoginPage() {
     const [user, setUser] = useState({

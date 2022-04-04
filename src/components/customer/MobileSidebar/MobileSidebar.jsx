@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { navLinks } from '../../../utils/constants';
 
 import './MobileSidebar.scss';
+import { navLinks } from '../../../utils/constants';
 import SingleMenu from './SingleMenu';
 
 function MobileSidebar({ isMobileSidebarOpen, setIsMobileSidebarOpen }) {

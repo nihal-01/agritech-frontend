@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 import './ProductCard.scss';
 import { updateProductCard } from '../../../redux/slices/layoutSlice';
 import axios from '../../../axios';
 import Stars from '../Stars/Stars';
-import { useNavigate } from 'react-router-dom';
 import { addItemToCart } from '../../../redux/slices/cartSlice';
 import BtnLoading from '../BtnLoading/BtnLoading';
 import { noProductImg } from '../../../assets/images';

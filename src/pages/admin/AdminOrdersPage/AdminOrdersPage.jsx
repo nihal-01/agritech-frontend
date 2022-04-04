@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { AiOutlineCloudDownload } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './AdminOrdersPage.scss';
 import axios from '../../../axios';
 import { adminNotFoundImg } from '../../../assets/images';
 import { Loader } from '../../../components/customer';
 import AdminOrdersSingleRow from './AdminOrdersSingleRow';
-import { useDispatch, useSelector } from 'react-redux';
 import { setAllOrders, updateSkip } from '../../../redux/slices/ordersSlice';
 
 const limit = 12;
@@ -22,10 +22,8 @@ function AdminOrdersPage() {
     const { orders, skip, totalOrders } = useSelector((state) => state.orders);
     const { token } = useSelector((state) => state.user);
 
-    console.log('admin orders page');
     const fetchOrders = useCallback(async () => {
         try {
-            console.log('fetching orders');
             setLoading(true);
             const response = await axios.get(
                 `/orders?status=${status}&createdAt=${time}&paymentType=${payType}&skip=${skip}`,

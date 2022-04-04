@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import './OurProducts.scss';
 import { noProductImg } from '../../../assets/images';
 import {
     clearFilters,
@@ -9,8 +11,6 @@ import {
     updateProductLoading,
 } from '../../../redux/slices/productsSlice';
 import GridView from '../GridView/GridView';
-
-import './OurProducts.scss';
 
 function OurProducts() {
     const { categories } = useSelector((state) => state.categories);
@@ -22,7 +22,6 @@ function OurProducts() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('product fetching...');
         dispatch(updateLimit(5));
         dispatch(updateProductLoading(true));
         dispatch(fetchProducts());

@@ -22,7 +22,6 @@ function ProductList() {
         useSelector((state) => state.products);
 
     useEffect(() => {
-        console.log('product fetching...');
         dispatch(updateProductLoading(true));
         dispatch(fetchProducts());
     }, [dispatch, skip, sort, filters]);

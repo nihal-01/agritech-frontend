@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './AdminUserOrdersPage.scss';
 import { adminNotFoundImg } from '../../../assets/images';
 import { Loader } from '../../../components/customer';
 import AdminOrdersSingleRow from '../AdminOrdersPage/AdminOrdersSingleRow';
 import axios from '../../../axios';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { setAllOrders } from '../../../redux/slices/ordersSlice';
 
 function AdminUserOrdersPage() {
